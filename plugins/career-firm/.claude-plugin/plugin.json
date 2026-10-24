@@ -1,0 +1,19 @@
+{
+  "name": "career-firm",
+  "version": "0.1.0",
+  "description": "A career-consulting firm in a plugin: truthful CV, résumé and cover-letter diagnosis, rewriting, design and localization, mock interviews, and relationship-based job search, in any language. Run the whole firm or call any single specialist.",
+  "author": {
+    "name": "Mustafa Ahmed"
+  },
+  "license": "MIT",
+  "keywords": [
+    "career",
+    "resume",
+    "cv",
+    "cover-letter",
+    "interview",
+    "job-search",
+    "arabic",
+    "rtl"
+  ]
+}

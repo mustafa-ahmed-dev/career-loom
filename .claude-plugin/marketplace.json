@@ -1,0 +1,14 @@
+{
+  "name": "career-firm",
+  "owner": {
+    "name": "Mustafa Ahmed"
+  },
+  "plugins": [
+    {
+      "name": "career-firm",
+      "source": "./plugins/career-firm",
+      "description": "A career-consulting firm in a plugin: truthful CV, résumé and cover-letter diagnosis, rewriting, design and localization, mock interviews, and relationship-based job search, in any language. Run the whole firm or call any single specialist.",
+      "version": "0.1.0"
+    }
+  ]
+}

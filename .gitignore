@@ -1,0 +1,5 @@
+.remember/
+*.zip
+*.plugin
+.DS_Store
+Thumbs.db
