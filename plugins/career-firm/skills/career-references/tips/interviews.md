@@ -7,8 +7,8 @@ The user picks a level before each session and can say "harder" or "easier" at a
 |---|---|---|---|---|---|
 | **L1** | Warm-up | A friendly first chat | 1 gentle one; hints available | No time limit | First practice, nerves, a new language |
 | **L2** | Standard | First-round HR/recruiter screen | 1–2 | Relaxed time box | Most candidates' starting point |
-| **L3** | Challenging | Hiring-manager round | 2–3; asks "what exactly did *you* do?" and "how did you measure that?" | About 2–3 minutes per answer | Candidates with a real interview booked |
-| **L4** | Hard | Final round / "bar-raiser" (a senior interviewer brought in to hold the bar high) [S039, S040] | Deep follow-ups: trade-offs, "why not X?", checks claims against the CV | Firm time box; cuts off rambling | Competitive roles, senior roles |
+| **L3** | Realistic | Hiring-manager round | 2–3; asks "what exactly did *you* do?" and "how did you measure that?" | About 2–3 minutes per answer | Candidates with a real interview booked |
+| **L4** | Tough | Final round / "bar-raiser" (a senior interviewer brought in to hold the bar high) [S039, S040] | Deep follow-ups: trade-offs, "why not X?", checks claims against the CV | Firm time box; cuts off rambling | Competitive roles, senior roles |
 | **L5** | Brutal | Stress test or panel | Rapid, multiple interviewers, devil's advocate, ambiguous cases, curveballs | Strict timing and interruptions | Candidates who want the hardest practice |
 
 **Adaptive mode (optional):** start at L2. After two answers scoring 7 or more, move up a level; after two answers scoring 4 or less, move down.
@@ -43,7 +43,7 @@ Difficulty changes the questions and the pressure, not this scale. At L4–L5 a 
 ## Example question bank by difficulty
 Every question the plugin generates is tagged with a level, a category and the competency it tests. Role-specific technical questions are generated from the job posting at the chosen level, following the patterns in the last rows.
 
-| Category | L1 Warm-up | L2 Standard | L3 Challenging | L4 Hard | L5 Brutal |
+| Category | L1 Warm-up | L2 Standard | L3 Realistic | L4 Tough | L5 Brutal |
 |---|---|---|---|---|---|
 | Opening / motivation | "Tell me a bit about yourself." | "Why are you interested in this role?" | "Why this company and not a competitor?" | "Your background points elsewhere. Convince me this isn't a fallback." | "You have 60 seconds: why should we hire you over the 200 other applicants?" |
 | Behavioural: achievement | "What's something at work you're proud of?" | "Tell me about a goal you achieved." | "Walk me through your biggest result. What exactly was your part?" | "That figure on your CV: how was it measured, and what would it be without your team?" | "I think that result would have happened without you. Prove me wrong." |

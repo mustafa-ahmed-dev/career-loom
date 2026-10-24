@@ -12,9 +12,10 @@ This skill holds the evidence and practical tips behind every other career skill
 |---|---|
 | A source, link, author or evidence label | `sources.md` (IDs S001–S236; each row has Last checked and Volatility) |
 | A myth the user believes | `myths-vs-reality.md` |
-| How a "must verify" item gets verified | `VERIFICATION.md` |
+| The full integrity rules (no fabrication, privacy, banned items) | `rules/integrity.md` |
 | A claim that must never be repeated | `banned-claims.md` |
-| Which sources need re-checking and why | `volatility-review.md` |
+| Blank templates (fact bank, report, critique) | `templates/` |
+| A worked before/after example | `examples/` |
 | ATS and parsing | `tips/ats-and-parsing.md` |
 | Bullet formulas, numbers, Voice Fidelity | `tips/writing-bullets.md` |
 | Cover letters | `tips/cover-letters.md` |
@@ -24,7 +25,7 @@ This skill holds the evidence and practical tips behind every other career skill
 | Photo and personal data | `tips/photo-and-personal-data.md` |
 | Design tiers and layout | `tips/design-and-layout.md` |
 | Fonts, RTL, scripts | `tips/multilingual-typography.md` |
-| A specific country or region | `tips/regional/<region>.md` |
+| A specific country or region | `regions/<region>/pack.md` (conventions, where present) and `regions/<region>/tips.md`; list in `regions/README.md` |
 
 Read only the file the question needs. Do not load the whole library.
 
@@ -79,5 +80,5 @@ Do not add it to:
 
 ## Maintenance
 - Re-check every `quarterly` source each quarter (GCC quotas S081–S088, connectors and APIs S098–S141, licences S206–S214, platform docs S233–S236, and others flagged in `sources.md`); `annual` sources each year; `stable` sources by link check every 36 months.
-- Run the quarterly freshness review in `VERIFICATION.md` and update `volatility-review.md`.
+- Maintainers run the quarterly freshness review described in the repo's `docs/verification.md` and `docs/volatility-review.md` (not shipped with the plugin).
 - When a source changes, update its row and its entry in the verification log; never silently change a statistic.

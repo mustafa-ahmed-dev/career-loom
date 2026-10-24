@@ -10,5 +10,6 @@
       "description": "A career-consulting firm in a plugin: truthful CV, résumé and cover-letter diagnosis, rewriting, design and localization, mock interviews, and relationship-based job search, in any language. Run the whole firm or call any single specialist.",
       "version": "0.1.0"
     }
-  ]
+  ],
+  "description": "Marketplace for the career-firm plugin: truthful CV, cover-letter, interview and job-search help in any language."
 }

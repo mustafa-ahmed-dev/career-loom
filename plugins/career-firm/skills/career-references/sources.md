@@ -9,7 +9,7 @@ Every statistic, rule or claim the plugin gives a user must trace to an entry he
 - "Not identified" means the page did not name an author when it was captured. Do not guess an author.
 - Titles in *italics* were inferred from the link because the page title was not captured.
 - "Link pending" means the source was cited without a URL. Add and verify the link before release.
-- A "U" item becomes verified only when a new source row is added here and the regional file cites it. Record the check in the verification log at the bottom. See `VERIFICATION.md`.
+- A "U" item becomes verified only when a new source row is added here and the regional file cites it. Record the check in the verification log at the bottom. See `docs/verification.md` (repo, not shipped).
 
 ## Volatility key
 Every source has a `Volatility` value that sets how soon it must be re-checked.
@@ -19,9 +19,9 @@ Every source has a `Volatility` value that sets how soon it must be re-checked.
 | `stable` | 36 months (link check only) | Peer-reviewed studies, field experiments, historical findings |
 | `annual` | 12 months | Recurring platform or vendor reports, regional convention guides, font and script support notes |
 | `quarterly` | 3 months | Laws, quotas, regulations, connector or product status, API access, data licences, vendor pricing |
-| `hypothesis` | None (see `VERIFICATION.md`) | Founder observations and anything awaiting primary verification |
+| `hypothesis` | None (see `docs/verification.md` (repo, not shipped)) | Founder observations and anything awaiting primary verification |
 
-An entry is **stale** when today minus `Last checked` exceeds its window. `hypothesis` entries are never stale, only unverified. Volatility measures how fast a claim goes out of date, not evidence quality. Judgement calls are listed in `volatility-review.md`.
+An entry is **stale** when today minus `Last checked` exceeds its window. `hypothesis` entries are never stale, only unverified. Volatility measures how fast a claim goes out of date, not evidence quality. Judgement calls are listed in `docs/volatility-review.md` (repo, not shipped).
 
 **Last checked dates.** Round 1 and 2 entries show `2026-09-25 (earliest possible)`: the exact check date was not recorded, but round 1 cites the plugin directory opening on that date, so every R1/R2 source was checked on or after it. Treat the date as the earliest possible, not as a confirmed check. Round 3 entries show the date they were captured.
 
@@ -409,9 +409,9 @@ Add one row each time an item is verified. A "U" item becomes verified only afte
 - Review S014 and identify the issuer of S023.
 - Verify S084–S088 against HRSD (Saudi Arabia) and MOHRE (UAE).
 - Verify S094 (Japan form change).
-- Confirm S159 (founder observations) with 5–10 recruiter or HR interviews in Iraq/Kurdistan (see `VERIFICATION.md`).
+- Confirm S159 (founder observations) with 5–10 recruiter or HR interviews in Iraq/Kurdistan (see `docs/verification.md` (repo, not shipped)).
 - Round 3 full research is done (S160–S236). Still unverified after it: university and government section rules, regional cover-letter demand, ATS primary documents, Sorani glyphs, Gulf and Iraq photo norms.
 - Spot-check the new links (S160–S236) by opening each once; several were captured through search snippets and carry no link ("Link pending").
 - Confirm the MHLW 2021 rirekisho photo dimensions (S168, S170, S171 disagree or are silent).
 - Confirm S214 (Lightcast free-tier change, April 2026) with Lightcast directly before relying on it.
-- Quarterly freshness review: see `volatility-review.md` and the last section of `VERIFICATION.md`.
+- Quarterly freshness review: see `docs/volatility-review.md` (repo, not shipped) and the last section of `docs/verification.md` (repo, not shipped).
