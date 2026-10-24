@@ -4,7 +4,7 @@
 - A tailored letter beats both a generic letter and no letter. In one US field experiment of 7,287 applications: 16.4% callbacks with a tailored letter, 12.5% with a generic letter, 10.7% with none. [S156, Vendor]
 - In a US survey of 200 hiring decision-makers, most said they read a letter even when it isn't required, yet only about 35–38% of candidates submit one. So a good letter stands out. [S157, Vendor]
 - Another US vendor survey says about 60% of companies require one. [S158, Vendor]
-- **There is no data for Iraq, Kurdistan or the wider Middle East and North Africa.** One job seeker reports that local employers rarely ask for letters and that WhatsApp or phone contact comes first. [S159, Weak: n=1, unconfirmed] For direct applications there, a short intro message is the default.
+- **There is no data for Iraq, Kurdistan or the wider Middle East and North Africa.** Ask whether a letter is expected.
 - Google doesn't require letters [S024]; Harvard treats one as a screened writing sample [S020]; EU and UN processes expect a motivation letter [S041].
 
 | Situation | Do this |

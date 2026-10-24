@@ -4,7 +4,6 @@
 - Referred candidates convert far better. In one large US firm, referrals were 6% of applicants but 29% of hires. [S057, Strong]
 - People you know moderately well (about 10 mutual connections) produce the most job moves, more than close friends. [S059, Strong]
 - In much of the Arab region, personal connections are often the main way people find jobs. [S063, S064, Strong]
-- One job seeker in Iraq/Kurdistan reports that most of his jobs, and those of people he knows, came through referrals, with Telegram groups and channels, LinkedIn and Bayt as the next channels. [S159, Weak: n=1, unconfirmed]
 
 ## Build your warm-path list
 1. Former colleagues and managers.
@@ -23,7 +22,7 @@ Mark each person by how well you know them, and focus on the middle: people who 
 - **Thank-you:** within 24 hours, one specific thing you learned or appreciated.
 
 ## Channel notes
-- Where employers contact candidates by WhatsApp or phone first (reported for Iraq/Kurdistan, S159, unconfirmed), keep your phone number in international format, make sure it's reachable on WhatsApp, and keep your CV PDF small enough to send easily.
+- Where an employer or contact reaches you by WhatsApp or phone, keep your phone number in international format, make sure it's reachable on WhatsApp, and keep your CV PDF small enough to send easily.
 
 ## Follow-up schedule
 - One polite follow-up after 7–10 working days.

@@ -1,5 +1,7 @@
-# Iraq and Kurdistan Region (deep pack)
+# Iraq and Kurdistan Region
 
-Founder observations (S159, n=1, not recruiter-verified): English CVs for private/international employers, Arabic for federal public sector, Kurdish for some KRG roles; 1 page (2 with much experience); referrals first, Telegram second, then LinkedIn/Bayt; few or no ATS; WhatsApp or phone first. Personal data: nationality on, marital status off unless required, never national ID numbers. Multinationals, NGOs, UN and portals get the A twin; local employers may receive B/C. Sources: S068–S079, S159, S196–S205. Status: unverified until recruiter interviews (see docs/verification.md in the repo).
+Only what published sources support. Labour market and hiring channels: see `tips.md` (S070-S079, S196-S203). Referral-first recruiting is supported by RAND, World Bank and KRSO work but no representative channel-share data exists. Arabic or Sorani CVs sent through portals with foreign parsers are high parse risk; keep an English twin (S177-S180). Never include national ID numbers.
 
-Last verified: 2026-10-24 (library capture; not a recruiter verification).
+No published source was found for CV length, language per employer type, personal-data norms, ATS use or cover-letter practice in Iraq/KRI, so none is stated; the generic rules in `localization` apply and the user decides. To be researched in the Levant & Iraq pilot.
+
+Last verified: 2026-10-24 (library capture).

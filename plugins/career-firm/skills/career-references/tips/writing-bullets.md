@@ -25,7 +25,6 @@ If you can only estimate, write "~" in front of the number. If no number exists,
 - Every number, title and date must exist in your fact bank.
 - Team results stay team results: write "contributed to" or "as part of a 5-person team".
 - Expect every number to come up in an interview as "How did you measure that?"
-- Exaggerated CVs tend to backfire in person: the reader pictures a level, then meets someone below it. (One job seeker's observation from Iraq/Kurdistan, S159, Weak.)
 
 ## Voice fidelity: phrases to replace
 | Avoid | Use instead |

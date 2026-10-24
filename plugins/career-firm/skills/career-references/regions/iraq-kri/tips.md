@@ -1,4 +1,4 @@
-# Iraq and Kurdistan Region (full pack, many details still unverified)
+# Iraq and Kurdistan Region (only what published sources support)
 
 ## Labour market
 - 37.9% of employment is in the public sector (70.5% for women). [S070]
@@ -15,25 +15,9 @@
 - ILO Job Search Clubs in Duhok and Ninawa. [S074]
 
 ## The CV
-- English for private and international employers; Arabic for federal public-sector jobs; Kurdish for some KRG roles.
-- Photo: common, but optional.
+- Photo: optional (see `../../tips/photo-and-personal-data.md`).
 - Marital status sometimes included (weak source). [S079]
 - Never include national ID numbers.
-
-## Founder observations (n=1, job-seeker perspective; not recruiter-verified) [S159]
-| Topic | Observation | Plugin default |
-|---|---|---|
-| CV language | Mostly English | English; Arabic/Kurdish on request |
-| Length | 1 page; 2 pages with substantial experience; CVs for specialised roles can be long | Same |
-| Photo | Commonly added, usually unnecessary | Optional; suggested only for appearance roles or if the posting asks |
-| Personal details | Nationality yes; marital status only if required | Nationality on; marital status off |
-| Cover letters | Few companies ask for them (unconfirmed) | Short intro message by default; formal letter only if asked |
-| Channels | Referrals first, then Telegram groups and channels, LinkedIn, Bayt; Facebook unknown | Pair every application with a person; check Telegram channels in your field |
-| Screening | Few or no companies use ATS; HR reads CVs manually | Local employers: B/C designs acceptable. Multinationals, NGOs, UN: A twin |
-| Employer contact | WhatsApp or phone call first, email second | International phone format; WhatsApp-friendly PDF size; short intro message |
-| Biggest problem | Exaggeration that collapses at interview | Integrity Checker is strict: no inflated titles, numbers or skills |
-
-The observer is a job seeker who has also written CVs for friends, not a recruiter or hiring manager. He did not know the answers on recruiter rejection reasons and cover-letter reading. Treat every row as a hypothesis.
 
 ## Sources
 | ID | Source | Evidence |
@@ -48,7 +32,6 @@ The observer is a job seeker who has also written CVs for friends, not a recruit
 | S077 | LinkedIn: "FIND A JOB IN KURDISTAN" page | Weak |
 | S078 | HireKurd job board | Weak |
 | S079 | Resume-Example: Iraq CV format | Weak |
-| S159 | Founder observation, 24 Oct 2026 | Weak (anecdote, n=1) |
 | S068, S069 | Bayt surveys, MENA-wide (not Iraq-specific) | Vendor |
 
 ## Verification targets (not yet sources)
@@ -58,11 +41,10 @@ The observer is a job seeker who has also written CVs for friends, not a recruit
 - Native Sorani editor for the Reality note.
 
 ## Status
-Labour statistics: verified (Strong). CV conventions, hiring channels, ATS use and cover-letter practice: **unverified** until the recruiter checks are done.
+Labour statistics: verified (Strong). CV conventions, ATS use and cover-letter practice for Iraq/KRI: no published source found yet, so the plugin states none and uses the generic rules in `localization`.
 
 ## Round 3 additions (October 2026)
 - Referral-first is supported by RAND 2014, World Bank PRWP 10028 and KRSO MSME 2022; no representative channel-share data exists. [S196–S198]
 - Portals: KRG job-matching platform (Nov 2024), Hali Kar, Jobs.krd; Decree 172 requires 75% local workforce in investment projects. [S200–S203]
 - Arabic or Sorani CVs sent through portals with foreign parsers are high parse risk; keep an English twin. [S177–S180]
 - Background checks: vendor benchmarks report frequent discrepancies in EMEA; keep every claim provable. [S204, S205]
-- Status: still partly founder observation (S159) until the recruiter interviews are done.

@@ -252,7 +252,7 @@ An entry is **stale** when today minus `Last checked` exceeds its window. `hypot
 | S156 | [Cover letters: just how important are they?](https://www.resumego.net/research/cover-letters/) | Not identified | ResumeGo (résumé-writing service) | Field experiment, 7,287 US applications: tailored letter 16.4% callbacks, generic 12.5%, none 10.7%; also a survey of 236 recruiters (81% value tailored letters over generic) | Vendor (field experiment) | R3-quick | 2026-10-24 | stable |
 | S157 | [Are cover letters necessary?](https://resumelab.com/cover-letter/are-cover-letters-necessary) | Not identified | ResumeLab (survey run by OnePoll) | 200 US hiring decision-makers: 83% call the letter important; 77% read it even when it isn't required; only 35–38% of candidates submit one | Vendor | R3-quick | 2026-10-24 | annual |
 | S158 | [Cover letter statistics](https://resumegenius.com/blog/cover-letter-help/cover-letter-statistics) | Not identified | Resume Genius | 60% of US companies require a cover letter (US hiring-manager survey) | Vendor | R3-quick | 2026-10-24 | annual |
-| S159 | Founder observation (24 Oct 2026). Not a published source | The plugin founder (a job seeker, not a recruiter) | Erbil, Kurdistan Region | Iraq/Kurdistan: referral-first hiring; Telegram groups and channels as second channel, then LinkedIn and Bayt; WhatsApp/phone as the main employer contact; few or no ATS; exaggeration common | Weak (anecdote, n=1) | R3-quick | 2026-10-24 | hypothesis |
+| S159 | **EXCLUDED, not used by any file.** Founder observation (24 Oct 2026). Not a published source | The plugin founder (a job seeker, not a recruiter) | Erbil, Kurdistan Region | Iraq/Kurdistan: referral-first hiring; Telegram groups and channels as second channel, then LinkedIn and Bayt; WhatsApp/phone as the main employer contact; few or no ATS; exaggeration common | Weak (anecdote, n=1) | R3-quick | 2026-10-24 | hypothesis |
 
 **Warning:** AI cover-letter tool blogs misquote the ResumeGo study with inflated, inconsistent figures (for example "125,000 applications, 53.3% vs 34.8%"). Cite only S156.
 
@@ -373,7 +373,7 @@ An entry is **stale** when today minus `Last checked` exceeds its window. `hypot
 ## Regional index
 | Region file | Source IDs |
 |---|---|
-| iraq-kri.md | S068–S079, S159, S177–S180, S196–S205 |
+| iraq-kri.md | S068–S079, S177–S180, S196–S205 |
 | gcc.md | S067–S069, S080–S088, S117, S177–S180, S220–S222 |
 | levant-egypt-maghreb.md | S063–S068, S199, S223–S224 |
 | north-america-uk-anz.md | S015, S016, S019, S020, S024, S035, S040, S043–S045, S047, S052, S055, S057–S059, S089, S108, S109, S156–S158, S164, S172–S176, S181–S183, S215–S217 |
@@ -409,7 +409,7 @@ Add one row each time an item is verified. A "U" item becomes verified only afte
 - Review S014 and identify the issuer of S023.
 - Verify S084–S088 against HRSD (Saudi Arabia) and MOHRE (UAE).
 - Verify S094 (Japan form change).
-- Confirm S159 (founder observations) with 5–10 recruiter or HR interviews in Iraq/Kurdistan (see `docs/verification.md` (repo, not shipped)).
+- Find published sources for Iraq/KRI CV conventions (S159 was removed from use).
 - Round 3 full research is done (S160–S236). Still unverified after it: university and government section rules, regional cover-letter demand, ATS primary documents, Sorani glyphs, Gulf and Iraq photo norms.
 - Spot-check the new links (S160–S236) by opening each once; several were captured through search snippets and carry no link ("Link pending").
 - Confirm the MHLW 2021 rirekisho photo dimensions (S168, S170, S171 disagree or are silent).

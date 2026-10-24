@@ -4,7 +4,7 @@ One folder per region. `pack.md` (where present) holds the short conventions sum
 
 | Folder | Covers | Depth |
 |---|---|---|
-| `iraq-kri/` | Iraq and Kurdistan Region | pack + tips (status: unverified until recruiter interviews) |
+| `iraq-kri/` | Iraq and Kurdistan Region | pack + tips (published sources only; CV conventions not yet sourced) |
 | `gcc/` | Saudi Arabia, UAE first | pack + tips (partly unverified) |
 | `international-english/` | Multinationals and remote roles | pack |
 | `levant-egypt-maghreb/` | Levant, Egypt, Maghreb | tips (lite) |

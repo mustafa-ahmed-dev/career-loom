@@ -6,7 +6,7 @@
 3. **Search and rank.** Recruiters search by keyword and filter. If you're missing the terms, you never show up in the results. [S003]
 4. **Human review.** The first scan is short, so the top third of page 1 carries most of the weight. [S016, Weak]
 
-**Not every employer uses ATS software.** In some markets, including (reportedly) Iraq and Kurdistan, HR staff read CVs by hand. [S159, Weak: one job seeker's observation, unconfirmed] Ask or check which applies; keep an ATS-safe version for multinationals, NGOs, the UN and any online portal.
+**Not every employer uses ATS software.** Ask or check which applies; keep an ATS-safe version for multinationals, NGOs, the UN and any online portal.
 
 ## Do
 - Use a single column for any file you upload to a portal.

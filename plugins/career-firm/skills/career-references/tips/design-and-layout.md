@@ -10,8 +10,6 @@
 
 **Rule:** anything uploaded to a portal must be tier A. Tier C and D designs always come with an A-tier twin. [S011, S008]
 
-**Local employers that read CVs by hand:** where HR reads CVs manually rather than through ATS software (reported for Iraq/Kurdistan, S159, unconfirmed), tier B and C designs are acceptable for direct sends. Keep the A twin for multinationals, NGOs, the UN and any online portal.
-
 ## Readability basics
 - Body text at least 10 pt (11 pt for Arabic-script languages).
 - Text contrast at least 4.5:1 (WCAG AA).

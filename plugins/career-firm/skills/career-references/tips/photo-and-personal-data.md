@@ -5,7 +5,6 @@
 - **The plugin suggests a photo only when:**
   - the role depends on appearance: actors, models, TV presenters, cabin crew, brand ambassadors, fitness trainers, on-camera creators, some front-of-house hospitality roles; or
   - the job posting asks for one.
-- **Many people add a photo anyway, which is usually unnecessary.** (One job seeker's observation from Iraq/Kurdistan, S159, Weak.) The plugin says "common here, still optional" and leaves the choice to the user.
 - **Actors and models:** use a separate professional headshot rather than a photo on the résumé (industry norm; round 3 will verify).
 - **Cabin crew:** airlines usually ask for photos to their own specification in their application portal (verify per airline).
 - **Regional conventions** are given as information only, never pressure:
@@ -26,7 +25,6 @@
 ## Personal data
 - **Never include:** government ID, passport or Iqama numbers; your full street address (city and country are enough); salary history.
 - **Include only when your target region expects it, and only if you agree to each one:** nationality, visa status, date of birth, marital status. [S080]
-- **Iraq/Kurdistan default (founder observation, S159):** nationality on; marital status off unless the employer requires it.
 - The plugin never adds religion, health or similar characteristics.
 
 ## Round 3 additions (October 2026)

@@ -24,7 +24,7 @@ Full text: `skills/career-references/rules/integrity.md` (canonical). Every user
 - `sources.md` holds evidence rows S001-S236 with Last checked and Volatility. Look up by ID or topic; never load the whole file.
 - Library sources and live web findings stay strictly separate. Live findings are never written into `sources.md` (changed only in the quarterly review).
 - Check any statistic against `banned-claims.md`.
-- Regional content lives in `regions/<region>/` (`pack.md`, `tips.md`; index in `regions/README.md`). Conventions carry a verified / secondary / unverified status. Nothing unverified should be presented as fact; the Iraq/KRI files still rest on a founder observation (S159) and are labelled unverified.
+- Regional content lives in `regions/<region>/` (`pack.md`, `tips.md`; index in `regions/README.md`). Conventions carry a verified / secondary / unverified status. Nothing unverified is presented as fact. The founder observation S159 is excluded and used nowhere; Iraq/KRI CV conventions still need published sources.
 
 ### Design systems
 `skills/cv-design/systems/` has 20 stubs (`p1`-`p8`, `c1`, `c3`, `c5`-`c12`, `c15`, `c20`). Retired IDs C2, C17, C18 are never reused. Tiers A-D: every C/D design also produces an A-rated ATS twin; portals get the A twin. RTL is a variant flag; fonts OFL only. Dropped designs: `docs/design-backlog.md`.
