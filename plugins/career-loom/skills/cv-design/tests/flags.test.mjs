@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { join } from 'node:path';
+import { readFileSync } from 'node:fs';
 import { buildHtml } from '../scripts/lib/html.mjs';
 import { arabicFont } from '../scripts/lib/css.mjs';
 import { loadTokens, readJson, SKILL_DIR } from '../scripts/lib/util.mjs';
@@ -42,4 +43,11 @@ test('the screen block never touches print: nothing outside @media screen sets a
   const html = buildHtml(cv, loadTokens('p1').tokens).html;
   const outside = html.replace(/@media screen\{[\s\S]*?\n\}/, '');
   assert.doesNotMatch(outside, /box-shadow|width:210mm/);
+});
+
+test('shipped design.css: the RTL sidebar tint is mirrored on the screen sheet and the print page, and the desk stays grey', () => {
+  const css = readFileSync(join(SKILL_DIR, 'systems', 'c10-sidebar-dark', 'design.css'), 'utf8');
+  assert.match(css, /@media screen\{html\[dir="rtl"\] body\{background:linear-gradient\(to left/);
+  assert.match(css, /@media print\{html\[dir="rtl"\]\{background:linear-gradient\(to left/);
+  assert.doesNotMatch(css, /\n\s*html\[dir="rtl"\]\{background/, 'no bare html RTL background: it would beat the grey desk on screen');
 });

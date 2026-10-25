@@ -90,6 +90,7 @@ body{width:210mm;max-width:100%;min-height:297mm;margin:18px auto;background:lin
 }
 :root{--sidebar-bg:#17324d;--sidebar-text:#ffffff;--sidebar-muted:#c9d6e3;--sidebar-accent:#a9d1f5;}
 /* RTL and Arabic-script variant: RTL is a flag of the same design, not a separate design. */
-html[dir="rtl"]{background:linear-gradient(to left, #17324d 0, #17324d calc(13mm + 56mm + 4mm), #ffffff calc(13mm + 56mm + 4mm))}
+@media print{html[dir="rtl"]{background:linear-gradient(to left, #17324d 0, #17324d calc(13mm + 56mm + 4mm), #ffffff calc(13mm + 56mm + 4mm))}}
+@media screen{html[dir="rtl"] body{background:linear-gradient(to left, #17324d 0, #17324d calc(13mm + 56mm + 4mm), #ffffff calc(13mm + 56mm + 4mm))}}
 html[data-script="arabic"] body{font-family:"Inter","IBM Plex Sans Arabic","Noto Sans SC","Noto Sans Devanagari",sans-serif;line-height:1.62}
 html[data-script="arabic"] h1{letter-spacing:0}

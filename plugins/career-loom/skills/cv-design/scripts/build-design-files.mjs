@@ -45,7 +45,8 @@ function designCss(t) {
 ${fontFaces(t)}${buildCss(t, { rtl: false, script: 'latin', lang: 'en' }).trim()}
 :root{${sidebarVars}}
 /* RTL and Arabic-script variant: RTL is a flag of the same design, not a separate design. */
-html[dir="rtl"]{background:${pageBackground(t, true)}}
+@media print{html[dir="rtl"]{background:${pageBackground(t, true)}}}
+@media screen{html[dir="rtl"] body{background:${pageBackground(t, true)}}}
 html[data-script="arabic"] body{font-family:${arabic};line-height:${s.arabicLineHeight ?? s.lineHeight + 0.15}}
 html[data-script="arabic"] h1{letter-spacing:0}
 `;
