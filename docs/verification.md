@@ -33,7 +33,7 @@ Every "unverified" or "must verify" item in this library is checked here. Record
 ### Local practice (practitioner checks)
 | Item | File | Who to ask | How |
 |---|---|---|---|
-| Iraq / Kurdistan CV norms and channels (S159 founder observations) | iraq-kri.md | 5–10 recruiters or HR staff in Erbil, Sulaymaniyah and Duhok, mixing NGOs, oil and gas, private companies and banks | Use the 10-minute question set below |
+| Iraq / Kurdistan CV norms and channels (no published source yet; S159 was removed from use) | iraq-kri.md | 5–10 recruiters or HR staff in Erbil, Sulaymaniyah and Duhok, mixing NGOs, oil and gas, private companies and banks | Use the 10-minute question set below |
 | Egypt military-status line | levant-egypt-maghreb.md | 3–5 Egyptian recruiters (LinkedIn) | Is it still expected? For which employers? |
 | Levant CV language and photo | levant-egypt-maghreb.md | Recruiters in Amman and Beirut | Same short question set |
 | Africa and Latin America CV norms | africa-latam.md | Round-3 research first, then 2–3 recruiters per country | The national guides from step 1 come first |

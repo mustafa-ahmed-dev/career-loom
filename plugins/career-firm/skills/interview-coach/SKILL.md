@@ -12,7 +12,7 @@ Target role and company, region, the user's CV or Fact Bank, difficulty level, m
 L1 Warm-up, L2 Standard, L3 Realistic, L4 Tough, L5 Brutal. The 1-10 scale never changes; only questions, follow-up pressure and behaviour do. L5 is tough on the answer, never on the person. Level detail: `../career-references/tips/interviews.md`.
 
 ## Modes
-Realistic: no feedback until the end. Coaching: feedback after each answer.
+Exam mode: no feedback until the end (not the same as level L3 Realistic). Coaching mode: feedback after each answer.
 
 ## Steps
 1. Before the first question, write the rubric for it using `rubric.md` and hold it back. Do not show it until you score.

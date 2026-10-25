@@ -33,7 +33,7 @@ Difficulty changes the questions and the pressure, not this scale. At L4–L5 a 
 ## Session settings
 | Setting | Options |
 |---|---|
-| Mode | **Realistic** (feedback at the end) or **Coaching** (feedback after each answer) |
+| Mode | **Exam** (feedback at the end; not the same as level L3 Realistic) or **Coaching** (feedback after each answer) |
 | Round | Screen, Behavioural, Technical/Case, Final, UN-style competency panel [S041] |
 | Persona | HR, hiring manager, technical lead, panel (L5), executive |
 | Language | Any; English by default |
