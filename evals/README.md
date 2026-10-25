@@ -7,4 +7,4 @@ Automated checks that the plugin keeps its promises (nothing fabricated, privacy
 
 Run from the repo root: `python3 evals/run_evals.py` (or add case ids to run a few). A PASS only means the keyword rules held; read the saved answer against the `expect` line before trusting a change. Add a case whenever you find a failure in real use.
 
-Not yet covered: long Arabic CVs, full interview scoring, localization rules per region, the rendered PDF files themselves and the quality of the HTML written without the renderer (the design cases only check what the skill says and promises; renderer output is covered by the tests in `skills/cv-design/tests/`).
+Not yet covered: long Arabic CVs, full interview scoring, localization rules per region, the rendered PDF files themselves and the quality of the HTML Claude writes from the design files (the design cases only check what the skill says and promises; renderer output is covered by the tests in `skills/cv-design/tests/`).

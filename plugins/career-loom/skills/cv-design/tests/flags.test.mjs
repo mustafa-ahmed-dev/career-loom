@@ -29,3 +29,17 @@ test('Cairo is swapped for IBM Plex Sans Arabic in Sorani and Kurdish, and kept 
   assert.equal(arabicFont(role, 'ar'), 'Cairo');
   assert.equal(arabicFont({ ...role, arabic: 'Noto Naskh Arabic' }, 'ckb'), 'Noto Naskh Arabic');
 });
+
+test('on screen the page is a centred sheet; margins become padding only for designs that rely on @page margins', () => {
+  const screen = (id) => /@media screen\{([\s\S]*?)\n\}/.exec(buildHtml(cv, loadTokens(id).tokens).html)[1];
+  const plain = screen('p1'), sidebar = screen('c9'), band = screen('c1');
+  for (const css of [plain, sidebar, band]) { assert.match(css, /body\{width:210mm;max-width:100%/); assert.match(css, /margin:18px auto/); }
+  assert.match(plain, /padding:16mm 18mm 16mm/, 'a plain design has no padding of its own on screen');
+  assert.doesNotMatch(sidebar, /padding:/, 'a sidebar design already carries its margins as .layout padding');
+  assert.doesNotMatch(band, /padding:/, 'a band design already carries its margins as .layout padding');
+});
+test('the screen block never touches print: nothing outside @media screen sets a sheet width or shadow', () => {
+  const html = buildHtml(cv, loadTokens('p1').tokens).html;
+  const outside = html.replace(/@media screen\{[\s\S]*?\n\}/, '');
+  assert.doesNotMatch(outside, /box-shadow|width:210mm/);
+});

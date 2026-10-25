@@ -92,6 +92,11 @@ h3{font-family:"Source Serif 4","Noto Naskh Arabic","Noto Sans SC","Noto Sans De
 bdi.ltr{unicode-bidi:isolate}
 a{color:inherit;text-decoration:none}
 .mono{font-family:"IBM Plex Mono","IBM Plex Sans Arabic","Noto Sans SC","Noto Sans Devanagari",sans-serif}
+/* On screen the page is a centred sheet on a grey desk. @page margins only exist in print, so plain designs get them as padding here; print and PDF are unchanged. */
+@media screen{
+html{background:#dfe2e6}
+body{width:210mm;max-width:100%;min-height:297mm;margin:18px auto;background:#fbf6ee;box-shadow:0 1px 3px rgba(0,0,0,.18),0 8px 28px rgba(0,0,0,.12);}
+}
 :root{}
 /* RTL and Arabic-script variant: RTL is a flag of the same design, not a separate design. */
 html[dir="rtl"]{background:#fbf6ee}
