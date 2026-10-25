@@ -63,7 +63,7 @@ Prints a JSON summary (files, warnings, per-design tier, pages, RTL, DOCX status
 
 Schema: `../schema/cv.schema.json`. Unknown keys are rejected (so there is no field for skill percentages, photos, salary, ID numbers or street addresses). `meta.lang` and `basics.name` are required. Dates are free text. `"Present"` is replaced by the language's label. Sections: `summary`, `highlights` (2 to 4 `{value, label}` facts, already in the body), `work`, `projects`, `education`, `volunteer`, `publications`, `skills`, `languages`, `certificates`.
 
-Section headings exist for `en` and `ar` only. For any other `meta.lang`, add `meta.labels` (keys: `summary work education skills languages projects certificates volunteer publications contact links present`).
+Section headings exist for `en` and `ar` only. For any other `meta.lang`, add `meta.labels` (keys: `summary work education skills languages projects certificates volunteer publications contact links present highlights`).
 
 ```json
 {
@@ -98,7 +98,7 @@ For a tier C or D design the same set is written for the design, plus the A-rate
 
 | Tier | PDF | DOCX |
 |---|---|---|
-| A, B | yes | yes |
+| A, B | yes | yes (same content and order; see the DOCX limits below) |
 | C | yes | best effort: always a single column (no sidebar), real headings and bullets, no tables or text boxes |
 | D | yes | none (PDF only) |
 
@@ -111,7 +111,7 @@ npm test                      # node --test ../tests/*.test.mjs
 node check-design.mjs p1 c9   # the five checks for chosen designs, optional --out <dir>
 ```
 
-`npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) and the DOCX check needs `soffice` (LibreOffice). Without them extraction and greyscale fail (poppler) or the DOCX check is reported "not verified" (LibreOffice). Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 23 seconds together and passed all five, and `npm test` ran 41 tests, all passing, in about 22 seconds (with poppler and LibreOffice installed).
+`npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) and the DOCX check needs `soffice` (LibreOffice). Without them extraction and greyscale fail (poppler) or the DOCX check is reported "not verified" (LibreOffice). Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 27 seconds together and passed all five, and `npm test` ran 80 tests, all passing, in about 3 minutes on the merged `main` (with poppler and LibreOffice installed and the Noto fonts fetched).
 
 The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points the environment variable `CL_FONT_CACHE` at an empty folder. The same variable can move the font cache (`fetch-fonts.mjs` writes to it too; default `../fonts/cache/`). The test files therefore run in parallel safely.
 
@@ -138,5 +138,6 @@ DOCX (not one of the five): for tier A/B/C each of en/ar/long is written, conver
 - Arabic-script text is rendered with ligatures disabled, so PDF text extraction keeps letter order. The letters look less joined than normal typesetting. This is deliberate.
 - Sorani: glyph coverage and extraction are tested, but nobody who reads Sorani natively has reviewed the output. Treat it as unreviewed. Sorani CVs need `meta.labels` (no built-in headings). The Cairo-to-IBM-Plex-Sans-Arabic swap applies to both PDF and DOCX.
 - Chinese and Hindi PDFs need the fonts from `fetch-fonts.mjs`; otherwise those characters fall back to a generic sans-serif.
-- Token flags not implemented yet: `header` `band`/`split` and `headingStyle` `bar-start`/`ribbon` render as plain and the CLI warns (exit 3). DOCX ignores `bulletStyle`, `dateAlign` and `headingStyle`. See `../systems/TOKENS.md`.
+- DOCX does not reproduce the design. It is always one plain column with real headings and bullets, in the design's fonts and colours, section order and upper-case headings. It ignores the layout flags (`kind`, `header`, `headerAlign`, `headerFull`, `headingStyle`, `bulletStyle`, `dateAlign`, `entryStyle`, `skillsStyle`, `projectsStyle`, `highlightsStyle`), so sidebars, bands, ribbons, timelines, cards and pills do not appear, and `highlights` is one text line. This was read from `lib/docx.mjs`, and the sample DOCX files for P1 and C9 were judged by the project owner as not matching the design.
+- Layout flags and what they do in PDF/HTML: see `../systems/TOKENS.md`.
 - The check thresholds are this project's choices, not an external standard, except the WCAG ratios.

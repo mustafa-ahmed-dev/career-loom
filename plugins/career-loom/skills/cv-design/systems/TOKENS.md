@@ -75,7 +75,7 @@ Four roles: `display` (name), `heading` (section and entry titles), `body`, `mon
 
 Optional `fonts.cjk` and `fonts.devanagari` are free strings. They default to Noto Sans SC and Noto Sans Devanagari, which are not bundled; `node scripts/fetch-fonts.mjs` downloads them into a gitignored cache. Only OFL fonts, and only fonts shipped in `../fonts/` (plus that cache), may be used. Fonts are embedded in the PDF as base64 subsets chosen by unicode range.
 
-**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly in HTML/PDF. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the substituted font. The DOCX writer does not apply this substitution (`docx.mjs` reads `fonts[role].arabic` directly), so a Cairo design would not be safe for Sorani DOCX. No current finished design uses Cairo.
+**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly. `docx.mjs` calls the same function, so the substitution applies to DOCX too. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the font actually used; the P3 and P5 specs record that they are present in Noto Naskh Arabic, which is not substituted. No current finished design uses Cairo.
 
 ## colors
 
