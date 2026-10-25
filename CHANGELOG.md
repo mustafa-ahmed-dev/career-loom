@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Repo cleanup: removed the duplicate `assets/logo.jpg` (`logo.png` and `icon.png` stay) and the one-off `tools/migrate_sources.py`; corrected the "stub" wording in `systems/TOKENS.md`.
 - Directory submission prep: added `plugins/career-loom/README.md` (the plugin folder had none), finalised `PRIVACY.md` and `NOTICES.md`, and added `displayName`, `homepage`, `repository`, `documentationUrl`, `supportUrl` and `privacyPolicyUrl` to `plugin.json`.
 - Plugin icon is now `assets/icon.png`, the logo symbol alone (no text) cropped to fill the square; the full logo stays in `assets/logo.png` and `assets/logo.jpg`.
 - Added the plugin icon: `logo.png` (set as `icon` in `plugin.json`) and the original `logo.jpg`, both in `plugins/career-loom/assets/`.

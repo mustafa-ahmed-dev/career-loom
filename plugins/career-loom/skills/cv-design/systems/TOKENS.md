@@ -24,7 +24,7 @@ Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It i
 
 | Status | Required |
 |---|---|
-| `stub` | `id`, `name`, `atsTier`, `status`, `rtlVariant`. No layout, fonts, colours, sizes or spacing. Every current C/D stub also carries `twin`, but the schema does not require it at this status. |
+| `stub` | `id`, `name`, `atsTier`, `status`, `rtlVariant`. No layout, fonts, colours, sizes or spacing. No design uses this status today; it stays valid for a design that is planned but not built yet, and the schema does not require `twin` at this status. |
 | `draft`, `finished` | the stub set plus `twin` (null allowed for A/B), `layout`, `fonts`, `colors`, `sizes`, `spacing`. |
 
 `cv-render.mjs` refuses a `stub` outright (exit 4, message lists the finished designs) and refuses `draft` unless `--allow-draft` is passed. All 20 designs are `finished`; a design only gets that status when all five checks pass (see its `spec.md`).
