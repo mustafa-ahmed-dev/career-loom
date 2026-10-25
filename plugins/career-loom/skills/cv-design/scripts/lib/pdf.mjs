@@ -1,7 +1,24 @@
 import { chromium } from 'playwright';
 
 let browser;
-export async function openBrowser() { return (browser ??= await chromium.launch()); }
+/**
+ * Browser used to print PDFs. Order: CL_BROWSER_PATH (a Chromium-based browser .exe/binary you choose),
+ * then Playwright's own Chromium (npx playwright install chromium), then Microsoft Edge, then Google Chrome if installed.
+ */
+export async function openBrowser() {
+  if (browser) return browser;
+  const exe = process.env.CL_BROWSER_PATH;
+  if (exe) return (browser = await chromium.launch({ executablePath: exe }));
+  try {
+    return (browser = await chromium.launch());
+  } catch (e) {
+    if (!/Executable doesn't exist/.test(e.message)) throw e;
+    for (const channel of ['msedge', 'chrome']) {
+      try { return (browser = await chromium.launch({ channel })); } catch { /* try the next one */ }
+    }
+    throw new Error("No browser found for PDF output. Playwright's Chromium is not installed (run: npx playwright install chromium), and neither Microsoft Edge nor Google Chrome could be started. You can also set CL_BROWSER_PATH to a Chromium-based browser (for example C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe). HTML output (--format html) does not need a browser.");
+  }
+}
 export async function closeBrowser() { if (browser) await browser.close(); browser = undefined; }
 
 /** Renders html to a tagged PDF. Returns { pages, overflowX } */
