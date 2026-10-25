@@ -3,7 +3,7 @@
 ## Unreleased
 
 ## 0.1.0 - 2026-10-25 (preview)
-- 20 design systems (P1-P8, C1, C3, C5-C12, C15, C20), each with `spec.md`, `design.css`, `components.html` and `tokens.json`; every coloured design also has a plain, ATS-safe twin. Claude writes the HTML from these files, so it works in claude.ai chat. PDF or Word only if your Claude has a tool that can write files.
+- 20 design systems (P1-P8, C1, C3, C5-C12, C15, C20), each with `spec.md`, `design.css`, `components.html` and `tokens.json`; each tier C or D design (C9-C12, C15, C20) also has a plain, ATS-safe twin (P1); tier B designs (C1, C3, C5-C8) have none. Claude writes the HTML from these files, so it works in claude.ai chat. PDF or Word only if your Claude has a tool that can write files.
 - Six open-licence font families bundled (SIL OFL); Chinese and Hindi fonts are fetched on demand by the maintainer tool only.
 - The optional CV renderer and design checker (Node, with tests) live in `tools/cv-design/`, outside the plugin folder, so installing the plugin does not include them.
 - Known gaps: Sorani (Kurdish) wording is not natively reviewed; Iraq/KRI CV conventions and several regional files are unverified; ESCO/O*NET data is not built; `evals/` is a starter set.
