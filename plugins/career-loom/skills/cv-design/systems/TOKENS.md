@@ -1,6 +1,6 @@
 # tokens.json reference
 
-Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It is validated against `../schema/tokens.schema.json` (JSON Schema 2020-12, `additionalProperties: false` everywhere, so unknown keys are rejected). The renderer in `../scripts/` reads it; see `../scripts/README.md`. This file documents the schema once. If the two disagree, the schema wins.
+Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It is validated against `../schema/tokens.schema.json` (JSON Schema 2020-12, `additionalProperties: false` everywhere, so unknown keys are rejected). The renderer in `../scripts/` reads it; see `../scripts/README.md`. `design.css`, `components.html` and the Tokens block in `spec.md` are generated from it by `../scripts/build-design-files.mjs`; edit `tokens.json`, then regenerate. This file documents the schema once. If the two disagree, the schema wins.
 
 ## Top-level fields
 
@@ -27,9 +27,9 @@ Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It i
 | `stub` | `id`, `name`, `atsTier`, `status`, `rtlVariant`. No layout, fonts, colours, sizes or spacing. Every current C/D stub also carries `twin`, but the schema does not require it at this status. |
 | `draft`, `finished` | the stub set plus `twin` (null allowed for A/B), `layout`, `fonts`, `colors`, `sizes`, `spacing`. |
 
-`cv-render.mjs` refuses `stub` and `draft` designs unless `--allow-draft` is passed (exit 4). P1 and C9 are `finished`; the other 18 are `stub`. Rendering a stub is refused even with `--allow-draft`: the renderer stops with "Design X is a stub" and lists the finished designs (exit 4).
+`cv-render.mjs` refuses a `stub` outright (exit 4, message lists the finished designs) and refuses `draft` unless `--allow-draft` is passed. All 20 designs are `finished`; a design only gets that status when all five checks pass (see its `spec.md`).
 
-Conditional rules in the schema: a `sidebar` layout also requires `layout.sidebarWidth`, `layout.sidebarSections` and the four `colors.sidebar*` values. A `band` header also requires `colors.bandBg` and `colors.bandText`.
+Conditional rules in the schema: tier A requires `kind: single`, `header: plain` and a heading style of `rule-below`, `rule-above` or `plain`. A `sidebar` layout requires `sidebarWidth`, `sidebarSections` and the four `colors.sidebar*` values; `labelled` requires `labelWidth`; a `band` header requires `colors.bandBg` and `bandText`; `headingStyle: ribbon` requires `ribbonBg` and `ribbonText`; `projectsStyle: cards` requires `cardBg`; `skillsStyle: pills` requires `chipBg`.
 
 ## Tiers
 
@@ -46,15 +46,22 @@ Every C and D design names an A-tier `twin` and the CLI writes it next to the de
 
 | Field | Values | Effect (checked in `scripts/lib/css.mjs`, `html.mjs`, `docx.mjs`) |
 |---|---|---|
-| `kind` (required) | `single`, `sidebar` | `sidebar` renders a CSS grid: side column plus main column, with the sidebar tint mirrored in RTL. DOCX ignores it and writes one column. |
-| `header` (required) | `plain`, `band`, `split` | Only `plain` is implemented. `band` and `split` are accepted by the schema, rendered as plain, and the CLI adds a warning (exit 3). |
-| `sidebarWidth` | string `^[0-9.]+(mm\|%)$` | Grid column width, e.g. `"54mm"`. Required when `kind` is `sidebar`. |
-| `sidebarSections` | array of `contact`, `skills`, `languages`, `certificates`, `links` | Sections moved into the sidebar and removed from the main column. `links` has no renderer and is silently dropped. Required for `sidebar`. |
+| `kind` (required) | `single`, `sidebar`, `labelled` | `sidebar`: CSS grid with a side column and a main column; the page edge tint mirrors in RTL. `labelled`: every section is a two-column grid with the heading in a label column (`labelWidth`) and the content beside it. DOCX ignores both and writes one column. |
+| `header` (required) | `plain`, `band`, `split` | `band`: full-bleed coloured header (page margin 0, the layout padding repeats on every page). `split`: name and headline at the start, contact block at the end, rule below. |
+| `headerAlign` | `start`, `center` | `center` centres name, headline and contact. |
+| `headerFull` | boolean | Sidebar designs only: the header spans both columns and the sidebar starts below it (no page-height tint). |
+| `sidebarWidth` | string `^[0-9.]+(mm\|%)$` | Sidebar column width, e.g. `"54mm"`. Required for `sidebar`. |
+| `labelWidth` | string `^[0-9.]+mm$` | Label column width for `labelled`. Required there. |
+| `sidebarSections` | array of `contact`, `skills`, `languages`, `certificates` | Sections moved into the sidebar. If `contact` is not listed, the contact line stays in the header. |
 | `headingCase` | `none`, `upper` | `upper` is applied to Latin and Cyrillic text only. Never to Arabic, CJK or Devanagari. |
-| `headingStyle` | `rule-below`, `rule-above`, `plain`, `bar-start`, `ribbon` | `rule-below` and `rule-above` draw a 0.75pt rule under or over the heading; `plain` draws none. `bar-start` and `ribbon` are not implemented: rendered as plain, with a CLI warning (exit 3). |
-| `bulletStyle` | `disc`, `dash`, `none` | HTML/PDF: `dash` gives "–", `disc` gives "•", `none` draws no marker. DOCX always uses "•". |
-| `dateAlign` | `inline`, `end` | HTML/PDF: `end` pushes dates to the end of the entry line, `inline` keeps them next to the title. DOCX always puts them after the title. |
-| `sectionOrder` | array of strings | Order of sections. Sections left out are not rendered. Known keys: `summary work projects education volunteer publications skills certificates languages` (and `contact`, only meaningful inside the sidebar; in single layouts contact is in the header). Unknown keys are ignored. |
+| `headingStyle` | `rule-below`, `rule-above`, `plain`, `bar-start`, `ribbon` | A thin rule under or above the heading; no decoration; a coloured bar at the start edge; or a full-width tinted ribbon (`ribbonBg`/`ribbonText`). In a sidebar, headings always use a rule below in `sidebarAccent`. |
+| `bulletStyle` | `disc`, `dash`, `none` | `dash` gives "–", `disc` gives "•", `none` draws no marker and no indent. |
+| `dateAlign` | `inline`, `end` | `end` pushes the dates to the end of the entry line; `inline` keeps them next to the title. |
+| `entryStyle` | `stacked`, `timeline` | `timeline`: dates in a start-side column beside a thin line with a dot per entry. Line and dots are CSS backgrounds (decoration); the dates are real text. |
+| `skillsStyle` | `inline`, `mono`, `pills` | `mono`: skills in the mono font. `pills`: skills as text on a `chipBg` tint. No levels or bars either way. |
+| `projectsStyle` | `list`, `cards` | `cards`: the projects section is a two-column grid of bordered text cards (`cardBg`). |
+| `highlightsStyle` | `inline`, `cards` | How the optional `highlights` of the CV are shown: one line, or 2-4 large-number cards. Values and labels are always text. |
+| `sectionOrder` | array of strings | Order of sections. Sections left out are not rendered. Known keys: `summary highlights work projects education volunteer publications skills certificates languages` (and `contact`, only meaningful inside the sidebar). A section the order forgets is appended at the end, never dropped. Unknown keys are ignored. |
 
 ## fonts
 
@@ -62,17 +69,17 @@ Four roles: `display` (name), `heading` (section and entry titles), `body`, `mon
 
 | Key | Allowed | Notes |
 |---|---|---|
-| `latin` | `Inter`, `IBM Plex Mono` | Bundled OFL families only. |
-| `arabic` | `IBM Plex Sans Arabic`, `Cairo` | Used for Arabic-script text. |
+| `latin` | `Inter`, `IBM Plex Mono`, `Source Serif 4` | Bundled OFL families only. |
+| `arabic` | `IBM Plex Sans Arabic`, `Cairo`, `Noto Naskh Arabic` | Used for Arabic-script text. |
 | `weight` | `400`, `600`, `700` | Bundled files exist for these weights (IBM Plex Mono: 400 and 600 only, so `mono` should not use 700). |
 
 Optional `fonts.cjk` and `fonts.devanagari` are free strings. They default to Noto Sans SC and Noto Sans Devanagari, which are not bundled; `node scripts/fetch-fonts.mjs` downloads them into a gitignored cache. Only OFL fonts, and only fonts shipped in `../fonts/` (plus that cache), may be used. Fonts are embedded in the PDF as base64 subsets chosen by unicode range.
 
-**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly in HTML/PDF. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the substituted font. The DOCX writer applies the same substitution (covered by `tests/flags.test.mjs`). No current finished design uses Cairo.
+**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly in HTML/PDF. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the substituted font. The DOCX writer does not apply this substitution (`docx.mjs` reads `fonts[role].arabic` directly), so a Cairo design would not be safe for Sorani DOCX. No current finished design uses Cairo.
 
 ## colors
 
-Required: `bg`, `text`, `muted`, `accent`, `rule`. Optional: `bandBg`, `bandText` (required with a band header), `sidebarBg`, `sidebarText`, `sidebarMuted`, `sidebarAccent` (required with a sidebar). All are `#rrggbb`. The `contrast` and `greyscale` checks require 4.5:1 for text pairs and 3:1 for `rule` on `bg`, also under colour-blind simulation and greyscale conversion.
+Required: `bg`, `text`, `muted`, `accent`, `rule`. Optional: `bandBg`, `bandText` (band header), `sidebarBg`, `sidebarText`, `sidebarMuted`, `sidebarAccent` (sidebar; set `sidebarBg` equal to `bg` for no tint), `ribbonBg`, `ribbonText`, `cardBg`, `chipBg` (see the conditional rules above). All are `#rrggbb`. The `contrast` and `greyscale` checks require 4.5:1 for text pairs and 3:1 for `rule` on `bg`, also under colour-blind simulation and greyscale conversion.
 
 ## sizes and spacing
 
@@ -116,11 +123,25 @@ Required: `bg`, `text`, `muted`, `accent`, `rule`. Optional: `bandBg`, `bandText
 
 | Design | Tier | Status | Twin | Layout in tokens |
 |---|---|---|---|---|
-| P1 Plain Master | A | finished | none | single, plain header |
-| P2 Modern Minimal, P3 Classic Serif, P4 Executive, P5 Academic Research, P6 Technical Compact, P7 Graduate Starter, P8 Public Service Field | A | stub | none | not yet defined |
-| C1 Accent Band, C3 Bold Type, C5 Ribbon Sections, C6 Metric Spotlight, C7 Brand Kit, C8 Warm Editorial | B | stub | none | not yet defined |
-| C9 Sidebar Light | C | finished | P1 | sidebar, 54mm, plain header |
-| C10 Sidebar Dark, C11 Split Header, C12 Timeline, C15 Swiss Grid | C | stub | P1 | not yet defined |
-| C20 Portfolio Lite | D | stub | P1 | not yet defined |
+| P1 Plain Master | A | finished | none | single, plain header, rule-below upper-case headings |
+| P2 Modern Minimal | A | finished | none | single, plain headings, dash bullets, spacious |
+| P3 Classic Serif | A | finished | none | single, centred header, serif |
+| P4 Executive | A | finished | none | single, serif name, rule-above headings |
+| P5 Academic Research | A | finished | none | single, serif, education and publications first |
+| P6 Technical Compact | A | finished | none | single, 9.5 pt, mono skills, skills second |
+| P7 Graduate Starter | A | finished | none | single, education and projects first |
+| P8 Public Service and Field | A | finished | none | single, 10.5 pt, certificates and languages high |
+| C1 Accent Band | B | finished | none | single, band header |
+| C3 Bold Type | B | finished | none | single, 34 pt name, plain coloured headings |
+| C5 Ribbon Sections | B | finished | none | single, ribbon headings |
+| C6 Metric Spotlight | B | finished | none | single, highlight cards first |
+| C7 Brand Kit | B | finished | none | single, bar-start headings, skill pills |
+| C8 Warm Editorial | B | finished | none | single, cream page, serif headings |
+| C9 Sidebar Light | C | finished | P1 | sidebar, 54mm, tinted, plain header |
+| C10 Sidebar Dark | C | finished | P1 | sidebar, 56mm, dark tint |
+| C11 Split Header | C | finished | P1 | sidebar below a full-width split header, no tint |
+| C12 Timeline | C | finished | P1 | single, timeline entries |
+| C15 Swiss Grid | C | finished | P1 | labelled grid, 36mm labels |
+| C20 Portfolio Lite | D | finished | P1 | single, band header, project cards, PDF only |
 
-Only P1 and C9 can be rendered today (both finished). The other 18 are stubs: identity and tier only.
+All 20 designs can be rendered. Per-design check results are in each `spec.md`.

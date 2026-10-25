@@ -1,14 +1,13 @@
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SKILL_DIR } from '../scripts/lib/util.mjs';
 
 const CLI = join(SKILL_DIR, 'scripts', 'cv-render.mjs'), DATA = join(SKILL_DIR, 'test-data');
 const run = (...args) => spawnSync('node', [CLI, ...args], { encoding: 'utf8' });
-const runWithEnv = (env, ...args) => spawnSync('node', [CLI, ...args], { encoding: 'utf8', env: { ...process.env, ...env } });
 let out;
 before(() => { out = mkdtempSync(join(tmpdir(), 'cl-cli-')); });
 
@@ -40,9 +39,10 @@ test('the twin is rendered in the same direction as the design', () => {
   assert.match(readFileSync(join(out, 'tw-ats.html'), 'utf8'), /<html[^>]*dir="rtl"/);
 });
 test('stubs and drafts are refused unless --allow-draft; unknown ids and bad JSON fail clearly', () => {
-  assert.equal(run(join(DATA, 'short.json'), '--design', 'c3', '--out', out).status, 4);
-  const stub = run(join(DATA, 'short.json'), '--design', 'c3', '--out', out, '--allow-draft');
-  assert.equal(stub.status, 4, 'a stub cannot be forced with --allow-draft'); assert.match(stub.stderr, /is a stub.*(P1|C9)/);
+  const sys = join(out, 'systems', 'p2-modern-minimal'); mkdirSync(sys, { recursive: true });
+  writeFileSync(join(sys, 'tokens.json'), JSON.stringify({ id: 'P2', name: 'Modern Minimal', atsTier: 'A', status: 'stub', twin: null, rtlVariant: true }));
+  const stub = spawnSync('node', [CLI, join(DATA, 'short.json'), '--design', 'p2', '--out', out, '--allow-draft'], { encoding: 'utf8', env: { ...process.env, CL_SYSTEMS_DIR: join(out, 'systems') } });
+  assert.equal(stub.status, 4, 'a stub cannot be forced with --allow-draft'); assert.match(stub.stderr, /Design P2.*is a stub/);
   assert.equal(run(join(DATA, 'short.json'), '--design', 'zz', '--out', out).status, 1);
   const bad = join(out, 'bad.json'); writeFileSync(bad, JSON.stringify({ meta: { lang: 'en' }, basics: { name: 'X' }, skills: [{ name: 'a', items: ['b'], percent: 95 }] }));
   const r = run(bad, '--design', 'p1', '--out', out, '--allow-draft');
@@ -62,12 +62,12 @@ test('more than two pages is reported, not hidden', () => {
 });
 
 test('Noto warnings appear only when the CV contains that script', () => {
-  // An empty cache folder stands in for "fetch-fonts.mjs was never run"; the real fonts/cache is not touched, so tests can run in parallel.
-  const env = { CAREER_LOOM_FONT_CACHE: mkdtempSync(join(tmpdir(), 'cl-nocache-')) };
-  const en = runWithEnv(env, join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'nf', '--format', 'pdf');
+  const env = { ...process.env, CL_FONT_CACHE: join(out, 'no-font-cache') }; // an empty cache, so the shared one is never touched
+  const go = (file, name) => spawnSync('node', [CLI, join(DATA, file), '--design', 'p1', '--out', out, '--name', name, '--format', 'pdf'], { encoding: 'utf8', env });
+  const en = go('short.json', 'nf');
   assert.equal(en.status, 0, 'English CV needs no fetched fonts: ' + en.stderr + en.stdout);
-  const zh = runWithEnv(env, join(DATA, 'zh.json'), '--design', 'p1', '--out', out, '--name', 'nf-zh', '--format', 'pdf');
+  const zh = go('zh.json', 'nf-zh');
   assert.equal(zh.status, 3); assert.match(JSON.parse(zh.stdout).warnings.join(), /Noto Sans SC/); assert.doesNotMatch(JSON.parse(zh.stdout).warnings.join(), /Devanagari/);
-  const hi = runWithEnv(env, join(DATA, 'hi.json'), '--design', 'p1', '--out', out, '--name', 'nf-hi', '--format', 'pdf');
+  const hi = go('hi.json', 'nf-hi');
   assert.equal(hi.status, 3); assert.match(JSON.parse(hi.stdout).warnings.join(), /Devanagari/);
 });

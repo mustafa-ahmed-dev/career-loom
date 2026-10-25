@@ -39,7 +39,7 @@ node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format p
 | `--twin` | `on` | `off` skips the A-rated twin for tier C/D designs. Any value except `off` means on. |
 | `--allow-draft` | off | Render designs whose status is `draft` (or `stub`). Not needed for finished designs. |
 
-`p1` (tier A) and `c9` (tier C) are `finished`, so they render without `--allow-draft`. The other 18 designs are stubs with no layout data: `--allow-draft` does not help: the renderer stops with "Design X is a stub" and lists the finished designs (exit 4).
+All 20 designs (`p1`-`p8`, `c1`, `c3`, `c5`-`c12`, `c15`, `c20`) are `finished` and render without `--allow-draft`. A design that is a stub would stop with "Design X is a stub" and list the finished ones (exit 4); `--allow-draft` only lets a `draft` design through.
 
 Example:
 
@@ -61,7 +61,7 @@ Prints a JSON summary (files, warnings, per-design tier, pages, RTL, DOCX status
 
 ## CV JSON
 
-Schema: `../schema/cv.schema.json`. Unknown keys are rejected (so there is no field for skill percentages, photos, salary, ID numbers or street addresses). `meta.lang` and `basics.name` are required. Dates are free text. `"Present"` is replaced by the language's label. Sections: `summary`, `work`, `projects`, `education`, `volunteer`, `publications`, `skills`, `languages`, `certificates`.
+Schema: `../schema/cv.schema.json`. Unknown keys are rejected (so there is no field for skill percentages, photos, salary, ID numbers or street addresses). `meta.lang` and `basics.name` are required. Dates are free text. `"Present"` is replaced by the language's label. Sections: `summary`, `highlights` (2 to 4 `{value, label}` facts, already in the body), `work`, `projects`, `education`, `volunteer`, `publications`, `skills`, `languages`, `certificates`.
 
 Section headings exist for `en` and `ar` only. For any other `meta.lang`, add `meta.labels` (keys: `summary work education skills languages projects certificates volunteer publications contact links present`).
 
@@ -113,7 +113,7 @@ node check-design.mjs p1 c9   # the five checks for chosen designs, optional --o
 
 `npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) and the DOCX check needs `soffice` (LibreOffice). Without them extraction and greyscale fail (poppler) or the DOCX check is reported "not verified" (LibreOffice). Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 23 seconds together and passed all five, and `npm test` ran 41 tests, all passing, in about 22 seconds (with poppler and LibreOffice installed).
 
-The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points the environment variable `CAREER_LOOM_FONT_CACHE` at an empty folder. The same variable can move the font cache (`fetch-fonts.mjs` writes to it too; default `../fonts/cache/`). The test files therefore run in parallel safely.
+The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points the environment variable `CL_FONT_CACHE` at an empty folder. The same variable can move the font cache (`fetch-fonts.mjs` writes to it too; default `../fonts/cache/`). The test files therefore run in parallel safely.
 
 ### The five checks (`lib/checks.mjs`, `lib/runchecks.mjs`)
 
@@ -128,6 +128,7 @@ DOCX (not one of the five): for tier A/B/C each of en/ar/long is written, conver
 ## Other scripts
 
 - `node record-results.mjs p1 [c9 ...]` writes the check results from `tests/results/<id>.json` into the RESULTS block of that design's `spec.md`. Run `npm test` first.
+- `node build-design-files.mjs [--check]` writes `design.css`, `components.html` and the Tokens block of `spec.md` for every finished design, from `tokens.json`. `--check` exits 1 if they are stale; `npm test` runs it.
 - `node build-gallery.mjs` rebuilds `docs/gallery/` (static page, thumbnails, sample PDFs) for every finished design. Needs `pdftoppm` and a prior `npm test`. I did not run either script; this is from reading their header comments.
 
 ## Known limits

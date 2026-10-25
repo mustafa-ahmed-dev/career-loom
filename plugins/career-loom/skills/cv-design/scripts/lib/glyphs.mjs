@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { FONTS_DIR, FONTS_CACHE_DIR } from './util.mjs';
+import { FONTS_DIR, FONT_CACHE_DIR } from './util.mjs';
 import { inRange, loadManifest } from './fonts.mjs';
 
 import { openSync } from 'fontkit';
@@ -8,7 +8,7 @@ const open = (file) => opened.get(file) ?? (opened.set(file, openSync(file)), op
 /** Code points of `text` that none of `families` can draw (looks only at bundled + cached font files). */
 export function missingGlyphs(text, families) {
   const cps = [...new Set([...text].map((c) => c.codePointAt(0)).filter((c) => c > 32 && !(c >= 0x200b && c <= 0x200f) && !(c >= 0x202a && c <= 0x202e) && !(c >= 0x2066 && c <= 0x2069)))];
-  const sources = [[FONTS_DIR, loadManifest(FONTS_DIR)], [FONTS_CACHE_DIR, loadManifest(FONTS_CACHE_DIR)]];
+  const sources = [[FONTS_DIR, loadManifest(FONTS_DIR)], [FONT_CACHE_DIR, loadManifest(FONT_CACHE_DIR)]];
   const missing = [];
   for (const cp of cps) {
     let ok = false;

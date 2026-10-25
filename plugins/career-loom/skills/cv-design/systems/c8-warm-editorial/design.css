@@ -1,0 +1,99 @@
+/* C8 Warm Editorial. Generated from tokens.json by scripts/build-design-files.mjs. Do not edit by hand.
+   Fonts are bundled in ../../fonts (OFL). Load this file in a page, or copy the rules into a <style> block. */
+@font-face{font-family:"Source Serif 4";font-weight:400;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Source Serif 4";font-weight:400;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Source Serif 4";font-weight:400;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-cyrillic-400-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Source Serif 4";font-weight:600;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Source Serif 4";font-weight:600;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Source Serif 4";font-weight:600;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-cyrillic-600-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Source Serif 4";font-weight:700;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-latin-700-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Source Serif 4";font-weight:700;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-latin-ext-700-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Source Serif 4";font-weight:700;font-style:normal;src:url("../../fonts/source-serif-4/source-serif-4-cyrillic-700-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Noto Naskh Arabic";font-weight:400;font-style:normal;src:url("../../fonts/noto-naskh-arabic/noto-naskh-arabic-arabic-400-normal.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Noto Naskh Arabic";font-weight:600;font-style:normal;src:url("../../fonts/noto-naskh-arabic/noto-naskh-arabic-arabic-600-normal.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Noto Naskh Arabic";font-weight:700;font-style:normal;src:url("../../fonts/noto-naskh-arabic/noto-naskh-arabic-arabic-700-normal.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Inter";font-weight:400;font-style:normal;src:url("../../fonts/inter/inter-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Inter";font-weight:400;font-style:normal;src:url("../../fonts/inter/inter-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Inter";font-weight:400;font-style:normal;src:url("../../fonts/inter/inter-cyrillic-400-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Inter";font-weight:600;font-style:normal;src:url("../../fonts/inter/inter-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Inter";font-weight:600;font-style:normal;src:url("../../fonts/inter/inter-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Inter";font-weight:600;font-style:normal;src:url("../../fonts/inter/inter-cyrillic-600-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Inter";font-weight:700;font-style:normal;src:url("../../fonts/inter/inter-latin-700-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Inter";font-weight:700;font-style:normal;src:url("../../fonts/inter/inter-latin-ext-700-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Inter";font-weight:700;font-style:normal;src:url("../../fonts/inter/inter-cyrillic-700-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"IBM Plex Sans Arabic";font-weight:400;font-style:normal;src:url("../../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-arabic-400-normal.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"IBM Plex Sans Arabic";font-weight:600;font-style:normal;src:url("../../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-arabic-600-normal.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"IBM Plex Sans Arabic";font-weight:700;font-style:normal;src:url("../../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-arabic-700-normal.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;font-style:normal;src:url("../../fonts/ibm-plex-mono/ibm-plex-mono-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Mono";font-weight:600;font-style:normal;src:url("../../fonts/ibm-plex-mono/ibm-plex-mono-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+:root{--bg:#fbf6ee;--text:#2b2118;--muted:#5c4a3a;--accent:#9c3d1e;--rule:#8a7662;}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html{background:#fbf6ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+/* Arabic-script text: ligatures off so PDF text extraction keeps letter order (lam-alef and ba-ra ligature glyphs extract reversed otherwise). Verified in tests. */
+html[data-script="arabic"] body{font-variant-ligatures:none;font-feature-settings:"rlig" 0,"liga" 0,"clig" 0,"calt" 0}
+body{margin:0;color:var(--text);font-family:"Inter","IBM Plex Sans Arabic","Noto Sans SC","Noto Sans Devanagari",sans-serif;font-weight:400;font-size:10pt;line-height:1.42;font-kerning:normal;overflow-wrap:break-word;text-align:start}
+h1,h2,h3,p,ul,li{margin:0;padding:0}
+ul{list-style:none}
+.layout{padding:16mm 20mm 15mm;-webkit-box-decoration-break:clone;box-decoration-break:clone;display:grid;grid-template-columns:minmax(0,1fr);}
+/* header */
+.head{margin-bottom:7.8pt;}
+
+
+
+h1{font-family:"Source Serif 4","Noto Naskh Arabic","Noto Sans SC","Noto Sans Devanagari",serif;font-weight:600;font-size:27pt;line-height:1.12;letter-spacing:-0.015em}
+.headline{font-size:13pt;color:var(--muted);margin-top:2pt}
+.contact{display:flex;flex-wrap:wrap;gap:1pt 12pt;margin-top:5pt;font-size:9.5pt;}
+.side .contact{display:block;margin-top:0}
+.side .contact li{margin-bottom:3pt}
+.sec{margin-top:13pt}
+.sec:first-child{margin-top:0}
+h2{font-family:"Source Serif 4","Noto Naskh Arabic","Noto Sans SC","Noto Sans Devanagari",serif;font-weight:600;font-size:12pt;line-height:1.25;color:var(--accent);border-top:0.75pt solid var(--rule);padding-top:3pt;margin-bottom:5.6pt;break-after:avoid}
+
+/* entries */
+.entry{margin-bottom:8pt;break-inside:avoid-page}
+.entry:last-child{margin-bottom:0}
+.entry-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;column-gap:8pt;break-after:avoid}
+h3{font-family:"Source Serif 4","Noto Naskh Arabic","Noto Sans SC","Noto Sans Devanagari",serif;font-weight:600;font-size:10.5pt;line-height:1.3}
+.dates{color:var(--muted);font-size:9.5pt;white-space:nowrap}
+.meta{color:var(--muted);font-size:9.7pt;margin-top:0.5pt}
+.entry p.sum{margin-top:2pt}
+
+
+.bul{margin-top:2.8pt}
+.bul li{position:relative;padding-inline-start:10pt;margin-top:1.8pt}
+.bul li::before{content:"–";position:absolute;inset-inline-start:0;color:var(--muted)}
+/* skills, languages */
+.chips{display:block}
+.chips li{display:inline}
+.chips li:not(:last-child)::after{content:" · ";color:var(--muted)}
+.grp{margin-bottom:2.8pt}
+.grp b{font-weight:600}
+.single .grp b,.labelled .grp b{display:inline}
+.single .grp b::after,.labelled .grp b::after{content:":";margin-inline-end:4pt}
+.single .grp .chips,.labelled .grp .chips{display:inline}
+.single .lang-list li,.labelled .lang-list li{display:inline}
+.single .lang-list li:not(:last-child)::after,.labelled .lang-list li:not(:last-child)::after{content:" · ";color:var(--muted)}
+.side .grp{margin-bottom:8pt}
+.side .grp b{display:block}
+.side .chips li{display:block}
+.side .chips li:not(:last-child)::after{content:""}
+.lang-list li{margin-top:1.5pt}
+.lang-list .lvl{color:var(--muted)}
+
+
+/* highlights */
+.hl{display:block}
+.hl li{display:inline}
+.hl li:not(:last-child)::after{content:" · ";color:var(--muted)}
+.hl b{font-weight:600}
+
+.summary-p{max-width:100%}
+bdi.ltr{unicode-bidi:isolate}
+a{color:inherit;text-decoration:none}
+.mono{font-family:"IBM Plex Mono","IBM Plex Sans Arabic","Noto Sans SC","Noto Sans Devanagari",sans-serif}
+:root{}
+/* RTL and Arabic-script variant: RTL is a flag of the same design, not a separate design. */
+html[dir="rtl"]{background:#fbf6ee}
+html[data-script="arabic"] body{font-family:"Inter","IBM Plex Sans Arabic","Noto Sans SC","Noto Sans Devanagari",sans-serif;line-height:1.62}
+html[data-script="arabic"] h1{letter-spacing:0}

@@ -58,7 +58,8 @@
         "kind": {
           "enum": [
             "single",
-            "sidebar"
+            "sidebar",
+            "labelled"
           ]
         },
         "header": {
@@ -79,8 +80,7 @@
               "contact",
               "skills",
               "languages",
-              "certificates",
-              "links"
+              "certificates"
             ]
           }
         },
@@ -117,6 +117,45 @@
           "items": {
             "type": "string"
           }
+        },
+        "headerAlign": {
+          "enum": [
+            "start",
+            "center"
+          ]
+        },
+        "headerFull": {
+          "type": "boolean",
+          "description": "Sidebar designs: header spans both columns"
+        },
+        "labelWidth": {
+          "type": "string",
+          "pattern": "^[0-9.]+mm$"
+        },
+        "entryStyle": {
+          "enum": [
+            "stacked",
+            "timeline"
+          ]
+        },
+        "skillsStyle": {
+          "enum": [
+            "inline",
+            "mono",
+            "pills"
+          ]
+        },
+        "projectsStyle": {
+          "enum": [
+            "list",
+            "cards"
+          ]
+        },
+        "highlightsStyle": {
+          "enum": [
+            "inline",
+            "cards"
+          ]
         }
       }
     },
@@ -192,6 +231,18 @@
           "$ref": "#/$defs/hex"
         },
         "sidebarAccent": {
+          "$ref": "#/$defs/hex"
+        },
+        "ribbonBg": {
+          "$ref": "#/$defs/hex"
+        },
+        "ribbonText": {
+          "$ref": "#/$defs/hex"
+        },
+        "cardBg": {
+          "$ref": "#/$defs/hex"
+        },
+        "chipBg": {
           "$ref": "#/$defs/hex"
         }
       }
@@ -318,14 +369,16 @@
         "latin": {
           "enum": [
             "Inter",
-            "IBM Plex Mono"
+            "IBM Plex Mono",
+            "Source Serif 4"
           ],
           "description": "Bundled OFL families only"
         },
         "arabic": {
           "enum": [
             "IBM Plex Sans Arabic",
-            "Cairo"
+            "Cairo",
+            "Noto Naskh Arabic"
           ]
         },
         "weight": {
@@ -370,7 +423,10 @@
               "D"
             ]
           }
-        }
+        },
+        "required": [
+          "atsTier"
+        ]
       },
       "then": {
         "properties": {
@@ -388,9 +444,15 @@
               "kind": {
                 "const": "sidebar"
               }
-            }
+            },
+            "required": [
+              "kind"
+            ]
           }
-        }
+        },
+        "required": [
+          "layout"
+        ]
       },
       "then": {
         "properties": {
@@ -419,9 +481,15 @@
               "header": {
                 "const": "band"
               }
-            }
+            },
+            "required": [
+              "header"
+            ]
           }
-        }
+        },
+        "required": [
+          "layout"
+        ]
       },
       "then": {
         "properties": {
@@ -430,6 +498,152 @@
               "bandBg",
               "bandText"
             ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "kind": {
+                "const": "labelled"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "layout"
+        ]
+      },
+      "then": {
+        "properties": {
+          "layout": {
+            "required": [
+              "labelWidth"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "headingStyle": {
+                "const": "ribbon"
+              }
+            },
+            "required": [
+              "headingStyle"
+            ]
+          }
+        },
+        "required": [
+          "layout"
+        ]
+      },
+      "then": {
+        "properties": {
+          "colors": {
+            "required": [
+              "ribbonBg",
+              "ribbonText"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "projectsStyle": {
+                "const": "cards"
+              }
+            },
+            "required": [
+              "projectsStyle"
+            ]
+          }
+        },
+        "required": [
+          "layout"
+        ]
+      },
+      "then": {
+        "properties": {
+          "colors": {
+            "required": [
+              "cardBg"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "skillsStyle": {
+                "const": "pills"
+              }
+            },
+            "required": [
+              "skillsStyle"
+            ]
+          }
+        },
+        "required": [
+          "layout"
+        ]
+      },
+      "then": {
+        "properties": {
+          "colors": {
+            "required": [
+              "chipBg"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "atsTier": {
+            "const": "A"
+          }
+        },
+        "required": [
+          "atsTier"
+        ]
+      },
+      "then": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "kind": {
+                "const": "single"
+              },
+              "header": {
+                "const": "plain"
+              },
+              "headingStyle": {
+                "enum": [
+                  "rule-below",
+                  "rule-above",
+                  "plain"
+                ]
+              }
+            }
           }
         }
       }

@@ -4,61 +4,223 @@
   "title": "Career Loom CV input",
   "description": "Input for scripts/cv-render.mjs. Facts only: this file is produced from the Fact Bank after cv-write and localization. There are no fields for percentage skill levels, logos, photos, salary, ID numbers or street addresses.",
   "type": "object",
-  "required": ["meta", "basics"],
+  "required": [
+    "meta",
+    "basics"
+  ],
   "additionalProperties": false,
   "properties": {
     "meta": {
       "type": "object",
-      "required": ["lang"],
+      "required": [
+        "lang"
+      ],
       "additionalProperties": false,
       "properties": {
-        "lang": { "type": "string", "description": "BCP 47 tag, e.g. en, ar, ckb, zh-Hans, hi, ru" },
-        "dir": { "enum": ["auto", "ltr", "rtl"], "description": "auto = rtl for ar, ckb, fa, ur, he" },
-        "labels": { "type": "object", "description": "Section headings in the CV language; defaults exist for en and ar only", "additionalProperties": { "type": "string" } }
+        "lang": {
+          "type": "string",
+          "description": "BCP 47 tag, e.g. en, ar, ckb, zh-Hans, hi, ru"
+        },
+        "dir": {
+          "enum": [
+            "auto",
+            "ltr",
+            "rtl"
+          ],
+          "description": "auto = rtl for ar, ckb, fa, ur, he"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Section headings in the CV language; defaults exist for en and ar only",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
       }
     },
     "basics": {
       "type": "object",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "additionalProperties": false,
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
-        "headline": { "type": "string" },
-        "email": { "type": "string" },
-        "phone": { "type": "string" },
-        "location": { "type": "string", "description": "City and country only. No street address." },
-        "links": { "type": "array", "items": { "type": "object", "required": ["label", "url"], "additionalProperties": false, "properties": { "label": { "type": "string" }, "url": { "type": "string" } } } }
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "headline": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "description": "City and country only. No street address."
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "url"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          }
+        }
       }
     },
-    "summary": { "type": "string" },
-    "work": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
-    "education": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
-    "projects": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
-    "volunteer": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
-    "publications": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
+    "summary": {
+      "type": "string"
+    },
+    "work": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "volunteer": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "publications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
     "skills": {
       "type": "array",
-      "items": { "type": "object", "required": ["name", "items"], "additionalProperties": false, "properties": { "name": { "type": "string" }, "items": { "type": "array", "items": { "type": "string" }, "minItems": 1 } } }
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "items"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          }
+        }
+      }
     },
     "languages": {
       "type": "array",
-      "items": { "type": "object", "required": ["name"], "additionalProperties": false, "properties": { "name": { "type": "string" }, "level": { "type": "string", "description": "Words only, e.g. Native, B2, Fluent. Never a percentage or bar." } } }
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "description": "Words only, e.g. Native, B2, Fluent. Never a percentage or bar."
+          }
+        }
+      }
     },
-    "certificates": { "type": "array", "items": { "$ref": "#/$defs/entry" } }
+    "certificates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "highlights": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "description": "2 to 4 facts from the Fact Bank, already in the CV body (estimates shown with ~). value is the number or short fact, label says what it counts.",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "label"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "string",
+            "maxLength": 16
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 80
+          }
+        }
+      }
+    }
   },
   "$defs": {
     "entry": {
       "type": "object",
-      "required": ["title"],
+      "required": [
+        "title"
+      ],
       "additionalProperties": false,
       "properties": {
-        "title": { "type": "string" },
-        "org": { "type": "string" },
-        "location": { "type": "string" },
-        "start": { "type": "string" },
-        "end": { "type": "string" },
-        "summary": { "type": "string" },
-        "bullets": { "type": "array", "items": { "type": "string" } }
+        "title": {
+          "type": "string"
+        },
+        "org": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "bullets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   }

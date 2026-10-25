@@ -4,10 +4,9 @@ import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv/dist/2020.js';
 
 export const SKILL_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const SYSTEMS_DIR = join(SKILL_DIR, 'systems');
+export const SYSTEMS_DIR = process.env.CL_SYSTEMS_DIR ?? join(SKILL_DIR, 'systems'); // override is for tests only
 export const FONTS_DIR = join(SKILL_DIR, 'fonts');
-// Folder of fonts fetched on demand (fetch-fonts.mjs). Overridable so tests can point at an empty folder instead of moving the real one.
-export const FONTS_CACHE_DIR = process.env.CAREER_LOOM_FONT_CACHE ?? join(FONTS_DIR, 'cache');
+export const FONT_CACHE_DIR = process.env.CL_FONT_CACHE ?? join(FONTS_DIR, 'cache'); // override is for tests only
 export const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 export const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
