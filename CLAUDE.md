@@ -29,6 +29,8 @@ Full text: `skills/career-references/rules/integrity.md` (canonical). Every user
 ### CV renderer (`skills/cv-design/scripts/`)
 `cv-render.mjs` (Node 20+, Playwright, `docx`) renders a JSON CV (`schema/cv.schema.json`) with a design's `tokens.json` to PDF, DOCX and HTML. It refuses designs whose status is not `finished` (exit 4) and always writes the A-rated `-ats` twin for tier C/D. It cannot run in claude.ai chat. Do not edit it from skill work; change behaviour descriptions in `cv-design/SKILL.md`. Tests: `cd plugins/career-loom/skills/cv-design/scripts && npm install && npm test`.
 
+Every finished design also has plain files that need no install: `systems/<id>/spec.md` (rules plus a generated Tokens block), `design.css` and `components.html`, so Claude can follow the design where the renderer cannot run. They are generated from `tokens.json` by `node build-design-files.mjs` (run it after editing tokens; `--check` fails if they are stale, and `npm test` runs that check). Never edit them by hand.
+
 ### Design systems
 `skills/cv-design/systems/` has 20 design systems, of which P1 and C9 are built and 18 are still stubs (`p1`-`p8`, `c1`, `c3`, `c5`-`c12`, `c15`, `c20`). Retired IDs C2, C17, C18 are never reused. Tiers A-D: every C/D design also produces an A-rated ATS twin; portals get the A twin. RTL is a variant flag; fonts OFL only. Dropped designs: `docs/design-backlog.md`.
 

@@ -126,6 +126,7 @@ DOCX (not one of the five): for tier A/B/C each of en/ar/long is written, conver
 ## Other scripts
 
 - `node record-results.mjs p1 [c9 ...]` writes the check results from `tests/results/<id>.json` into the RESULTS block of that design's `spec.md`. Run `npm test` first.
+- `node build-design-files.mjs [--check]` writes `design.css`, `components.html` and the Tokens block of `spec.md` for every finished design, from `tokens.json`. `--check` exits 1 if they are stale; `npm test` runs it.
 - `node build-gallery.mjs` rebuilds `docs/gallery/` (static page, thumbnails, sample PDFs) for every finished design. Needs `pdftoppm` and a prior `npm test`. I did not run either script; this is from reading their header comments.
 
 ## Known limits
