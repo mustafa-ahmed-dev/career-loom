@@ -3,7 +3,8 @@
 // These are plain files Claude can read where the renderer cannot run (claude.ai chat). Generated from tokens.json: do not edit by hand.
 // Usage: node build-design-files.mjs [--check]   (--check exits 1 if any file is out of date)
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { SKILL_DIR, SYSTEMS_DIR, loadTokens, readJson, esc } from './lib/util.mjs';
 import { buildCss, fontStacks, familiesUsed } from './lib/css.mjs';
 import { buildHtml } from './lib/html.mjs';
@@ -151,7 +152,7 @@ export function buildAll({ check = false } = {}) {
   return stale;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const check = process.argv.includes('--check');
   const stale = buildAll({ check });
   if (stale.length) { console.error('Out of date (run: node scripts/build-design-files.mjs):\n  ' + stale.join('\n  ')); process.exit(1); }

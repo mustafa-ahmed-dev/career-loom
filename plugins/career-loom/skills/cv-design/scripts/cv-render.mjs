@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Career Loom CV renderer. See scripts/README.md. Input: a JSON CV (schema/cv.schema.json).
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
-import { join, basename } from 'node:path';
+import { join, basename, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { readJson, validate, loadTokens, finishedDesigns } from './lib/util.mjs';
 import { buildHtml } from './lib/html.mjs';
@@ -48,7 +49,7 @@ export async function render(cvPath, opts) {
   return result;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     const { values, positionals } = parseArgs({ allowPositionals: true, options: { design: { type: 'string' }, out: { type: 'string', default: '.' }, name: { type: 'string' }, format: { type: 'string', default: 'pdf,html' }, rtl: { type: 'string', default: 'auto' }, twin: { type: 'string', default: 'on' }, 'allow-draft': { type: 'boolean', default: false } } });
     if (!positionals[0] || !values.design) { console.error(USAGE); process.exit(1); }
