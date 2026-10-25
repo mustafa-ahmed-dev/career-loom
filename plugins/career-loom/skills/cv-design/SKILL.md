@@ -5,13 +5,17 @@ description: "Chooses a visual design for a CV and produces the final document p
 
 # CV Design
 
-Turns finished content into a document. Status: a renderer exists (`scripts/cv-render.mjs`, Node + Playwright). It runs in Claude Code, Cowork or on a laptop with Node, and cannot run in claude.ai chat; there, produce Markdown or HTML following the tier rules below and say plainly that no PDF or Word file was made.
+Turns finished content into a document. Status: the renderer exists (`scripts/cv-render.mjs`, Node + Playwright). It runs in Claude Code, Cowork or on a laptop with Node, and cannot run in claude.ai chat; there, produce Markdown or HTML following the tier rules below and say plainly that no PDF or Word file was made.
 
 ## Design systems
 20 systems live in `systems/` (8 professional `p1`-`p8`, 12 colourful `c1`, `c3`, `c5`-`c12`, `c15`, `c20`). Retired IDs C2, C17 and C18 are never reused. Tiers:
 - **A** plain single column. **B** single column with colour. **C** two column or sidebar, for people. **D** graphic or portfolio, PDF only, never sent to a portal.
 - Every C or D design must also produce an A-rated plain twin. Online portals always get the A twin.
-- Built so far: **P1** Plain Master (tier A) and **C9** Sidebar Light (tier C). The other 18 are still stubs: describe them if asked, but do not render them. The renderer refuses any design whose status is not `finished` (exit code 4); offer P1 or C9 instead.
+- All 20 are built and pass the five checks (contrast and colour-blind, greyscale print, six-script render, PDF text extraction, page fit). Pick by need:
+  - **A, any channel, portal-safe:** `p1` default; `p2` spacious; `p3` classic serif; `p4` executive; `p5` academic; `p6` technical compact; `p7` graduate; `p8` public service and field.
+  - **B, one column with colour:** `c1` accent band; `c3` bold type; `c5` ribbon sections; `c6` metric spotlight (2-4 highlights); `c7` brand kit; `c8` warm editorial.
+  - **C, for people only:** `c9` sidebar light; `c10` sidebar dark; `c11` split header; `c12` timeline; `c15` Swiss grid. **D:** `c20` portfolio lite (PDF only).
+  - Highlights (`c6`, optional elsewhere) are 2-4 facts already in the CV body, estimates marked "~"; never invent one. Every design lists them as text.
 
 ## Steps
 1. Ask the channel (portal, email to a person, print), region and seniority.
@@ -21,7 +25,7 @@ Turns finished content into a document. Status: a renderer exists (`scripts/cv-r
 
 ## Rules
 - Contact details never live only in a header or footer. No skill percentage bars. Information is never only in a graphic: every visual has a text equivalent.
-- RTL is a variant flag, not a separate design: `--rtl auto` follows the CV language, `on` or `off` forces it. Fonts by role, open-licence (OFL) only. Sorani passes the glyph test (ڕ ڵ ۆ ێ ە) in IBM Plex Sans Arabic only, and is still labelled "needs native review".
+- RTL is a variant flag, not a separate design: `--rtl auto` follows the CV language, `on` or `off` forces it. Fonts by role, open-licence (OFL) only. Sorani passes the glyph test (ڕ ڵ ۆ ێ ە) in IBM Plex Sans Arabic and Noto Naskh Arabic (not Cairo, which is swapped out), and is still labelled "needs native review".
 - Check contrast, greyscale print and that text extracts from the PDF in reading order.
 
 ## Read when needed
