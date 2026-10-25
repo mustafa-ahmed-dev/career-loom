@@ -51,3 +51,10 @@ test('shipped design.css: the RTL sidebar tint is mirrored on the screen sheet a
   assert.match(css, /@media print\{html\[dir="rtl"\]\{background:linear-gradient\(to left/);
   assert.doesNotMatch(css, /\n\s*html\[dir="rtl"\]\{background/, 'no bare html RTL background: it would beat the grey desk on screen');
 });
+
+test('the Windows npm command line quotes the arguments but never the command name', async () => {
+  const { winNpmCommandLine } = await import('../scripts/lib/npm.mjs');
+  const line = winNpmCommandLine(['pack', '@fontsource/noto-sans-sc', '--silent', '--pack-destination', 'C:\\Users\\A B\\Temp']);
+  assert.equal(line, 'npm "pack" "@fontsource/noto-sans-sc" "--silent" "--pack-destination" "C:\\Users\\A B\\Temp"');
+  assert.doesNotMatch(line, /^"npm"/);
+});
