@@ -3,6 +3,7 @@ import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Leve
 import { writeFileSync } from 'node:fs';
 import { isRtl, scriptOf, hasRtlChars } from './util.mjs';
 import { labelsFor } from './labels.mjs';
+import { completeOrder } from './html.mjs';
 
 const ORDER = ['summary', 'work', 'projects', 'education', 'volunteer', 'publications', 'skills', 'certificates', 'languages'];
 const hex = (c) => c.replace('#', '').toUpperCase();
@@ -32,6 +33,7 @@ export async function renderDocx(cv, t, outPath, { rtlFlag = 'auto' } = {}) {
     for (const x of e.bullets ?? []) kids.push(bullet(x));
   };
   const sections = {
+    highlights: () => cv.highlights?.length && (kids.push(heading(lab.highlights)), kids.push(para([run(cv.highlights.map((h) => `${h.value} ${h.label}`).join(' · '))]))),
     summary: () => cv.summary && (kids.push(heading(lab.summary)), kids.push(para([run(cv.summary)]))),
     work: () => cv.work?.length && (kids.push(heading(lab.work)), cv.work.forEach(entry)),
     projects: () => cv.projects?.length && (kids.push(heading(lab.projects)), cv.projects.forEach(entry)),
@@ -42,7 +44,7 @@ export async function renderDocx(cv, t, outPath, { rtlFlag = 'auto' } = {}) {
     certificates: () => cv.certificates?.length && (kids.push(heading(lab.certificates)), cv.certificates.forEach(entry)),
     languages: () => cv.languages?.length && (kids.push(heading(lab.languages)), kids.push(para([run(cv.languages.map((l) => (l.level ? `${l.name} (${l.level})` : l.name)).join(' · '))]))),
   };
-  for (const k of t.layout.sectionOrder ?? ORDER) sections[k]?.();
+  for (const k of completeOrder(t.layout.sectionOrder ?? ORDER, cv, [])) sections[k]?.();
 
   const doc = new Document({
     creator: 'Career Loom', title: `${b.name} – CV`, language: cv.meta.lang,

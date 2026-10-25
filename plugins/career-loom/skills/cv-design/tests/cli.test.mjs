@@ -1,7 +1,7 @@
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs';
+import { mkdtempSync, existsSync, readFileSync, writeFileSync, renameSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SKILL_DIR } from '../scripts/lib/util.mjs';
@@ -39,9 +39,10 @@ test('the twin is rendered in the same direction as the design', () => {
   assert.match(readFileSync(join(out, 'tw-ats.html'), 'utf8'), /<html[^>]*dir="rtl"/);
 });
 test('stubs and drafts are refused unless --allow-draft; unknown ids and bad JSON fail clearly', () => {
-  assert.equal(run(join(DATA, 'short.json'), '--design', 'c3', '--out', out).status, 4);
-  const stub = run(join(DATA, 'short.json'), '--design', 'c3', '--out', out, '--allow-draft');
-  assert.equal(stub.status, 4, 'a stub cannot be forced with --allow-draft'); assert.match(stub.stderr, /is a stub.*(P1|C9)/);
+  const sys = join(out, 'systems', 'p2-modern-minimal'); mkdirSync(sys, { recursive: true });
+  writeFileSync(join(sys, 'tokens.json'), JSON.stringify({ id: 'P2', name: 'Modern Minimal', atsTier: 'A', status: 'stub', twin: null, rtlVariant: true }));
+  const stub = spawnSync('node', [CLI, join(DATA, 'short.json'), '--design', 'p2', '--out', out, '--allow-draft'], { encoding: 'utf8', env: { ...process.env, CL_SYSTEMS_DIR: join(out, 'systems') } });
+  assert.equal(stub.status, 4, 'a stub cannot be forced with --allow-draft'); assert.match(stub.stderr, /Design P2.*is a stub/);
   assert.equal(run(join(DATA, 'short.json'), '--design', 'zz', '--out', out).status, 1);
   const bad = join(out, 'bad.json'); writeFileSync(bad, JSON.stringify({ meta: { lang: 'en' }, basics: { name: 'X' }, skills: [{ name: 'a', items: ['b'], percent: 95 }] }));
   const r = run(bad, '--design', 'p1', '--out', out, '--allow-draft');

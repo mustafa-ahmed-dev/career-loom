@@ -100,10 +100,10 @@ export async function runChecks(id, outDir) {
       const cv = cvOf(file), rtl = isRtl(cv);
       await render(join(DATA, file + '.json'), { design: id, out: outDir, name: `${tokens.id.toLowerCase()}-${tag}`, format: 'docx', rtl: 'auto', twin: 'off', allowDraft: true });
       const dx = join(outDir, `${tokens.id.toLowerCase()}-${tag}.docx`);
-      spawnSync('soffice', ['--headless', '--convert-to', 'pdf', '--outdir', join(outDir, 'docx-pdf'), dx], { timeout: 120000 });
+      spawnSync('soffice', [`-env:UserInstallation=file://${join(outDir, 'lo-profile')}`, '--headless', '--convert-to', 'pdf', '--outdir', join(outDir, 'docx-pdf'), dx], { timeout: 120000 });
       const pdf = join(outDir, 'docx-pdf', `${tokens.id.toLowerCase()}-${tag}.pdf`);
       if (!existsSync(pdf)) { rows[tag] = { ok: false, error: 'conversion failed' }; continue; }
-      const a = anchors(cv, { ...tokens, layout: { ...tokens.layout, kind: 'single' } });
+      const a = anchors(cv, { ...tokens, layout: { ...tokens.layout, kind: 'single', sidebarSections: [] } });
       const list = [...a.head, ...a.main].filter((x) => !(rtl && /[A-Za-z]/.test(x)));
       const xml = (await (await JSZip.loadAsync(readFileSync(dx))).file('word/document.xml').async('string'));
       const text = xml.replace(/<\/w:p>/g, '\n').replace(/<[^>]+>/g, '');

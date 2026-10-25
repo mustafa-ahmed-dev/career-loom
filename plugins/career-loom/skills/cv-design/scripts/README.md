@@ -39,7 +39,7 @@ node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format p
 | `--twin` | `on` | `off` skips the A-rated twin for tier C/D designs. Any value except `off` means on. |
 | `--allow-draft` | off | Render designs whose status is `draft` (or `stub`). Not needed for finished designs. |
 
-`p1` (tier A) and `c9` (tier C) are `finished`, so they render without `--allow-draft`. The other 18 designs are stubs with no layout data: `--allow-draft` does not help: the renderer stops with "Design X is a stub" and lists the finished designs (exit 4).
+All 20 designs (`p1`-`p8`, `c1`, `c3`, `c5`-`c12`, `c15`, `c20`) are `finished` and render without `--allow-draft`. A design that is a stub would stop with "Design X is a stub" and list the finished ones (exit 4); `--allow-draft` only lets a `draft` design through.
 
 Example:
 
@@ -61,7 +61,7 @@ Prints a JSON summary (files, warnings, per-design tier, pages, RTL, DOCX status
 
 ## CV JSON
 
-Schema: `../schema/cv.schema.json`. Unknown keys are rejected (so there is no field for skill percentages, photos, salary, ID numbers or street addresses). `meta.lang` and `basics.name` are required. Dates are free text. `"Present"` is replaced by the language's label. Sections: `summary`, `work`, `projects`, `education`, `volunteer`, `publications`, `skills`, `languages`, `certificates`.
+Schema: `../schema/cv.schema.json`. Unknown keys are rejected (so there is no field for skill percentages, photos, salary, ID numbers or street addresses). `meta.lang` and `basics.name` are required. Dates are free text. `"Present"` is replaced by the language's label. Sections: `summary`, `highlights` (2 to 4 `{value, label}` facts, already in the body), `work`, `projects`, `education`, `volunteer`, `publications`, `skills`, `languages`, `certificates`.
 
 Section headings exist for `en` and `ar` only. For any other `meta.lang`, add `meta.labels` (keys: `summary work education skills languages projects certificates volunteer publications contact links present`).
 

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv/dist/2020.js';
 
 export const SKILL_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const SYSTEMS_DIR = join(SKILL_DIR, 'systems');
+export const SYSTEMS_DIR = process.env.CL_SYSTEMS_DIR ?? join(SKILL_DIR, 'systems'); // override is for tests only
 export const FONTS_DIR = join(SKILL_DIR, 'fonts');
 export const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 export const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
