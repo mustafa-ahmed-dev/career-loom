@@ -107,11 +107,13 @@ PDFs are tagged and use fonts embedded as subsets. The page limit is 2; going ov
 ## Tests
 
 ```
-npm test                      # node --test ../tests/*.test.mjs
+npm test                      # node --test --test-concurrency=1 ../tests/*.test.mjs (serial: see note below)
 node check-design.mjs p1 c9   # the five checks for chosen designs, optional --out <dir>
 ```
 
-`npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) and the DOCX check needs `soffice` (LibreOffice). Without them extraction and greyscale fail (poppler) or the DOCX check is reported "not verified" (LibreOffice). Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 23 seconds together and passed all five, and `npm test` ran 36 tests, all passing, in about 22 seconds (with poppler and LibreOffice installed).
+`npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) and the DOCX check needs `soffice` (LibreOffice). Without them extraction and greyscale fail (poppler) or the DOCX check is reported "not verified" (LibreOffice). Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 23 seconds together and passed all five, and `npm test` ran 41 tests, all passing, in about 36 seconds (with poppler and LibreOffice installed).
+
+The test files run one at a time on purpose. `cli.test.mjs` temporarily renames `fonts/cache` to check the missing-font warnings, and when it ran in parallel with `design.test.mjs` the design checks sometimes saw no Chinese/Hindi fonts and failed (about 1 run in 8 here). Avoid running the test files in parallel.
 
 ### The five checks (`lib/checks.mjs`, `lib/runchecks.mjs`)
 
