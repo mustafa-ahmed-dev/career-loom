@@ -10,7 +10,7 @@ This skill holds the evidence and practical tips behind every other career skill
 ## Files
 | Need | File |
 |---|---|
-| A source, link, author or evidence label | `sources.md` (IDs S001–S236; each row has Last checked and Volatility) |
+| A source, link, author or evidence label | `sources/sources.csv` (editable source of truth, IDs S001–S236) and `sources.md` (the same rows as readable tables) |
 | A myth the user believes | `myths-vs-reality.md` |
 | The full integrity rules (no fabrication, privacy, banned items) | `rules/integrity.md` |
 | A claim that must never be repeated | `banned-claims.md` |
@@ -36,6 +36,8 @@ Read only the file the question needs. Do not load the whole library.
 - **Live finding**: anything from web search in this session. Cite as "Live finding, retrieved YYYY-MM-DD, not in the firm's vetted library", with a link and an evidence label assigned by the same rubric. Never present a live finding as library-vetted.
 
 **Look up, don't load.** Find entries by S-ID, the regional index or topic search. Never load all of `sources.md` into context.
+
+**Web search is optional and the user decides.** The library is a vetted starting point and will age; new techniques and rule changes will not be in it. If web search is off, say in one line what turning it on adds (current requirements, real postings, company research, recent changes) and carry on without it. If it is on, offer to search for the important points (laws, quotas, current ATS behaviour, the target company) instead of searching silently. Everything found this way is a live finding, never merged with library sources.
 
 **Default claims use the library only.** The Reality note, myths-vs-reality, scoring rationale and regional defaults cite library sources. A search result never replaces a library source for these.
 
@@ -66,8 +68,9 @@ Read only the file the question needs. Do not load the whole library.
 3. **Respect "U" and "pending" flags.** Say "unverified" for any U item. Never cite S014, or anything marked "link pending", as if it were confirmed.
 4. **Regulatory items** (GCC quotas, legal rules) always carry: "Not legal advice; verify with the ministry," plus the date captured.
 5. **When asked for references,** give a short list of [title](link), the organization, a one-line takeaway and the evidence label. Use only sources relevant to the answer, never the whole file.
-6. **When asked for tips,** give the 3–7 most relevant tips from the matching file, adapted to the user's region, role and language. Offer more on request.
-7. **Answer in the user's chosen language;** English by default. Source titles stay in their original language.
+6. **When asked where to learn more,** give the 2-3 most relevant library sources (look them up in `sources/sources.csv` by topic), then offer to search for newer material.
+7. **When asked for tips,** give the 3–7 most relevant tips from the matching file, adapted to the user's region, role and language. Offer more on request.
+8. **Answer in the user's chosen language;** English by default. Source titles stay in their original language.
 
 ## Footer (in the user's language)
 Add this line at the end of every deliverable and at the end of each stage:

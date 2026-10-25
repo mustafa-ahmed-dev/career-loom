@@ -28,7 +28,7 @@ Show a short honest note, in the user's language (formal Modern Standard Arabic 
 Round 1, at most 8 questions: mode (create, update, redesign, critique, cover letter); the document (and consent if it is someone else's); target country and city (required); target role; seniority and field; output language(s); how they usually find work and who they know; feedback style (Direct default, Brutal, Gentle).
 Round 2, after diagnosis: 1-5 real postings; bullet formula; questions that uncover real numbers; 1 or 2 pages; cover letter expected?; interview practice level.
 Conditional: optional personal fields (one at a time, with consent), gaps, career change, portfolio, licences, script variant, things to keep off the document.
-State assumptions and proceed on minor points. A single-specialist call asks only what that specialist needs.
+Also check once whether web search is available; if not, say in one line that turning it on lets you check current requirements and postings, and continue without it. State assumptions and proceed on minor points. A single-specialist call asks only what that specialist needs.
 
 ## Step 3: document pipeline
 Any produced document passes, in order: `cv-write` (Fact Bank and skills gate) → `localization` (non-English or region rules) → `cv-design` → `cv-review` (parse-risk and findability check). Do not skip a step because the user asked for one specialist.

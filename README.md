@@ -3,6 +3,11 @@
 A career-consulting firm in a plugin: truthful CV and résumé diagnosis, rewriting, design and localization, cover letters, mock interviews and relationship-based job search, in any language including Arabic (RTL). Nothing is fabricated and nothing unverified is presented as fact.
 
 ## Install
+
+### In claude.ai (chat, desktop app) or Cowork: no coding needed
+Open **Customize > Plugins** and choose **Add > Add marketplace**, then enter `mustafa-ahmed-dev/careerly` and add **career-firm**. Or download this repo as a zip, choose **Add > Upload plugin** and upload it. Skills and commands work in chat; the two agents run in Cowork and Claude Code only. Then describe what you need, for example "review my CV", or type `/` and pick a career-firm skill. Turn on web search in your Claude settings if you want current requirements and postings.
+
+### In Claude Code
 Needs Claude Code v2.1.275 or later for the one-step form:
 ```
 /plugin install career-firm --marketplace mustafa-ahmed-dev/careerly
@@ -12,7 +17,7 @@ Or in two steps:
 /plugin marketplace add mustafa-ahmed-dev/careerly
 /plugin install career-firm@career-firm
 ```
-Cloud sessions do not load plugins installed on your machine. In claude.ai chat or Cowork, see Anthropic's plugin docs; uploading `plugins/career-firm/` as a zip is untested here. Only skills load in claude.ai chat, so every must-keep rule is also written inline in each skill.
+Cloud sessions do not load plugins installed on your machine. Every must-keep rule is also written inline in each skill, because agents and hooks do not load in chat.
 
 ## Use
 Start with the `career-firm` skill (full engagement), or call a specialist: `cv-review`, `cv-write`, `cv-design`, `cover-letter`, `interview-coach`, `job-search`, `localization`, `career-references`.
