@@ -20,9 +20,15 @@ Maintainer notes for the developer portal at https://claude.ai/directory/manage 
 
 Select **Validate**. Fix anything marked **Blocks**, push, then **Re-validate**. A result applies to one commit.
 
-Things only the portal can settle:
-- **Name:** `career-loom` may be held for a reviewer as "Name matches a known brand" or "Name may be confused with an existing listing" (Loom, CVLoom). A hold is not a rejection. A name already taken by another organization would block.
-- **`.gitattributes`:** the repo has `* text=auto eol=lf`. If validation stops with "Couldn't validate that repository", remove or relax that line first.
+First Validate result (commit `2bdbe1d`, 2026-10-25): the repository fetched, size and file limits passed, the manifest is valid, 9 skills and 2 agents were found, there are no MCP servers, and the name and publisher checks passed. The `.gitattributes` line did not stop validation.
+
+Findings that were reported as held for a reviewer or as warnings, and what they are:
+- **`UNREAD_ASSET_REFERENCED`:** the CV renderer's scripts use bundled fonts and images, so a reviewer looks at them. Expected for a plugin that bundles fonts. No action.
+- **`MCP_FORWARDS_CREDENTIAL_ENV`:** was a false positive. "tokens" in `build-gallery.mjs` means design tokens, and `$50-$90` was a price in source row S232. Both were reworded in the repo. Nothing reads or sends a credential.
+- **`UNKNOWN_KEY` (`icon`, `documentationUrl`, `privacyPolicyUrl`, `supportUrl`):** fields only the directory reads. No action.
+- **`RUNTIME_FETCH_EXEC` on the logo image and `ASSETS_PASSED_UNREAD`:** image files that were not read as code. No text matching a download-and-execute pattern was found in the files. No action.
+
+After pushing a fix, select **Re-validate** on the Source step. A report applies to one commit.
 
 ## 2. Listing details step
 
@@ -35,7 +41,7 @@ Draft answers from `plugins/career-loom/PRIVACY.md`. Check each against the live
 | Question | Draft answer |
 |---|---|
 | Does the plugin read or store personal data? | **Reads: yes.** It works with the CVs, résumés and career details the user gives it in the conversation. **Stores: no.** It keeps nothing between conversations and offers a "forget me" option. |
-| Does it send data to services other than its declared connectors? | **No, with two user-controlled exceptions.** (1) If the user turns on web search in Claude, search terms (not the CV) go to the search tool. (2) Only when the user asks, documents are saved to Google Drive, Microsoft 365 or Notion through connectors the user has enabled. The plugin has no server, analytics or connectors of its own. |
+| Does it send data to services other than its declared connectors? | **No, with two user-controlled exceptions.** (1) If the user turns on web search in Claude, search terms (not the CV) go to the search tool. (2) Only when the user asks, documents are saved to Google Drive, Microsoft 365 or Notion through connectors the user has enabled. The plugin has no server, analytics or connectors of its own. The optional CV renderer runs locally and uploads nothing. Its setup downloads npm packages, Chromium and two open-licence fonts from public hosts, with no CV content sent. |
 | How long does it keep data? | **Nothing is retained by the plugin.** Data stays in the user's Claude conversation, under Claude's own retention settings. |
 | Is it intended for people under 18? | **Your decision.** The plugin is written for job seekers and does not collect age. Recommended answer: **No, it is not directed at people under 18.** Choose differently if you want to market it to students or school leavers, and then check the policy for what that requires. |
 
