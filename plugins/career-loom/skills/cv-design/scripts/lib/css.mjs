@@ -129,5 +129,10 @@ ${L.highlightsStyle === 'cards' ? `.hl{display:grid;grid-template-columns:repeat
 bdi.ltr{unicode-bidi:isolate}
 a{color:inherit;text-decoration:none}
 .mono{font-family:${f.mono}}
+/* On screen the page is a centred sheet on a grey desk. @page margins only exist in print, so plain designs get them as padding here; print and PDF are unchanged. */
+@media screen{
+html{background:#dfe2e6}
+body{width:${s.page === 'Letter' ? '8.5in' : '210mm'};max-width:100%;min-height:${s.page === 'Letter' ? '11in' : '297mm'};margin:18px auto;background:${bg};box-shadow:0 1px 3px rgba(0,0,0,.18),0 8px 28px rgba(0,0,0,.12);${bleed ? '' : `padding:${s.marginTop}mm ${s.marginSide}mm ${s.marginBottom}mm;`}}
+}
 `;
 }

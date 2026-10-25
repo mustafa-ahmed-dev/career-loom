@@ -1,4 +1,6 @@
-# CV renderer
+# CV renderer (optional)
+
+The design itself is plain files (`../systems/<id>/spec.md`, `design.css`, `components.html`); Claude can write the HTML from them with no install. This renderer is an optional extra for a laptop and the maintainers' checking tool: it runs the five design checks on all 20 designs.
 
 Turns a CV written as JSON into a PDF and/or an HTML file using one of the Career Loom design systems (`../systems/`). Everything runs locally. The CV is not uploaded anywhere. Fonts are embedded from `../fonts/`.
 
