@@ -1,0 +1,24 @@
+{
+  "name": "career-loom-cv-render",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Renders a JSON CV to PDF/DOCX/HTML using a Career Loom design system.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test \"../tests/*.test.mjs\"",
+    "check": "node check-design.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "docx": "9.5.0",
+    "playwright": "1.63.0"
+  },
+  "devDependencies": {
+    "fontkit": "2.0.4",
+    "jszip": "^3.10.2",
+    "pdfjs-dist": "4.10.38"
+  }
+}
