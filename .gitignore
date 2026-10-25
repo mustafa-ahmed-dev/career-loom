@@ -4,3 +4,7 @@
 .DS_Store
 Thumbs.db
 evals/out/
+node_modules/
+plugins/career-loom/skills/cv-design/fonts/cache/
+plugins/career-loom/skills/cv-design/tests/results/out/
+plugins/career-loom/skills/cv-design/tests/results/

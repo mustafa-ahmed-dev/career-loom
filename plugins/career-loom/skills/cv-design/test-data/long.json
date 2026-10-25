@@ -1,0 +1,192 @@
+{
+ "meta": {
+  "lang": "en"
+ },
+ "basics": {
+  "name": "Sara Test",
+  "headline": "Operations Analyst, Customer Support and Logistics",
+  "email": "sara.test@example.com",
+  "phone": "+964 750 000 0000",
+  "location": "Erbil, Iraq",
+  "links": [
+   {
+    "label": "LinkedIn",
+    "url": "linkedin.com/in/sara-test-example"
+   },
+   {
+    "label": "Portfolio",
+    "url": "sara-test.example.com"
+   }
+  ]
+ },
+ "summary": "Analyst with ten years across support, retail and operations in Iraq. Turns messy spreadsheets and ticket data into short weekly reports that managers actually use, and explains the numbers in plain language to non-technical teams.",
+ "work": [
+  {
+   "title": "Senior Operations Analyst",
+   "org": "Example Marketplace Ltd.",
+   "location": "Erbil",
+   "start": "2023-01",
+   "end": "Present",
+   "bullets": [
+    "Built a weekly returns report in Excel and SQL that replaced three manual spreadsheets used by the support and warehouse teams.",
+    "Reduced the time to produce the monthly delivery-delay summary from two days to about four hours (self-reported estimate).",
+    "Worked with the logistics lead to define five delay categories now used in all internal reports.",
+    "Presented findings to department heads each month and tracked agreed actions in a shared list.",
+    "Mentored two junior analysts on data cleaning and report review."
+   ]
+  },
+  {
+   "title": "Operations Analyst",
+   "org": "Sample Retail Group",
+   "location": "Sulaymaniyah",
+   "start": "2020-09",
+   "end": "2022-12",
+   "bullets": [
+    "Maintained inventory dashboards for 6 stores and flagged stock mismatches to store managers each week.",
+    "Reconciled supplier invoices against deliveries and raised about 15 discrepancies per month for follow-up.",
+    "Documented the stock-count procedure and used it to train new store staff.",
+    "Supported the 2021 warehouse move by preparing location lists and counting checklists."
+   ]
+  },
+  {
+   "title": "Customer Support Lead",
+   "org": "Example Electronics Co.",
+   "location": "Erbil",
+   "start": "2018-05",
+   "end": "2020-08",
+   "bullets": [
+    "Led a team of 8 agents on two shifts and prepared the weekly rota.",
+    "Introduced a short daily briefing that covered new products, known issues and delivery delays.",
+    "Handled escalated complaints and recorded root causes for the weekly quality review.",
+    "Coached agents using call reviews, with written feedback after each session."
+   ]
+  },
+  {
+   "title": "Support Agent",
+   "org": "Sample Telecom Services",
+   "location": "Erbil",
+   "start": "2016-02",
+   "end": "2018-04",
+   "bullets": [
+    "Answered inbound calls about billing and mobile data plans.",
+    "Logged each case in the CRM with a clear summary so the next agent could continue without asking again.",
+    "Covered weekend shifts during the 2017 network upgrade."
+   ]
+  },
+  {
+   "title": "Sales Assistant",
+   "org": "Example Mobile Accessories",
+   "location": "Erbil",
+   "start": "2014-09",
+   "end": "2016-01",
+   "bullets": [
+    "Advised walk-in customers on phone accessories and processed payments.",
+    "Counted the till and stock at the end of each day and reported differences to the owner."
+   ]
+  }
+ ],
+ "education": [
+  {
+   "title": "MSc Data Analytics (part-time)",
+   "org": "Example University",
+   "location": "Erbil",
+   "start": "2021",
+   "end": "2024",
+   "bullets": [
+    "Thesis on forecasting weekly order volume for a small online shop, using synthetic data.",
+    "Modules: statistics, databases, data visualisation, machine learning basics."
+   ]
+  },
+  {
+   "title": "BSc Computer Science",
+   "org": "Example University",
+   "location": "Erbil",
+   "start": "2010",
+   "end": "2014",
+   "bullets": [
+    "Final project: a stock-tracking web application for a small shop."
+   ]
+  }
+ ],
+ "projects": [
+  {
+   "title": "Returns Dashboard",
+   "org": "Internal project",
+   "start": "2023",
+   "end": "2024",
+   "bullets": [
+    "Designed a dashboard of return reasons by product category and supplier.",
+    "Agreed the category list with support and warehouse leads before building it."
+   ]
+  },
+  {
+   "title": "Open Data Visualisation Club",
+   "org": "Volunteer",
+   "start": "2022",
+   "end": "Present",
+   "bullets": [
+    "Run a monthly evening session where members practise charts on public datasets."
+   ]
+  }
+ ],
+ "skills": [
+  {
+   "name": "Data and reporting",
+   "items": [
+    "SQL",
+    "Excel (pivot tables, lookups)",
+    "Power BI",
+    "Python basics",
+    "Data cleaning"
+   ]
+  },
+  {
+   "name": "Operations",
+   "items": [
+    "Inventory control",
+    "Supplier reconciliation",
+    "Process documentation",
+    "Rota planning"
+   ]
+  },
+  {
+   "name": "People",
+   "items": [
+    "Coaching",
+    "Stakeholder reporting",
+    "Escalation handling",
+    "Training new staff"
+   ]
+  }
+ ],
+ "languages": [
+  {
+   "name": "Arabic",
+   "level": "Native"
+  },
+  {
+   "name": "Kurdish (Sorani)",
+   "level": "Native"
+  },
+  {
+   "name": "English",
+   "level": "C1"
+  },
+  {
+   "name": "Turkish",
+   "level": "A2"
+  }
+ ],
+ "certificates": [
+  {
+   "title": "Example Data Analytics Certificate",
+   "org": "Sample Training Institute",
+   "end": "2022"
+  },
+  {
+   "title": "Example Customer Service Practitioner",
+   "org": "Sample Training Institute",
+   "end": "2019"
+  }
+ ]
+}

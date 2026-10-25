@@ -23,7 +23,7 @@ Cloud sessions do not load plugins installed on your machine. Every must-keep ru
 Start with the `career-loom` skill (full engagement), or call a specialist: `cv-review`, `cv-write`, `cv-design`, `cover-letter`, `interview-coach`, `job-search`, `localization`, `career-references`.
 
 ## Status
-v0.1 in progress. Skills are rewritten; the 20 design systems are still specification stubs and the renderer, skill data and evals are not built. Regional files are lite and several are marked unverified. See `docs/roadmap.md`, `PRIVACY.md` and `NOTICES.md`.
+v0.1 in progress. Skills are rewritten. The CV renderer (`plugins/career-loom/skills/cv-design/scripts/cv-render.mjs`, Node + Playwright; runs in Claude Code, Cowork or on a laptop, not in claude.ai chat) exists with two designs, P1 Plain Master (tier A) and C9 Sidebar Light (tier C); the other 18 design systems are still specification stubs. See the [design gallery](docs/gallery/index.html) for the finished designs. Skill data (ESCO/O*NET) is not built and `evals/` is a small starter set. Regional files are lite and several are marked unverified. See `docs/roadmap.md`, `PRIVACY.md` and `NOTICES.md`.
 
 ## Maintainers
-Validate with `claude plugin validate plugins/career-loom` and `claude plugin validate .`. Do not add a top-level `bin/` folder to the plugin.
+Validate with `claude plugin validate plugins/career-loom` and `claude plugin validate .`. Do not add a top-level `bin/` folder to the plugin. Renderer tests: `cd plugins/career-loom/skills/cv-design/scripts && npm install && npm test`. Evals: `python3 evals/run_evals.py` (needs the `claude` CLI; see `evals/README.md`).

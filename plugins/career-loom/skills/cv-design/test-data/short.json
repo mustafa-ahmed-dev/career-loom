@@ -1,0 +1,49 @@
+{
+  "meta": { "lang": "en" },
+  "basics": {
+    "name": "Sara Test",
+    "headline": "Customer Support Specialist",
+    "email": "sara.test@example.com",
+    "phone": "+964 750 000 0000",
+    "location": "Erbil, Iraq",
+    "links": [{ "label": "LinkedIn", "url": "linkedin.com/in/sara-test-example" }]
+  },
+  "summary": "Customer support specialist with three years of experience handling chat and phone tickets for an online electronics shop. Comfortable with CRM tools and with explaining technical problems in plain language.",
+  "work": [
+    {
+      "title": "Customer Support Agent",
+      "org": "Example Electronics Co.",
+      "location": "Erbil",
+      "start": "2022-03",
+      "end": "Present",
+      "bullets": [
+        "Handled about 40 chat and phone tickets per day for warranty and delivery questions (self-reported).",
+        "Wrote 12 help-centre answers for the most common warranty questions.",
+        "Trained 3 new agents on the ticket system during their first month."
+      ]
+    },
+    {
+      "title": "Call Centre Agent",
+      "org": "Sample Telecom Services",
+      "location": "Erbil",
+      "start": "2020-06",
+      "end": "2022-02",
+      "bullets": [
+        "Answered inbound billing calls and logged each case in the CRM.",
+        "Recognised by the team lead for the lowest repeat-call rate in the shift (Q3 2021)."
+      ]
+    }
+  ],
+  "education": [
+    { "title": "BSc Computer Science", "org": "Example University", "location": "Erbil", "start": "2019", "end": "2023" }
+  ],
+  "skills": [
+    { "name": "Tools", "items": ["Zendesk", "Excel", "Google Workspace"] },
+    { "name": "Strengths", "items": ["Written support", "De-escalation", "Product knowledge"] }
+  ],
+  "languages": [
+    { "name": "Arabic", "level": "Native" },
+    { "name": "Kurdish (Sorani)", "level": "Native" },
+    { "name": "English", "level": "C1" }
+  ]
+}
