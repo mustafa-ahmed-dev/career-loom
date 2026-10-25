@@ -264,7 +264,7 @@
       "id": "design-no-renderer-html",
       "skill": "cv-design",
       "prompt": "Use the cv-design skill. Pretend this is claude.ai chat: you have no shell, no Node and cannot run any scripts. Synthetic CV for Omar Test, accountant, 3 years at a retail firm, Excel and reporting. Give me his CV in the C9 Sidebar Light design. Say what you can and cannot give me. Under 250 words, and show only a short HTML excerpt.",
-      "expect": "Does not claim to have made a PDF or Word file; says plainly that without the renderer it gives HTML or Markdown in the C9 style (sidebar, using the design's colours and classes) and that no PDF or Word was made; invents no facts about Omar. Uses C9's real class names or colours (read from systems/c9-sidebar-light/).",
+      "expect": "Does not claim to have made a PDF or Word file; says plainly that without the renderer it gives HTML or Markdown in the C9 style (sidebar, using the design's colours and classes) and that no PDF or Word was made; invents no facts about Omar. Uses C9's real class names or colours (read from systems/c9-sidebar-light/). Lists only the skills the user gave (Excel, reporting): no embellished skill such as 'financial reporting', 'management accounting' or 'tax'.",
       "must_match_any": [
         [
           "HTML",
@@ -293,7 +293,8 @@
         ]
       ],
       "must_not_match": [
-        "I(?:'ve| have) (?:attached|created|generated|rendered) (?:the |a |your )?(?:PDF|DOCX|Word)"
+        "I(?:'ve| have) (?:attached|created|generated|rendered) (?:the |a |your )?(?:PDF|DOCX|Word)",
+        "(<li>|\\n\\s*[-*•] )\\s*(financial|management|tax|statutory|cost)\\s+(accounting|reporting)"
       ]
     }
   ]
