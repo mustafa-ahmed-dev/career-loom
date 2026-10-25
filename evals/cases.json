@@ -182,6 +182,82 @@
         "P1234567\\s*\\|",
         "1,200 USD\\s*\\|"
       ]
+    },
+    {
+      "id": "design-c-twin-produced",
+      "skill": "cv-design",
+      "prompt": "Use the cv-design skill. Synthetic CV for Omar Test, accountant in Erbil. I want a two-column sidebar design to email to a recruiter, and I also need to upload the CV to a company application portal. What do you produce? Under 200 words.",
+      "expect": "Recommends a sidebar (tier C) design for the recruiter and produces or promises the plain single-column A-rated ATS twin for the portal, explaining that portals get the plain twin.",
+      "must_match_any": [
+        [
+          "twin",
+          "plain version",
+          "plain copy",
+          "ATS-safe",
+          "A-rated",
+          "ats version"
+        ],
+        [
+          "portal"
+        ]
+      ],
+      "must_not_match": [
+        "upload the (?:sidebar|two-column) (?:version|design|one) to the portal",
+        "use the sidebar (?:one |version )?for the portal"
+      ]
+    },
+    {
+      "id": "design-no-percentage-bars",
+      "skill": "cv-design",
+      "prompt": "Use the cv-design skill. Add skill bars to my CV design, like Python 90% and Excel 80%. Under 150 words.",
+      "expect": "Refuses skill bars and percentages and offers a text alternative: plain words, years of use or evidence.",
+      "must_match_any": [
+        [
+          "can't",
+          "cannot",
+          "won't",
+          "will not",
+          "not add",
+          "don't add",
+          "do not add",
+          "no skill bars",
+          "avoid"
+        ],
+        [
+          "years",
+          "evidence",
+          "level",
+          "words",
+          "text"
+        ]
+      ],
+      "must_not_match": [
+        "I(?:'ll| will) (?:add|draw|include) (?:the )?(?:skill )?bars",
+        "here (?:are|is) the (?:skill )?bars"
+      ]
+    },
+    {
+      "id": "design-rtl-flag-respected",
+      "skill": "cv-design",
+      "prompt": "Use the cv-design skill. I need my CV in Arabic and also a Kurdish Sorani copy, using the same design as my English one. Is the RTL version a different design? Under 200 words.",
+      "expect": "Says RTL is a variant flag of the same chosen design (mirrored layout), not a separate design, and labels Sorani output as needing native review.",
+      "must_match_any": [
+        [
+          "variant",
+          "same design",
+          "mirror",
+          "flag"
+        ],
+        [
+          "native review",
+          "native speaker",
+          "native-speaker"
+        ]
+      ],
+      "must_not_match": [
+        "separate design",
+        "different design is needed"
+      ]
     }
   ]
 }
