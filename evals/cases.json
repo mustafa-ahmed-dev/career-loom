@@ -203,8 +203,8 @@
         ]
       ],
       "must_not_match": [
-        "upload the (?:sidebar|two-column) (?:version|design|one) to the portal",
-        "use the sidebar (?:one |version )?for the portal"
+        "(?<!never )(?<!not )(?<!n't )(?<!no )upload the (?:sidebar|two-column) (?:version|design|one) to the portal",
+        "(?<!never )(?<!not )(?<!n't )(?<!no )use the sidebar (?:one |version )?for the portal"
       ]
     },
     {
