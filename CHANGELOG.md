@@ -1,6 +1,12 @@
 # Changelog
 
 ## Unreleased
+
+## 0.1.0 - 2026-10-25 (preview)
+- 20 design systems (P1-P8, C1, C3, C5-C12, C15, C20), each with `spec.md`, `design.css`, `components.html` and `tokens.json`; each tier C or D design (C9-C12, C15, C20) also has a plain, ATS-safe twin (P1); tier B designs (C1, C3, C5-C8) have none. Claude writes the HTML from these files, so it works in claude.ai chat. PDF or Word only if your Claude has a tool that can write files.
+- Six open-licence font families bundled (SIL OFL); Chinese and Hindi fonts are fetched on demand by the maintainer tool only.
+- The optional CV renderer and design checker (Node, with tests) live in `tools/cv-design/`, outside the plugin folder, so installing the plugin does not include them.
+- Known gaps: Sorani (Kurdish) wording is not natively reviewed; Iraq/KRI CV conventions and several regional files are unverified; ESCO/O*NET data is not built; `evals/` is a starter set.
 - Directory submission prep: added `plugins/career-loom/README.md` (the plugin folder had none), finalised `PRIVACY.md` and `NOTICES.md`, and added `displayName`, `homepage`, `repository`, `documentationUrl`, `supportUrl` and `privacyPolicyUrl` to `plugin.json`.
 - Plugin icon is now `assets/icon.png`, the logo symbol alone (no text) cropped to fill the square; the full logo stays in `assets/logo.png` and `assets/logo.jpg`.
 - Added the plugin icon: `logo.png` (set as `icon` in `plugin.json`) and the original `logo.jpg`, both in `plugins/career-loom/assets/`.
@@ -15,5 +21,5 @@
 - Agents reduced to `cv-reviewer` and `market-researcher`.
 - Interview levels unified: L1 Warm-up, L2 Standard, L3 Realistic, L4 Tough, L5 Brutal.
 
-## 0.1.0
+## Before 0.1.0
 - Planning scaffold.
