@@ -11,6 +11,8 @@ Fonts (CV renderer, `skills/cv-design/fonts/`). All SIL Open Font License 1.1. E
 - IBM Plex Sans Arabic. Copyright 2019 IBM Corp. Bundled.
 - IBM Plex Mono. Copyright 2017 IBM Corp. Bundled.
 - Cairo. Copyright 2009 The Cairo Project Authors (https://github.com/Gue3bara/Cairo). Bundled.
+- Source Serif 4. Copyright 2014-2023 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'. Bundled as subsetted woff2 from `@fontsource/source-serif-4`; the licence text in `OFL.txt` is the upstream `LICENSE.md` of adobe-fonts/source-serif.
+- Noto Naskh Arabic. Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic). Bundled.
 - Noto Sans SC and Noto Sans Devanagari (OFL 1.1, via `@fontsource/noto-sans-sc` and `@fontsource/noto-sans-devanagari`). Not bundled and not redistributed: `skills/cv-design/scripts/fetch-fonts.mjs` downloads them on the user's machine into `fonts/cache/` (gitignored). The Devanagari package's licence file reads "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/devanagari)"; the Noto Sans SC package's licence file names only "Google Inc." as the holder.
 
 npm dependencies of the renderer (`skills/cv-design/scripts/package.json`; installed by the user with `npm install`, not shipped in the plugin). Licences read from each package's `package.json` at the installed version:
