@@ -1,4 +1,4 @@
-# Regions
+# Career Loom: regions
 
 One folder per region. `pack.md` (where present) holds the short conventions summary; `tips.md` holds the detail. Every file carries a status: verified / secondary / unverified (U) and a "last verified" date. Regional content stays here; core skills must not hard-code country rules.
 

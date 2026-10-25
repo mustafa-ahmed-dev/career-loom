@@ -1,4 +1,4 @@
-# Design backlog
+# Career Loom: design backlog
 
 Dropped from v1 (the 20 kept systems are in `plugins/career-loom/skills/cv-design/systems/`). Retired IDs C2, C17, C18 are never reused.
 

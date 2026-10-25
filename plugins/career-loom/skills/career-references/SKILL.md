@@ -33,7 +33,7 @@ Read only the file the question needs. Do not load the whole library.
 
 **Two kinds of evidence, never mixed up**
 - **Library source**: an entry in `sources.md`. Cite as `[S###]` with its evidence label (Strong / Moderate / Vendor survey / U).
-- **Live finding**: anything from web search in this session. Cite as "Live finding, retrieved YYYY-MM-DD, not in the firm's vetted library", with a link and an evidence label assigned by the same rubric. Never present a live finding as library-vetted.
+- **Live finding**: anything from web search in this session. Cite as "Live finding, retrieved YYYY-MM-DD, not in Career Loom's vetted library", with a link and an evidence label assigned by the same rubric. Never present a live finding as library-vetted.
 
 **Look up, don't load.** Find entries by S-ID, the regional index or topic search. Never load all of `sources.md` into context.
 

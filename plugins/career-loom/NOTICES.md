@@ -1,4 +1,4 @@
-# Notices
+# Career Loom: notices
 
 Planned third-party data (not included in v0.1):
 - ESCO (European Commission), CC BY 4.0. Confirm exact wording before release.

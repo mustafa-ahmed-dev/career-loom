@@ -1,4 +1,4 @@
-# Evals
+# Career Loom: evals
 
 Automated checks that the plugin keeps its promises (nothing fabricated, privacy rules, honest labels, no auto-apply). All inputs are synthetic; never put a real person's CV here, the repo is public.
 

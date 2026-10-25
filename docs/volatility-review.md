@@ -1,4 +1,4 @@
-# Volatility review list
+# Career Loom: volatility review list
 
 Judgement calls made when the Volatility column was first assigned (24 October 2026). Where unsure, the shorter window was chosen. Review these at the next quarterly review and fix the column in `sources.md` if you disagree.
 

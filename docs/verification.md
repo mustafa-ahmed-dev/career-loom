@@ -1,4 +1,4 @@
-# Verification Guide
+# Career Loom: verification guide
 
 Every "unverified" or "must verify" item in this library is checked here. Record each completed check in the verification log at the bottom of `sources.md`.
 

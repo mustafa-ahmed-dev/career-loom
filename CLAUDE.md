@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A plugin marketplace repo. `.claude-plugin/marketplace.json` lists one plugin, `plugins/career-loom` (`.claude-plugin/plugin.json`). The plugin is almost entirely Markdown: nine skills and two agents. There is no build, lint or test command. The 20 design systems are spec stubs; the renderer, ESCO/O*NET data and `evals/` are not built.
+Career Loom is a plugin marketplace repo. `.claude-plugin/marketplace.json` lists one plugin, `plugins/career-loom` (`.claude-plugin/plugin.json`). The plugin is almost entirely Markdown: nine skills and two agents. There is no build, lint or test command. The 20 design systems are spec stubs; the renderer, ESCO/O*NET data and `evals/` are not built.
 
 Validate with `claude plugin validate plugins/career-loom` and `claude plugin validate .`. Do not add a top-level `bin/` folder inside the plugin. The two `.claude-plugin` folders are both correct: do not merge them. `CLAUDE.md` is not shipped to plugin users, so shipped guidance must live in skills.
 

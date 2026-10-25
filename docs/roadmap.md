@@ -1,4 +1,4 @@
-# Roster
+# Career Loom: roster
 
 Sixteen v0.1 roles were merged into nine skills. Roles are now sections inside a skill, not separate skills.
 
@@ -12,7 +12,7 @@ Sixteen v0.1 roles were merged into nine skills. Roles are now sections inside a
 | interview-coach | Interview Coach |
 | job-search | Networking and Outreach Coach, weekly plan |
 | localization | Localization Specialist, Language Editor |
-| career-references | Firm Librarian, integrity rules (`rules/integrity.md`), regions, templates |
+| career-references | Librarian, integrity rules (`rules/integrity.md`), regions, templates |
 
 Agents: `cv-reviewer`, `market-researcher`.
 
