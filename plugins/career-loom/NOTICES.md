@@ -4,7 +4,7 @@
 
 No third-party datasets are bundled in this version. The plugin's instructions and reference files are original Markdown under the MIT license (see the `license` field in `.claude-plugin/plugin.json`). The CV renderer in `skills/cv-design/` bundles four font families under the SIL Open Font License 1.1 (listed under Fonts below); its code is original and MIT-licensed, and its npm dependencies are not shipped (see below).
 
-The logo and icon images in the assets folder were supplied by the project author. The logo file carries embedded C2PA content-credential metadata from Google's image tools.
+The logo and icon images in the assets folder were generated with Google Gemini and supplied by the project author.
 
 ### Fonts
 
