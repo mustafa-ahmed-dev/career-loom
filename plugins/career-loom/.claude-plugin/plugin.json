@@ -6,6 +6,7 @@
     "name": "Mustafa Ahmed"
   },
   "license": "MIT",
+  "icon": "./.claude-plugin/logo.png",
   "keywords": [
     "career",
     "resume",
