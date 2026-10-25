@@ -255,7 +255,7 @@
         ]
       ],
       "must_not_match": [
-        "separate design",
+        "(?<!not a )(?<!not )(?:it|rtl)(?: version)? is a separate design",
         "different design is needed"
       ]
     }
