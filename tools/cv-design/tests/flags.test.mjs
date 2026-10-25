@@ -4,9 +4,9 @@ import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { buildHtml } from '../scripts/lib/html.mjs';
 import { arabicFont } from '../scripts/lib/css.mjs';
-import { loadTokens, readJson, SKILL_DIR } from '../scripts/lib/util.mjs';
+import { loadTokens, readJson, SKILL_DIR, TOOL_DIR } from '../scripts/lib/util.mjs';
 
-const cv = readJson(join(SKILL_DIR, 'test-data', 'short.json'));
+const cv = readJson(join(TOOL_DIR, 'test-data', 'short.json'));
 const withLayout = (over) => { const t = structuredClone(loadTokens('p1').tokens); Object.assign(t.layout, over); return t; };
 const css = (t) => buildHtml(cv, t).html;
 

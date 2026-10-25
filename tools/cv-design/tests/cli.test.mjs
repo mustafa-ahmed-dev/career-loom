@@ -4,9 +4,9 @@ import { spawnSync } from 'node:child_process';
 import { mkdtempSync, existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { SKILL_DIR } from '../scripts/lib/util.mjs';
+import { TOOL_DIR } from '../scripts/lib/util.mjs';
 
-const CLI = join(SKILL_DIR, 'scripts', 'cv-render.mjs'), DATA = join(SKILL_DIR, 'test-data');
+const CLI = join(TOOL_DIR, 'scripts', 'cv-render.mjs'), DATA = join(TOOL_DIR, 'test-data');
 const run = (...args) => spawnSync('node', [CLI, ...args], { encoding: 'utf8' });
 let out;
 before(() => { out = mkdtempSync(join(tmpdir(), 'cl-cli-')); });

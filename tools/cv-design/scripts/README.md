@@ -1,8 +1,8 @@
 # CV renderer (optional)
 
-The design itself is plain files (`../systems/<id>/spec.md`, `design.css`, `components.html`); Claude can write the HTML from them with no install. This renderer is an optional extra for a laptop and the maintainers' checking tool: it runs the five design checks on all 20 designs.
+The design itself is plain files (`../../../plugins/career-loom/skills/cv-design/systems/<id>/spec.md`, `design.css`, `components.html`); Claude can write the HTML from them with no install. This renderer is an optional extra for a laptop and the maintainers' checking tool: it runs the five design checks on all 20 designs.
 
-Turns a CV written as JSON into a PDF and/or an HTML file using one of the Career Loom design systems (`../systems/`). Everything runs locally. The CV is not uploaded anywhere. Fonts are embedded from `../fonts/`.
+Turns a CV written as JSON into a PDF and/or an HTML file using one of the Career Loom design systems (`../../../plugins/career-loom/skills/cv-design/systems/`). Everything runs locally. The CV is not uploaded anywhere. Fonts are embedded from `../../../plugins/career-loom/skills/cv-design/fonts/`.
 
 **Not runnable inside claude.ai chat.** It needs Node.js, a Chromium download and the ability to write files, none of which chat provides. It is meant for a laptop, Claude Code or similar.
 
@@ -15,14 +15,14 @@ Turns a CV written as JSON into a PDF and/or an HTML file using one of the Caree
 ## Install
 
 ```
-cd plugins/career-loom/skills/cv-design/scripts
+cd tools/cv-design/scripts
 npm install
 npx playwright install chromium
 ```
 
 PDF output needs a Chromium-based browser. The renderer looks, in this order, for: the browser at `CL_BROWSER_PATH` (set it to a `.exe` or binary you choose), Playwright's own Chromium (the `npx playwright install chromium` step), then Microsoft Edge, then Google Chrome. If the Playwright download is blocked on your network, you can skip it on Windows 10/11 because Edge is normally installed (on one Windows machine where the Playwright download was blocked, a PDF was made through this fallback with Microsoft Edge, Chromium 156.0.4314.42, as reported by the summary's `pdfBrowser` line). `--format html` needs no browser at all; open the file and use the browser's Print to PDF if you want.
 
-Once, needs internet: `node fetch-fonts.mjs` downloads the Noto Sans SC (Chinese) and Noto Sans Devanagari fonts into `../fonts/cache/` (gitignored). It uses `npm pack` and `tar`, so both must be on your PATH.
+Once, needs internet: `node fetch-fonts.mjs` downloads the Noto Sans SC (Chinese) and Noto Sans Devanagari fonts into `../../../plugins/career-loom/skills/cv-design/fonts/cache/` (gitignored). It uses `npm pack` and `tar`, so both must be on your PATH.
 
 Optional for rendering: only needed for Chinese or Devanagari CVs. **Required before running the tests** (`npm test`, `check-design.mjs`): the render check covers the Chinese and Hindi samples, and on a checkout without these fonts it fails with missing glyphs and the p1 and c9 design tests fail (verified on a clean checkout: 2 of 41 tests fail). Without the fonts, a CV containing that script prints a "Fonts not available" warning and exits with code 3 (the files are still written, with fallback glyphs or gaps). English, Arabic and Cyrillic CVs never need them and exit 0.
 
@@ -35,7 +35,7 @@ node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format p
 | Flag | Default | Meaning |
 |---|---|---|
 | `<cv.json>` | required | Path to the CV file. |
-| `--design` | required | Design id, case-insensitive: `p1`, `c9`, ... (folder names under `../systems/`). |
+| `--design` | required | Design id, case-insensitive: `p1`, `c9`, ... (folder names under `../../../plugins/career-loom/skills/cv-design/systems/`). |
 | `--out` | `.` | Output folder, created if missing. |
 | `--name` | the input file name without `.json` | Base name of the output files. |
 | `--format` | `pdf,html` | Comma list of `pdf` and `html`. Anything else (including `docx`) is refused with exit 1; there is no Word output. |
@@ -100,7 +100,7 @@ For `--name cv` and tier A/B design `X`: `cv.pdf` and `cv.html`.
 
 For a tier C or D design the same set is written for the design, plus the A-rated twin as `cv-ats.pdf` / `cv-ats.html`. Use the twin for job portals and ATS uploads.
 
-The renderer writes no Word file. The design is the HTML plus its rules (`../systems/<id>/spec.md`, `design.css`, `components.html`). To get a Word document, ask Claude to convert the finished HTML (for a tier C or D design, its A-rated twin). Such a conversion is not part of this project's checks: expect columns, bands, ribbons, timelines and cards to be simplified, and it has not been verified in Microsoft Word.
+The renderer writes no Word file. The design is the HTML plus its rules (`../../../plugins/career-loom/skills/cv-design/systems/<id>/spec.md`, `design.css`, `components.html`). To get a Word document, ask Claude to convert the finished HTML (for a tier C or D design, its A-rated twin). Such a conversion is not part of this project's checks: expect columns, bands, ribbons, timelines and cards to be simplified, and it has not been verified in Microsoft Word.
 
 PDFs are tagged and use fonts embedded as subsets. The page limit is 2; going over gives a warning and exit 3.
 
@@ -113,7 +113,7 @@ node check-design.mjs p1 c9   # the five checks for chosen designs, optional --o
 
 `npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) . Without them extraction and greyscale fail. Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 27 seconds together and passed all five, and `npm test` ran 81 tests, all passing, in about 2 minutes (with poppler installed and the Noto fonts fetched).
 
-The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points the environment variable `CL_FONT_CACHE` at an empty folder. The same variable can move the font cache (`fetch-fonts.mjs` writes to it too; default `../fonts/cache/`). The test files therefore run in parallel safely.
+The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points the environment variable `CL_FONT_CACHE` at an empty folder. The same variable can move the font cache (`fetch-fonts.mjs` writes to it too; default `../../../plugins/career-loom/skills/cv-design/fonts/cache/`). The test files therefore run in parallel safely.
 
 ### The five checks (`lib/checks.mjs`, `lib/runchecks.mjs`)
 
@@ -138,5 +138,5 @@ The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points 
 - Arabic-script text is rendered with ligatures disabled, so PDF text extraction keeps letter order. The letters look less joined than normal typesetting. This is deliberate.
 - Sorani: glyph coverage and extraction are tested, but nobody who reads Sorani natively has reviewed the output. Treat it as unreviewed. Sorani CVs need `meta.labels` (no built-in headings). The Cairo-to-IBM-Plex-Sans-Arabic swap is applied to every Sorani or Kurdish document.
 - Chinese and Hindi PDFs need the fonts from `fetch-fonts.mjs`; otherwise those characters fall back to a generic sans-serif.
-- Layout flags and what they do: see `../systems/TOKENS.md`.
+- Layout flags and what they do: see `../../../plugins/career-loom/skills/cv-design/systems/TOKENS.md`.
 - The check thresholds are this project's choices, not an external standard, except the WCAG ratios.

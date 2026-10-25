@@ -23,7 +23,7 @@ Turns finished content into a document. A design is plain files: `systems/<id>/s
 3. Write the document as HTML: read the chosen design's `spec.md`, `design.css` and `components.html` and use the same classes and variables, with the user's content in the design's section order. A tier C or D design also gets its A-rated twin (named in its spec, currently `p1`), built from that design's files.
    - **PDF:** only with a code or PDF tool: print the HTML to A4, backgrounds on, 1-2 pages. Otherwise say plainly that no PDF or Word file was made; the user can open the HTML in a browser and use Print, Save as PDF.
    - **Word:** on request, convert the finished HTML (tier C or D: the A twin) and say it is simplified and unchecked in Word.
-   - **Optional (laptop with Node):** `scripts/cv-render.mjs`, see `scripts/README.md`.
+   - **Renderer:** maintainers' tool in the repo's `tools/cv-design/`, not shipped.
 4. Hand the result to `cv-review`.
 
 ## Rules

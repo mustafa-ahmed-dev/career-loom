@@ -5,11 +5,11 @@ import { readdirSync, mkdirSync, copyFileSync, writeFileSync, readFileSync, exis
 import { join, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { SKILL_DIR, SYSTEMS_DIR, loadTokens, readJson, esc } from './lib/util.mjs';
+import { SKILL_DIR, TOOL_DIR, REPO_DIR, SYSTEMS_DIR, loadTokens, readJson, esc } from './lib/util.mjs';
 import { render } from './cv-render.mjs';
 
-const REPO_URL = readJson(join(SKILL_DIR, '..', '..', '.claude-plugin', 'plugin.json')).repository;
-const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..', '..', 'docs', 'gallery');
+const REPO_URL = readJson(join(REPO_DIR, 'plugins', 'career-loom', '.claude-plugin', 'plugin.json')).repository;
+const OUT = join(REPO_DIR, 'docs', 'gallery');
 rmSync(OUT, { recursive: true, force: true });
 for (const d of ['img', 'samples']) mkdirSync(join(OUT, d), { recursive: true });
 const SAMPLES = [['en', 'short', 'English'], ['ar', 'ar', 'Arabic (RTL)']];
@@ -18,11 +18,11 @@ const cards = [];
 for (const id of ids) {
   const { tokens } = loadTokens(id);
   if (tokens.status !== 'finished') continue;
-  const res = readJson(join(SKILL_DIR, 'tests', 'results', `${id}.json`));
+  const res = readJson(join(TOOL_DIR, 'tests', 'results', `${id}.json`));
   if (!res.pass) throw new Error(`${tokens.id} is marked finished but its last test run failed`);
   const shots = [];
   for (const [tag, file, label] of SAMPLES) {
-    const r = await render(join(SKILL_DIR, 'test-data', file + '.json'), { design: id, out: join(OUT, 'samples'), name: `${id}-${tag}`, format: 'pdf', rtl: 'auto', twin: 'on', allowDraft: false });
+    const r = await render(join(TOOL_DIR, 'test-data', file + '.json'), { design: id, out: join(OUT, 'samples'), name: `${id}-${tag}`, format: 'pdf', rtl: 'auto', twin: 'on', allowDraft: false });
     for (const d of r.designs) {
       const stem = d.role === 'ats-twin' ? `${id}-${tag}-ats` : `${id}-${tag}`;
       const pr = spawnSync('pdftoppm', ['-png', '-r', '70', '-f', '1', '-l', '1', '-singlefile', join(OUT, 'samples', stem + '.pdf'), join(OUT, 'img', stem)]);

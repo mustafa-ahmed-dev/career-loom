@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "career-loom/cv.schema.json",
   "title": "Career Loom CV input",
-  "description": "Input for scripts/cv-render.mjs. Facts only: this file is produced from the Fact Bank after cv-write and localization. There are no fields for percentage skill levels, logos, photos, salary, ID numbers or street addresses.",
+  "description": "Input for tools/cv-design/scripts/cv-render.mjs. Facts only: this file is produced from the Fact Bank after cv-write and localization. There are no fields for percentage skill levels, logos, photos, salary, ID numbers or street addresses.",
   "type": "object",
   "required": [
     "meta",

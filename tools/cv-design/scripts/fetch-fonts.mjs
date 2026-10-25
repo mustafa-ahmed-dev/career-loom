@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = process.env.CL_FONT_CACHE ?? join(dirname(fileURLToPath(import.meta.url)), '..', 'fonts', 'cache');
+const ROOT = process.env.CL_FONT_CACHE ?? join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'plugins', 'career-loom', 'skills', 'cv-design', 'fonts', 'cache');
 const PACKS = [
   { family: 'Noto Sans SC', pkg: '@fontsource/noto-sans-sc', slug: 'noto-sans-sc', weights: [400, 700] },
   { family: 'Noto Sans Devanagari', pkg: '@fontsource/noto-sans-devanagari', slug: 'noto-sans-devanagari', weights: [400, 700] },
