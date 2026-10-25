@@ -8,7 +8,7 @@ Turns a CV written as JSON into a PDF, a DOCX and/or an HTML file using one of t
 
 - Node.js 20 or newer (`engines` in `package.json`).
 - Disk: `node_modules` was 139 MB on my install, plus Playwright's Chromium download (size not measured).
-- Only for the tests: poppler (`pdftotext`, `pdftoppm`, `pdfinfo`) and LibreOffice (`soffice`).
+- Only for the tests: poppler (`pdftotext`, `pdftoppm`, `pdfinfo`), LibreOffice (`soffice`), and the fonts from `node fetch-fonts.mjs` (see Install).
 
 ## Install
 
@@ -18,9 +18,9 @@ npm install
 npx playwright install chromium
 ```
 
-Optional, once, needs internet: `node fetch-fonts.mjs` downloads the Noto Sans SC (Chinese) and Noto Sans Devanagari fonts into `../fonts/cache/` (gitignored). It uses `npm pack` and `tar`, so both must be on your PATH.
+Once, needs internet: `node fetch-fonts.mjs` downloads the Noto Sans SC (Chinese) and Noto Sans Devanagari fonts into `../fonts/cache/` (gitignored). It uses `npm pack` and `tar`, so both must be on your PATH.
 
-Only needed for Chinese or Devanagari CVs. Without the fonts, a CV containing that script prints a "Fonts not available" warning and exits with code 3 (the files are still written, with fallback glyphs or gaps). English, Arabic and Cyrillic CVs never need them and exit 0.
+Optional for rendering: only needed for Chinese or Devanagari CVs. **Required before running the tests** (`npm test`, `check-design.mjs`): the render check covers the Chinese and Hindi samples, and on a checkout without these fonts it fails with missing glyphs and the p1 and c9 design tests fail (verified on a clean checkout: 2 of 41 tests fail). Without the fonts, a CV containing that script prints a "Fonts not available" warning and exits with code 3 (the files are still written, with fallback glyphs or gaps). English, Arabic and Cyrillic CVs never need them and exit 0.
 
 ## Usage
 
