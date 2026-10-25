@@ -3,6 +3,7 @@ import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Leve
 import { writeFileSync } from 'node:fs';
 import { isRtl, scriptOf, hasRtlChars } from './util.mjs';
 import { labelsFor } from './labels.mjs';
+import { arabicFont } from './css.mjs';
 
 const ORDER = ['summary', 'work', 'projects', 'education', 'volunteer', 'publications', 'skills', 'certificates', 'languages'];
 const hex = (c) => c.replace('#', '').toUpperCase();
@@ -10,7 +11,7 @@ const pt = (n) => Math.round(n * 2); // half-points
 
 export async function renderDocx(cv, t, outPath, { rtlFlag = 'auto' } = {}) {
   const rtl = isRtl(cv, rtlFlag), lab = labelsFor(cv), c = t.colors, s = t.sizes, script = scriptOf(cv.meta.lang);
-  const font = (role) => ({ ascii: t.fonts[role].latin, hAnsi: t.fonts[role].latin, cs: t.fonts[role].arabic, eastAsia: t.fonts.cjk ?? 'Noto Sans SC' });
+  const font = (role) => ({ ascii: t.fonts[role].latin, hAnsi: t.fonts[role].latin, cs: arabicFont(t.fonts[role], cv.meta.lang), eastAsia: t.fonts.cjk ?? 'Noto Sans SC' });
   const run = (text, o = {}) => new TextRun({ text, font: font(o.role ?? 'body'), size: pt(o.size ?? s.base), bold: o.bold, color: hex(o.color ?? c.text), rightToLeft: rtl && hasRtlChars(text) ? true : undefined, language: { value: cv.meta.lang, bidirectional: rtl ? cv.meta.lang : undefined }, allCaps: o.caps });
   const para = (children, o = {}) => new Paragraph({ children, bidirectional: rtl || undefined, alignment: AlignmentType.START, spacing: { before: pt(o.before ?? 0) * 10, after: pt(o.after ?? 0) * 10, line: Math.round((script === 'arabic' ? (s.arabicLineHeight ?? 1.6) : s.lineHeight) * 240) }, ...o.extra });
   const heading = (text) => new Paragraph({ heading: HeadingLevel.HEADING_2, children: [run(text, { role: 'heading', bold: true, size: s.heading, color: c.accent, caps: t.layout.headingCase === 'upper' && (script === 'latin' || script === 'cyrillic') })], bidirectional: rtl || undefined, keepNext: true, spacing: { before: t.spacing.section * 20, after: 60 }, border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: hex(c.rule), space: 2 } } });

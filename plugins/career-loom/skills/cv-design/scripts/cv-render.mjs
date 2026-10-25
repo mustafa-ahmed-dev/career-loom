@@ -26,6 +26,8 @@ export async function render(cvPath, opts) {
     if (errors.length) throw Object.assign(new Error(`tokens.json of ${designId} is invalid:\n  ${errors.join('\n  ')}`), { code: 2 });
     if (tokens.status === 'stub') throw Object.assign(new Error(`Design ${tokens.id} (${tokens.name}) is a stub: it has no layout or colours yet, so it cannot be rendered. Finished designs: ${finishedDesigns().join(', ')}.`), { code: 4 });
     if (tokens.status !== 'finished' && !opts.allowDraft) throw Object.assign(new Error(`Design ${tokens.id} is "${tokens.status}", not finished. Pick a finished design or pass --allow-draft.`), { code: 4 });
+    const unsupported = [tokens.layout.header !== 'plain' && `header "${tokens.layout.header}"`, ['bar-start', 'ribbon'].includes(tokens.layout.headingStyle) && `headingStyle "${tokens.layout.headingStyle}"`].filter(Boolean);
+    if (unsupported.length) result.warnings.push(`${tokens.id}: not implemented yet, rendered as plain: ${unsupported.join(', ')}`);
     const { html, rtl, script, missingFonts } = buildHtml(cv, tokens, { rtlFlag: opts.rtl });
     if (missingFonts.length) result.warnings.push(`Fonts not available (run node fetch-fonts.mjs): ${missingFonts.join(', ')}`);
     const stem = join(out, base + suffix);

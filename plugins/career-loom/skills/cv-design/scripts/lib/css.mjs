@@ -49,17 +49,17 @@ h1{font-family:${f.display};font-weight:${t.fonts.display.weight};font-size:${s.
 .contact li{display:block}
 .sec{margin-top:${sp.section}pt}
 .sec:first-child{margin-top:0}
-h2{font-family:${f.heading};font-weight:${t.fonts.heading.weight};font-size:${s.heading}pt;line-height:1.25;color:var(--accent);${upper ? 'text-transform:uppercase;' : ''}${upper && script === 'latin' ? 'letter-spacing:0.06em;' : ''}${L.headingStyle === 'rule-below' ? `border-bottom:0.75pt solid var(--rule);padding-bottom:2pt;` : ''}margin-bottom:${sp.item * 0.7}pt;break-after:avoid}
+h2{font-family:${f.heading};font-weight:${t.fonts.heading.weight};font-size:${s.heading}pt;line-height:1.25;color:var(--accent);${upper ? 'text-transform:uppercase;' : ''}${upper && script === 'latin' ? 'letter-spacing:0.06em;' : ''}${L.headingStyle === 'rule-below' ? `border-bottom:0.75pt solid var(--rule);padding-bottom:2pt;` : ''}${L.headingStyle === 'rule-above' ? `border-top:0.75pt solid var(--rule);padding-top:3pt;` : ''}margin-bottom:${sp.item * 0.7}pt;break-after:avoid}
 .entry{margin-bottom:${sp.item}pt;break-inside:avoid-page}
 .entry:last-child{margin-bottom:0}
-.entry-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;column-gap:8pt;break-after:avoid}
+.entry-head{display:flex;flex-wrap:wrap;justify-content:${L.dateAlign === 'inline' ? 'flex-start' : 'space-between'};align-items:baseline;column-gap:8pt;break-after:avoid}
 h3{font-family:${f.heading};font-weight:${t.fonts.heading.weight};font-size:${s.base + 0.5}pt;line-height:1.3}
 .dates{color:var(--muted);font-size:${s.small + 0.5}pt;white-space:nowrap}
 .meta{color:var(--muted);font-size:${s.base - 0.3}pt;margin-top:0.5pt}
 .entry p.sum{margin-top:2pt}
 .bul{margin-top:${sp.bullet + 1}pt}
-.bul li{position:relative;padding-inline-start:10pt;margin-top:${sp.bullet}pt}
-.bul li::before{content:"${L.bulletStyle === 'dash' ? '–' : '•'}";position:absolute;inset-inline-start:0;color:var(--muted)}
+.bul li{position:relative;padding-inline-start:${L.bulletStyle === 'none' ? 0 : 10}pt;margin-top:${sp.bullet}pt}
+${L.bulletStyle === 'none' ? '' : `.bul li::before{content:"${L.bulletStyle === 'dash' ? '–' : '•'}";position:absolute;inset-inline-start:0;color:var(--muted)}`}
 .chips{display:block}
 .chips li{display:inline}
 .chips li:not(:last-child)::after{content:" · ";color:var(--muted)}

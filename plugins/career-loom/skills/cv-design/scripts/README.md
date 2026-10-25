@@ -133,7 +133,7 @@ DOCX (not one of the five): for tier A/B/C each of en/ar/long is written, conver
 - Not runnable inside claude.ai chat (see above).
 - DOCX is verified only by converting in LibreOffice. It has not been opened in Microsoft Word.
 - Arabic-script text is rendered with ligatures disabled, so PDF text extraction keeps letter order. The letters look less joined than normal typesetting. This is deliberate.
-- Sorani: glyph coverage and extraction are tested, but nobody who reads Sorani natively has reviewed the output. Treat it as unreviewed. Sorani CVs need `meta.labels` (no built-in headings). The Cairo-to-IBM-Plex-Sans-Arabic swap applies to HTML/PDF but not to DOCX.
+- Sorani: glyph coverage and extraction are tested, but nobody who reads Sorani natively has reviewed the output. Treat it as unreviewed. Sorani CVs need `meta.labels` (no built-in headings). The Cairo-to-IBM-Plex-Sans-Arabic swap applies to both PDF and DOCX.
 - Chinese and Hindi PDFs need the fonts from `fetch-fonts.mjs`; otherwise those characters fall back to a generic sans-serif.
-- Several token flags are accepted but not used yet (`header`, `dateAlign`, most `headingStyle` values); see `../systems/TOKENS.md`.
+- Token flags not implemented yet: `header` `band`/`split` and `headingStyle` `bar-start`/`ribbon` render as plain and the CLI warns (exit 3). DOCX ignores `bulletStyle`, `dateAlign` and `headingStyle`. See `../systems/TOKENS.md`.
 - The check thresholds are this project's choices, not an external standard, except the WCAG ratios.

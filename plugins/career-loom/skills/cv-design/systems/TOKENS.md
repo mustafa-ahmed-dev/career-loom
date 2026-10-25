@@ -27,7 +27,7 @@ Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It i
 | `stub` | `id`, `name`, `atsTier`, `status`, `rtlVariant`. No layout, fonts, colours, sizes or spacing. Every current C/D stub also carries `twin`, but the schema does not require it at this status. |
 | `draft`, `finished` | the stub set plus `twin` (null allowed for A/B), `layout`, `fonts`, `colors`, `sizes`, `spacing`. |
 
-`cv-render.mjs` refuses `stub` and `draft` designs unless `--allow-draft` is passed (exit 4). P1 and C9 are `finished`; the other 18 are `stub`. Rendering a stub with `--allow-draft` crashes with `Cannot read properties of undefined (reading 'sectionOrder')` (exit 1), because it has no layout; the renderer has no friendlier message for this yet.
+`cv-render.mjs` refuses `stub` and `draft` designs unless `--allow-draft` is passed (exit 4). P1 and C9 are `finished`; the other 18 are `stub`. Rendering a stub is refused even with `--allow-draft`: the renderer stops with "Design X is a stub" and lists the finished designs (exit 4).
 
 Conditional rules in the schema: a `sidebar` layout also requires `layout.sidebarWidth`, `layout.sidebarSections` and the four `colors.sidebar*` values. A `band` header also requires `colors.bandBg` and `colors.bandText`.
 
@@ -47,13 +47,13 @@ Every C and D design names an A-tier `twin` and the CLI writes it next to the de
 | Field | Values | Effect (checked in `scripts/lib/css.mjs`, `html.mjs`, `docx.mjs`) |
 |---|---|---|
 | `kind` (required) | `single`, `sidebar` | `sidebar` renders a CSS grid: side column plus main column, with the sidebar tint mirrored in RTL. DOCX ignores it and writes one column. |
-| `header` (required) | `plain`, `band`, `split` | **Not read by the renderer.** Accepted by the schema and has no effect on output yet. |
+| `header` (required) | `plain`, `band`, `split` | Only `plain` is implemented. `band` and `split` are accepted by the schema, rendered as plain, and the CLI adds a warning (exit 3). |
 | `sidebarWidth` | string `^[0-9.]+(mm\|%)$` | Grid column width, e.g. `"54mm"`. Required when `kind` is `sidebar`. |
 | `sidebarSections` | array of `contact`, `skills`, `languages`, `certificates`, `links` | Sections moved into the sidebar and removed from the main column. `links` has no renderer and is silently dropped. Required for `sidebar`. |
 | `headingCase` | `none`, `upper` | `upper` is applied to Latin and Cyrillic text only. Never to Arabic, CJK or Devanagari. |
-| `headingStyle` | `rule-below`, `rule-above`, `plain`, `bar-start`, `ribbon` | Only `rule-below` draws anything (a 0.75pt rule under the heading). The other four render as plain headings for now. |
-| `bulletStyle` | `disc`, `dash`, `none` | `dash` gives "–". Anything else gives "•", including `none`. |
-| `dateAlign` | `inline`, `end` | **Not read by the renderer.** Dates are always pushed to the end of the entry line. |
+| `headingStyle` | `rule-below`, `rule-above`, `plain`, `bar-start`, `ribbon` | `rule-below` and `rule-above` draw a 0.75pt rule under or over the heading; `plain` draws none. `bar-start` and `ribbon` are not implemented: rendered as plain, with a CLI warning (exit 3). |
+| `bulletStyle` | `disc`, `dash`, `none` | HTML/PDF: `dash` gives "–", `disc` gives "•", `none` draws no marker. DOCX always uses "•". |
+| `dateAlign` | `inline`, `end` | HTML/PDF: `end` pushes dates to the end of the entry line, `inline` keeps them next to the title. DOCX always puts them after the title. |
 | `sectionOrder` | array of strings | Order of sections. Sections left out are not rendered. Known keys: `summary work projects education volunteer publications skills certificates languages` (and `contact`, only meaningful inside the sidebar; in single layouts contact is in the header). Unknown keys are ignored. |
 
 ## fonts
@@ -68,7 +68,7 @@ Four roles: `display` (name), `heading` (section and entry titles), `body`, `mon
 
 Optional `fonts.cjk` and `fonts.devanagari` are free strings. They default to Noto Sans SC and Noto Sans Devanagari, which are not bundled; `node scripts/fetch-fonts.mjs` downloads them into a gitignored cache. Only OFL fonts, and only fonts shipped in `../fonts/` (plus that cache), may be used. Fonts are embedded in the PDF as base64 subsets chosen by unicode range.
 
-**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly in HTML/PDF. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the substituted font. The DOCX writer does not apply this substitution (`docx.mjs` reads `fonts[role].arabic` directly), so a Cairo design would not be safe for Sorani DOCX. No current finished design uses Cairo.
+**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly in HTML/PDF. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the substituted font. The DOCX writer applies the same substitution (covered by `tests/flags.test.mjs`). No current finished design uses Cairo.
 
 ## colors
 
