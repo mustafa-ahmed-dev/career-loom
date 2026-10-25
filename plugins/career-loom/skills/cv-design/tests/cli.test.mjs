@@ -1,13 +1,14 @@
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs';
+import { mkdtempSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SKILL_DIR } from '../scripts/lib/util.mjs';
 
 const CLI = join(SKILL_DIR, 'scripts', 'cv-render.mjs'), DATA = join(SKILL_DIR, 'test-data');
 const run = (...args) => spawnSync('node', [CLI, ...args], { encoding: 'utf8' });
+const runWithEnv = (env, ...args) => spawnSync('node', [CLI, ...args], { encoding: 'utf8', env: { ...process.env, ...env } });
 let out;
 before(() => { out = mkdtempSync(join(tmpdir(), 'cl-cli-')); });
 
@@ -61,14 +62,12 @@ test('more than two pages is reported, not hidden', () => {
 });
 
 test('Noto warnings appear only when the CV contains that script', () => {
-  const hide = join(SKILL_DIR, 'fonts', 'cache'), moved = hide + '-hidden';
-  const had = existsSync(hide); if (had) renameSync(hide, moved);
-  try {
-    const en = run(join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'nf', '--format', 'pdf');
-    assert.equal(en.status, 0, 'English CV needs no fetched fonts: ' + en.stderr + en.stdout);
-    const zh = run(join(DATA, 'zh.json'), '--design', 'p1', '--out', out, '--name', 'nf-zh', '--format', 'pdf');
-    assert.equal(zh.status, 3); assert.match(JSON.parse(zh.stdout).warnings.join(), /Noto Sans SC/); assert.doesNotMatch(JSON.parse(zh.stdout).warnings.join(), /Devanagari/);
-    const hi = run(join(DATA, 'hi.json'), '--design', 'p1', '--out', out, '--name', 'nf-hi', '--format', 'pdf');
-    assert.equal(hi.status, 3); assert.match(JSON.parse(hi.stdout).warnings.join(), /Devanagari/);
-  } finally { if (had) renameSync(moved, hide); }
+  // An empty cache folder stands in for "fetch-fonts.mjs was never run"; the real fonts/cache is not touched, so tests can run in parallel.
+  const env = { CAREER_LOOM_FONT_CACHE: mkdtempSync(join(tmpdir(), 'cl-nocache-')) };
+  const en = runWithEnv(env, join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'nf', '--format', 'pdf');
+  assert.equal(en.status, 0, 'English CV needs no fetched fonts: ' + en.stderr + en.stdout);
+  const zh = runWithEnv(env, join(DATA, 'zh.json'), '--design', 'p1', '--out', out, '--name', 'nf-zh', '--format', 'pdf');
+  assert.equal(zh.status, 3); assert.match(JSON.parse(zh.stdout).warnings.join(), /Noto Sans SC/); assert.doesNotMatch(JSON.parse(zh.stdout).warnings.join(), /Devanagari/);
+  const hi = runWithEnv(env, join(DATA, 'hi.json'), '--design', 'p1', '--out', out, '--name', 'nf-hi', '--format', 'pdf');
+  assert.equal(hi.status, 3); assert.match(JSON.parse(hi.stdout).warnings.join(), /Devanagari/);
 });
