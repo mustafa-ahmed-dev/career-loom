@@ -51,7 +51,7 @@ Example:
 node cv-render.mjs ../test-data/short.json --design c9 --out ./out
 ```
 
-Prints a JSON summary (files, warnings, per-design tier, pages, RTL) to stdout; errors go to stderr.
+Prints a JSON summary (files, warnings, per-design tier, pages, RTL, and `pdfBrowser`: which browser printed the PDFs, for example `msedge (Chromium 156...)`) to stdout; errors go to stderr.
 
 ### Exit codes
 
