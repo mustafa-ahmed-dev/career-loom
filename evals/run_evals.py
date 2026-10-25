@@ -15,8 +15,10 @@ if sys.argv[1:]:
 
 def run(c):
     try:
-        p = subprocess.run(["claude", "-p", "--plugin-dir", str(PLUGIN), c["prompt"]],
-                           capture_output=True, text=True, timeout=240, cwd=OUT)
+        # Read-only tools so skills can open their own files (systems/, references). The prompt goes on stdin
+        # because --allowedTools takes a list and would swallow a positional prompt.
+        p = subprocess.run(["claude", "-p", "--plugin-dir", str(PLUGIN), "--allowedTools", "Read,Glob,Grep"],
+                           input=c["prompt"], capture_output=True, text=True, timeout=240, cwd=OUT)
         text = p.stdout
     except subprocess.TimeoutExpired:
         text = ""
