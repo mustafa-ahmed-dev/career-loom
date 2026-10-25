@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { readJson, validate, loadTokens, finishedDesigns } from './lib/util.mjs';
 import { buildHtml } from './lib/html.mjs';
-import { renderPdf, closeBrowser } from './lib/pdf.mjs';
+import { renderPdf, closeBrowser, browserLabel } from './lib/pdf.mjs';
 import { needsLabels } from './lib/labels.mjs';
 
 const USAGE = `Usage: node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format pdf,html] [--rtl auto|on|off] [--twin on|off] [--allow-draft]
@@ -36,7 +36,7 @@ export async function render(cvPath, opts) {
     if (formats.includes('html')) { writeFileSync(stem + '.html', html); result.files.push(stem + '.html'); }
     if (formats.includes('pdf')) {
       const r = await renderPdf(html, stem + '.pdf', tokens);
-      info.pages = r.pages; result.files.push(stem + '.pdf');
+      info.pages = r.pages; result.files.push(stem + '.pdf'); result.pdfBrowser ??= browserLabel();
       if (r.pages > (tokens.limits?.maxPages ?? 2)) result.warnings.push(`${tokens.id}: ${r.pages} pages (limit ${tokens.limits?.maxPages ?? 2}). Shorten the content.`);
       if (r.wide) result.warnings.push(`${tokens.id}: content wider than the page`);
     }

@@ -94,3 +94,10 @@ test('CL_BROWSER_PATH pointing nowhere fails with the browser path in the messag
   const r = spawnSync('node', [CLI, join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'bad-browser', '--format', 'pdf'], { encoding: 'utf8', env: { ...process.env, CL_BROWSER_PATH: join(out, 'no-such-browser') } });
   assert.equal(r.status, 1); assert.match(r.stderr, /no-such-browser/);
 });
+
+test('the summary names the browser that printed the PDFs, and has no browser line for HTML only', () => {
+  const pdf = JSON.parse(run(join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'pb', '--format', 'pdf').stdout);
+  assert.match(pdf.pdfBrowser, /^(playwright|CL_BROWSER_PATH|msedge|chrome) \(Chromium \d+\./);
+  const html = JSON.parse(run(join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'pbh', '--format', 'html').stdout);
+  assert.equal(html.pdfBrowser, undefined);
+});
