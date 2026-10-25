@@ -55,6 +55,6 @@ Source: `tokens.json`. Styling: `design.css`. Components: `components.html`.
 | 4 PDF text extraction | pass | 7/7 sample PDFs (design and A twin) extract headings in reading order with email in the text. |
 | 5 Page fit | pass | Short profile: 1 page, 63% of the page height used (Arabic 66%). Long profile: 2 pages, bottom margin clear, last bullet present. |
 
-DOCX: pass (A/B; LibreOffice only, not verified in Word). Tier A: no twin needed.
+Tier A: no twin needed.
 Overall: all five checks pass.
 <!-- RESULTS:END -->

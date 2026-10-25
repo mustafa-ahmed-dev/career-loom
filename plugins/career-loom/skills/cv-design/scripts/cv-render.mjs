@@ -8,7 +8,7 @@ import { buildHtml } from './lib/html.mjs';
 import { renderPdf, closeBrowser } from './lib/pdf.mjs';
 import { needsLabels } from './lib/labels.mjs';
 
-const USAGE = `Usage: node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format pdf,docx,html] [--rtl auto|on|off] [--twin on|off] [--allow-draft]
+const USAGE = `Usage: node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format pdf,html] [--rtl auto|on|off] [--twin on|off] [--allow-draft]
   Tier C/D designs also write an A-rated plain twin (<name>-ats.*). Portals get the twin.`;
 
 export async function render(cvPath, opts) {
@@ -19,6 +19,8 @@ export async function render(cvPath, opts) {
   const out = opts.out; mkdirSync(out, { recursive: true });
   const base = opts.name ?? basename(cvPath, '.json');
   const formats = opts.format.split(',');
+  const bad = formats.filter((f) => !['pdf', 'html'].includes(f));
+  if (bad.length) throw Object.assign(new Error(bad.includes('docx') ? 'DOCX is not produced by the renderer. Write HTML (and PDF) and ask Claude to convert the HTML to Word if you need it. --format accepts: pdf, html.' : `Unknown --format "${bad.join(',')}". Accepted: pdf, html.`), { code: 1 });
   const result = { files: [], warnings: [], designs: [] };
 
   async function one(designId, suffix, role) {
@@ -37,12 +39,6 @@ export async function render(cvPath, opts) {
       if (r.pages > (tokens.limits?.maxPages ?? 2)) result.warnings.push(`${tokens.id}: ${r.pages} pages (limit ${tokens.limits?.maxPages ?? 2}). Shorten the content.`);
       if (r.wide) result.warnings.push(`${tokens.id}: content wider than the page`);
     }
-    if (formats.includes('docx') && tokens.atsTier !== 'D') {
-      const { renderDocx } = await import('./lib/docx.mjs');
-      await renderDocx(cv, tokens, stem + '.docx', { rtlFlag: opts.rtl });
-      result.files.push(stem + '.docx');
-      info.docx = tokens.atsTier === 'C' ? 'best effort (single column)' : 'yes';
-    } else if (formats.includes('docx')) info.docx = 'none (tier D is PDF only)';
     result.designs.push(info);
     return tokens;
   }
@@ -54,7 +50,7 @@ export async function render(cvPath, opts) {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   try {
-    const { values, positionals } = parseArgs({ allowPositionals: true, options: { design: { type: 'string' }, out: { type: 'string', default: '.' }, name: { type: 'string' }, format: { type: 'string', default: 'pdf,docx' }, rtl: { type: 'string', default: 'auto' }, twin: { type: 'string', default: 'on' }, 'allow-draft': { type: 'boolean', default: false } } });
+    const { values, positionals } = parseArgs({ allowPositionals: true, options: { design: { type: 'string' }, out: { type: 'string', default: '.' }, name: { type: 'string' }, format: { type: 'string', default: 'pdf,html' }, rtl: { type: 'string', default: 'auto' }, twin: { type: 'string', default: 'on' }, 'allow-draft': { type: 'boolean', default: false } } });
     if (!positionals[0] || !values.design) { console.error(USAGE); process.exit(1); }
     const r = await render(positionals[0], { ...values, allowDraft: values['allow-draft'] });
     console.log(JSON.stringify(r, null, 2));

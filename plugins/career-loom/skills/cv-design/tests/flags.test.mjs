@@ -1,14 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createRequire } from 'node:module';
 import { buildHtml } from '../scripts/lib/html.mjs';
-import { renderDocx } from '../scripts/lib/docx.mjs';
+import { arabicFont } from '../scripts/lib/css.mjs';
 import { loadTokens, readJson, SKILL_DIR } from '../scripts/lib/util.mjs';
 
-const JSZip = createRequire(join(SKILL_DIR, 'scripts', 'package.json'))('jszip');
 const cv = readJson(join(SKILL_DIR, 'test-data', 'short.json'));
 const withLayout = (over) => { const t = structuredClone(loadTokens('p1').tokens); Object.assign(t.layout, over); return t; };
 const css = (t) => buildHtml(cv, t).html;
@@ -26,16 +22,10 @@ test('headingStyle rule-above draws a top rule, plain draws none', () => {
   assert.match(css(withLayout({ headingStyle: 'rule-above' })), /h2\{[^}]*border-top:0\.75pt/);
   assert.doesNotMatch(css(withLayout({ headingStyle: 'plain' })), /h2\{[^}]*border-(top|bottom):/);
 });
-test('DOCX uses IBM Plex Sans Arabic instead of Cairo for Sorani, Cairo stays for Arabic', async () => {
-  const t = structuredClone(loadTokens('p1').tokens);
-  for (const r of ['display', 'heading', 'body', 'mono']) t.fonts[r].arabic = 'Cairo';
-  const dir = mkdtempSync(join(tmpdir(), 'cl-flags-'));
-  const fonts = async (lang) => {
-    const f = join(dir, lang + '.docx');
-    await renderDocx({ ...cv, meta: { lang } }, t, f);
-    return (await (await JSZip.loadAsync(readFileSync(f))).file('word/document.xml').async('string'));
-  };
-  const ckb = await fonts('ckb'), ar = await fonts('ar');
-  assert.match(ckb, /w:cs="IBM Plex Sans Arabic"/); assert.doesNotMatch(ckb, /w:cs="Cairo"/);
-  assert.match(ar, /w:cs="Cairo"/);
+test('Cairo is swapped for IBM Plex Sans Arabic in Sorani and Kurdish, and kept for Arabic', () => {
+  const role = { latin: 'Inter', arabic: 'Cairo', weight: 400 };
+  assert.equal(arabicFont(role, 'ckb'), 'IBM Plex Sans Arabic');
+  assert.equal(arabicFont(role, 'ku'), 'IBM Plex Sans Arabic');
+  assert.equal(arabicFont(role, 'ar'), 'Cairo');
+  assert.equal(arabicFont({ ...role, arabic: 'Noto Naskh Arabic' }, 'ckb'), 'Noto Naskh Arabic');
 });

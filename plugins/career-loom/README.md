@@ -49,8 +49,8 @@ See `PRIVACY.md` in this folder for the full privacy note.
 
 ## Honest limits in this version (0.1)
 
-- Two of the 20 CV design systems are finished and can be rendered: P1 (Plain Master, plain single column) and C9 (Sidebar Light, two columns). The other 18 are specification stubs. Career Loom can describe them but will not render them, and offers P1 or C9 instead.
-- Word output is verified in LibreOffice only. Sorani (Central Kurdish) output needs native-speaker review.
+- All 20 CV design systems are finished. Where the renderer can run (Claude Code, Cowork or a laptop with Node) it writes PDF and HTML; in claude.ai chat Career Loom writes the HTML from the design's rules and says plainly that no PDF was made. It makes no Word file; ask Claude to convert the HTML to Word if you need one.
+- Sorani (Central Kurdish) output needs native-speaker review.
 - Some regional conventions are marked verified, secondary or unverified. Anything unverified is shown as unverified, never as fact. Iraq and Kurdistan Region CV conventions still need published sources.
 - Interview scores are practice feedback, not predictions. Legal and quota statements are not legal advice; check with the relevant authority.
 - No score from applicant-tracking software is ever invented.

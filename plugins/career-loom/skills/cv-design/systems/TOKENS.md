@@ -33,20 +33,20 @@ Conditional rules in the schema: tier A requires `kind: single`, `header: plain`
 
 ## Tiers
 
-| Tier | Meaning | DOCX | Twin |
-|---|---|---|---|
-| A | Plain single column, no colour needed. Parser-safe. | yes | none |
-| B | Single column with colour. | yes | none (in the current files; the schema does not forbid one) |
-| C | Two columns or sidebar. | best effort, always one column | required, tier A |
-| D | Graphic design, PDF only. | none | required, tier A |
+| Tier | Meaning | Twin |
+|---|---|---|
+| A | Plain single column, no colour needed. Parser-safe. | none |
+| B | Single column with colour. | none (in the current files; the schema does not forbid one) |
+| C | Two columns, sidebar or grid. Not for portals. | required, tier A |
+| D | Graphic design (bands, cards). Not for portals. | required, tier A |
 
 Every C and D design names an A-tier `twin` and the CLI writes it next to the design as `<name>-ats.*`. Applications through portals get the twin, not the design. That the twin is tier A is checked by `tests/tokens.test.mjs`, not by the schema. Currently every twin is P1.
 
 ## layout
 
-| Field | Values | Effect (checked in `scripts/lib/css.mjs`, `html.mjs`, `docx.mjs`) |
+| Field | Values | Effect (checked in `scripts/lib/css.mjs` and `html.mjs`) |
 |---|---|---|
-| `kind` (required) | `single`, `sidebar`, `labelled` | `sidebar`: CSS grid with a side column and a main column; the page edge tint mirrors in RTL. `labelled`: every section is a two-column grid with the heading in a label column (`labelWidth`) and the content beside it. DOCX ignores both and writes one column. |
+| `kind` (required) | `single`, `sidebar`, `labelled` | `sidebar`: CSS grid with a side column and a main column; the page edge tint mirrors in RTL. `labelled`: every section is a two-column grid with the heading in a label column (`labelWidth`) and the content beside it. |
 | `header` (required) | `plain`, `band`, `split` | `band`: full-bleed coloured header (page margin 0, the layout padding repeats on every page). `split`: name and headline at the start, contact block at the end, rule below. |
 | `headerAlign` | `start`, `center` | `center` centres name, headline and contact. |
 | `headerFull` | boolean | Sidebar designs only: the header spans both columns and the sidebar starts below it (no page-height tint). |
@@ -75,7 +75,7 @@ Four roles: `display` (name), `heading` (section and entry titles), `body`, `mon
 
 Optional `fonts.cjk` and `fonts.devanagari` are free strings. They default to Noto Sans SC and Noto Sans Devanagari, which are not bundled; `node scripts/fetch-fonts.mjs` downloads them into a gitignored cache. Only OFL fonts, and only fonts shipped in `../fonts/` (plus that cache), may be used. Fonts are embedded in the PDF as base64 subsets chosen by unicode range.
 
-**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly. `docx.mjs` calls the same function, so the substitution applies to DOCX too. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the font actually used; the P3 and P5 specs record that they are present in Noto Naskh Arabic, which is not substituted. No current finished design uses Cairo.
+**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly. The unit test `tests/flags.test.mjs` covers the swap. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the font actually used; the P3 and P5 specs record that they are present in Noto Naskh Arabic, which is not substituted. No current finished design uses Cairo.
 
 ## colors
 

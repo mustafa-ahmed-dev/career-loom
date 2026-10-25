@@ -1,8 +1,5 @@
 // Runs the five design checks for one design and returns a structured result. Used by tests and check-design.mjs.
-import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
-import JSZip from 'jszip';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { SKILL_DIR, readJson, loadTokens, isRtl } from './util.mjs';
 import { buildHtml, anchors } from './html.mjs';
@@ -90,36 +87,8 @@ export async function runChecks(id, outDir) {
     short: { pages: sh.length, fill: fill(sh) }, shortArabic: { pages: sar.length, fill: fill(sar) }, long: { pages: lg.length, bottomClear: bottomOk(lg), lastBulletPresent: lgRaw.includes(lastBullet) },
   });
 
-  // DOCX (A/B/C): written, converted with LibreOffice, text order checked. Informational for tier C (best effort); D has none.
-  res.docx = { tier: tokens.atsTier };
-  if (tokens.atsTier === 'D') res.docx.status = 'none (PDF only)';
-  else if (spawnSync('soffice', ['--version']).status !== 0 || !hasPoppler()) res.docx.status = 'not verified (LibreOffice or poppler missing)';
-  else {
-    const rows = {};
-    for (const [tag, file] of [['en', 'short'], ['ar', 'ar'], ['long', 'long']]) {
-      const cv = cvOf(file), rtl = isRtl(cv);
-      await render(join(DATA, file + '.json'), { design: id, out: outDir, name: `${tokens.id.toLowerCase()}-${tag}`, format: 'docx', rtl: 'auto', twin: 'off', allowDraft: true });
-      const dx = join(outDir, `${tokens.id.toLowerCase()}-${tag}.docx`);
-      const pdf = join(outDir, 'docx-pdf', `${tokens.id.toLowerCase()}-${tag}.pdf`);
-      // LibreOffice occasionally fails to start under load; one retry, anything else is reported as a failure
-      for (let attempt = 0; attempt < 2 && !existsSync(pdf); attempt++) spawnSync('soffice', [`-env:UserInstallation=file://${join(outDir, 'lo-profile')}`, '--headless', '--convert-to', 'pdf', '--outdir', join(outDir, 'docx-pdf'), dx], { timeout: 120000 });
-      if (!existsSync(pdf)) { rows[tag] = { ok: false, error: 'conversion failed' }; continue; }
-      const a = anchors(cv, { ...tokens, layout: { ...tokens.layout, kind: 'single', sidebarSections: [] } });
-      const list = [...a.head, ...a.main].filter((x) => !(rtl && /[A-Za-z]/.test(x)));
-      const xml = (await (await JSZip.loadAsync(readFileSync(dx))).file('word/document.xml').async('string'));
-      const text = xml.replace(/<\/w:p>/g, '\n').replace(/<[^>]+>/g, '');
-      const r = readingOrder(text, list);
-      const bidiOk = !rtl || (/<w:bidi\b/.test(xml) && /<w:rtl\b/.test(xml));
-      const headings = (xml.match(/w:val="Heading2"/g) || []).length;
-      const pages = Number((spawnSync('pdfinfo', [pdf], { encoding: 'utf8' }).stdout.match(/Pages:\s+(\d+)/) || [])[1]);
-      rows[tag] = { ok: r.ok && bidiOk && headings >= 3, missing: r.missing, outOfOrder: r.outOfOrder, bidiFlags: bidiOk, headingStyles: headings, pagesInLibreOffice: pages };
-    }
-    res.docx.status = Object.values(rows).every((r) => r.ok) ? 'pass' : 'FAIL';
-    res.docx.samples = rows;
-  }
-
   res.twin = tokens.twin ? { design: tokens.twin, produced: Object.values(pdfs).every((r) => r.designs.some((d) => d.role === 'ats-twin')) } : null;
-  res.pass = Object.values(res.checks).every((c) => c.pass) && (!res.twin || res.twin.produced) && res.docx.status !== 'FAIL';
+  res.pass = Object.values(res.checks).every((c) => c.pass) && (!res.twin || res.twin.produced);
   writeFileSync(join(outDir, `${tokens.id.toLowerCase()}-results.json`), JSON.stringify(res, null, 1));
   return res;
 }

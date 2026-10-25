@@ -3,7 +3,7 @@
 ATS tier: **C** (two columns, for people). Status: finished. Tokens: `tokens.json`. A-rated plain twin: **P1 Plain Master**, produced automatically.
 
 ## Use it for
-CVs sent to a person (email, print, interview): a clean left sidebar with contact, skills, languages and certificates; experience and education in the wide column. **Never upload it to a portal**: the renderer writes `<name>-ats.pdf` (and `.docx`) from the same content in P1 and that is the file portals get.
+CVs sent to a person (email, print, interview): a clean left sidebar with contact, skills, languages and certificates; experience and education in the wide column. **Never upload it to a portal**: the renderer writes `<name>-ats.pdf` from the same content in P1 and that is the file portals get.
 
 ## Layout
 - A4, sidebar 54 mm with a light blue-grey tint (#e9eef3), main column on the other side, 8 mm gutter. The tint runs the full page height on every page.
@@ -16,9 +16,6 @@ The sidebar moves to the right edge and the tint mirrors with it. Everything els
 
 ## Fonts
 Same roles as P1 (Inter, IBM Plex Sans Arabic, Plex Mono; Noto for Chinese and Devanagari). Heading weight 600.
-
-## Word output
-Best effort: DOCX is a single column in the same order as the A twin, with the accent colours. There is no real sidebar in Word, by design: text boxes and tables break screen readers and ATS parsers.
 
 ## Rules this design never breaks
 No skill bars or percentages, no logos, no photo, contact details in the body text, no information only in a graphic.
@@ -61,6 +58,6 @@ Source: `tokens.json`. Styling: `design.css`. Components: `components.html`.
 | 4 PDF text extraction | pass | 14/14 sample PDFs (design and A twin) extract headings in reading order with email in the text. |
 | 5 Page fit | pass | Short profile: 1 page, 56% of the page height used (Arabic 51%). Long profile: 2 pages, bottom margin clear, last bullet present. |
 
-DOCX: pass (best effort, single column; LibreOffice only, not verified in Word). A twin P1: produced for every sample.
+A twin P1: produced for every sample.
 Overall: all five checks pass.
 <!-- RESULTS:END -->

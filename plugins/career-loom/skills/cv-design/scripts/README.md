@@ -1,6 +1,6 @@
 # CV renderer
 
-Turns a CV written as JSON into a PDF, a DOCX and/or an HTML file using one of the Career Loom design systems (`../systems/`). Everything runs locally. The CV is not uploaded anywhere. Fonts are embedded from `../fonts/`.
+Turns a CV written as JSON into a PDF and/or an HTML file using one of the Career Loom design systems (`../systems/`). Everything runs locally. The CV is not uploaded anywhere. Fonts are embedded from `../fonts/`.
 
 **Not runnable inside claude.ai chat.** It needs Node.js, a Chromium download and the ability to write files, none of which chat provides. It is meant for a laptop, Claude Code or similar.
 
@@ -8,7 +8,7 @@ Turns a CV written as JSON into a PDF, a DOCX and/or an HTML file using one of t
 
 - Node.js 20 or newer (`engines` in `package.json`).
 - Disk: `node_modules` was 139 MB on my install, plus Playwright's Chromium download (size not measured).
-- Only for the tests: poppler (`pdftotext`, `pdftoppm`, `pdfinfo`), LibreOffice (`soffice`), and the fonts from `node fetch-fonts.mjs` (see Install).
+- Only for the tests: poppler (`pdftotext`, `pdftoppm`, `pdfinfo`) and the fonts from `node fetch-fonts.mjs` (see Install).
 
 ## Install
 
@@ -25,7 +25,7 @@ Optional for rendering: only needed for Chinese or Devanagari CVs. **Required be
 ## Usage
 
 ```
-node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format pdf,docx,html] [--rtl auto|on|off] [--twin on|off] [--allow-draft]
+node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format pdf,html] [--rtl auto|on|off] [--twin on|off] [--allow-draft]
 ```
 
 | Flag | Default | Meaning |
@@ -34,7 +34,7 @@ node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format p
 | `--design` | required | Design id, case-insensitive: `p1`, `c9`, ... (folder names under `../systems/`). |
 | `--out` | `.` | Output folder, created if missing. |
 | `--name` | the input file name without `.json` | Base name of the output files. |
-| `--format` | `pdf,docx` | Comma list of `pdf`, `docx`, `html`. Other values are ignored without an error. |
+| `--format` | `pdf,html` | Comma list of `pdf` and `html`. Anything else (including `docx`) is refused with exit 1; there is no Word output. |
 | `--rtl` | `auto` | `auto` follows the CV language/`meta.dir`; `on` or `off` forces it. Any other value behaves like `auto`. |
 | `--twin` | `on` | `off` skips the A-rated twin for tier C/D designs. Any value except `off` means on. |
 | `--allow-draft` | off | Render designs whose status is `draft` (or `stub`). Not needed for finished designs. |
@@ -47,7 +47,7 @@ Example:
 node cv-render.mjs ../test-data/short.json --design c9 --out ./out
 ```
 
-Prints a JSON summary (files, warnings, per-design tier, pages, RTL, DOCX status) to stdout; errors go to stderr.
+Prints a JSON summary (files, warnings, per-design tier, pages, RTL) to stdout; errors go to stderr.
 
 ### Exit codes
 
@@ -92,15 +92,11 @@ Full synthetic samples (English, Arabic, Sorani, Chinese, Hindi, Russian, and a 
 
 ## Output
 
-For `--name cv` and tier A/B design `X`: `cv.pdf`, `cv.docx` (and `cv.html` if requested).
+For `--name cv` and tier A/B design `X`: `cv.pdf` and `cv.html`.
 
-For a tier C or D design the same set is written for the design, plus the A-rated twin as `cv-ats.pdf` / `cv-ats.docx`. Use the twin for job portals and ATS uploads.
+For a tier C or D design the same set is written for the design, plus the A-rated twin as `cv-ats.pdf` / `cv-ats.html`. Use the twin for job portals and ATS uploads.
 
-| Tier | PDF | DOCX |
-|---|---|---|
-| A, B | yes | yes (same content and order; see the DOCX limits below) |
-| C | yes | best effort: always a single column (no sidebar), real headings and bullets, no tables or text boxes |
-| D | yes | none (PDF only) |
+The renderer writes no Word file. The design is the HTML plus its rules (`../systems/<id>/spec.md`, `design.css`, `components.html`). To get a Word document, ask Claude to convert the finished HTML (for a tier C or D design, its A-rated twin). Such a conversion is not part of this project's checks: expect columns, bands, ribbons, timelines and cards to be simplified, and it has not been verified in Microsoft Word.
 
 PDFs are tagged and use fonts embedded as subsets. The page limit is 2; going over gives a warning and exit 3.
 
@@ -111,7 +107,7 @@ npm test                      # node --test ../tests/*.test.mjs
 node check-design.mjs p1 c9   # the five checks for chosen designs, optional --out <dir>
 ```
 
-`npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) and the DOCX check needs `soffice` (LibreOffice). Without them extraction and greyscale fail (poppler) or the DOCX check is reported "not verified" (LibreOffice). Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 27 seconds together and passed all five, and `npm test` ran 80 tests, all passing, in about 3 minutes on the merged `main` (with poppler and LibreOffice installed and the Noto fonts fetched).
+`npm test` runs: token/schema rules for all 20 designs, CLI behaviour, tests that feed deliberately bad input to the check functions, and the five design checks for every design that is not a stub. The design checks need `pdftotext`/`pdftoppm` (poppler) . Without them extraction and greyscale fail. Per-design results are written to `../tests/results/` (gitignored). `check-design.mjs` prints PASS/FAIL per check and exits 1 if any design fails; on my run p1 and c9 took about 27 seconds together and passed all five, and `npm test` ran 81 tests, all passing, in about 2 minutes (with poppler installed and the Noto fonts fetched).
 
 The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points the environment variable `CL_FONT_CACHE` at an empty folder. The same variable can move the font cache (`fetch-fonts.mjs` writes to it too; default `../fonts/cache/`). The test files therefore run in parallel safely.
 
@@ -123,7 +119,6 @@ The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points 
 4. **extraction** - `pdftotext` on each sample PDF, for the design and its twin. Key strings (name, headline, section headings, entry titles) must appear in the right order and the email must appear. LTR uses content-stream order. RTL uses poppler's own reading order, skips Latin strings, and for RTL sidebar designs only checks presence of the sidebar strings (not their order), because poppler interleaves columns. This is weaker than a real ATS.
 5. **fit** - the short sample is 1 page and its text fills at least 40% of the page height; the Arabic sample is 1 page, at least 30%; the long sample is exactly 2 pages, keeps the bottom margin, and its last bullet is present. "Fill" is measured from text extents, not pixels.
 
-DOCX (not one of the five): for tier A/B/C each of en/ar/long is written, converted to PDF by LibreOffice, and the XML is checked for text order, bidi flags (RTL) and at least 3 `Heading2` paragraphs. Informational for tier C; none for D.
 
 ## Other scripts
 
@@ -134,10 +129,8 @@ DOCX (not one of the five): for tier A/B/C each of en/ar/long is written, conver
 ## Known limits
 
 - Not runnable inside claude.ai chat (see above).
-- DOCX is verified only by converting in LibreOffice. It has not been opened in Microsoft Word.
 - Arabic-script text is rendered with ligatures disabled, so PDF text extraction keeps letter order. The letters look less joined than normal typesetting. This is deliberate.
-- Sorani: glyph coverage and extraction are tested, but nobody who reads Sorani natively has reviewed the output. Treat it as unreviewed. Sorani CVs need `meta.labels` (no built-in headings). The Cairo-to-IBM-Plex-Sans-Arabic swap applies to both PDF and DOCX.
+- Sorani: glyph coverage and extraction are tested, but nobody who reads Sorani natively has reviewed the output. Treat it as unreviewed. Sorani CVs need `meta.labels` (no built-in headings). The Cairo-to-IBM-Plex-Sans-Arabic swap is applied to every Sorani or Kurdish document.
 - Chinese and Hindi PDFs need the fonts from `fetch-fonts.mjs`; otherwise those characters fall back to a generic sans-serif.
-- DOCX does not reproduce the design. It is always one plain column with real headings and bullets, in the design's fonts and colours, section order and upper-case headings. It ignores the layout flags (`kind`, `header`, `headerAlign`, `headerFull`, `headingStyle`, `bulletStyle`, `dateAlign`, `entryStyle`, `skillsStyle`, `projectsStyle`, `highlightsStyle`), so sidebars, bands, ribbons, timelines, cards and pills do not appear, and `highlights` is one text line. This was read from `lib/docx.mjs`, and the sample DOCX files for P1 and C9 were judged by the project owner as not matching the design.
-- Layout flags and what they do in PDF/HTML: see `../systems/TOKENS.md`.
+- Layout flags and what they do: see `../systems/TOKENS.md`.
 - The check thresholds are this project's choices, not an external standard, except the WCAG ratios.

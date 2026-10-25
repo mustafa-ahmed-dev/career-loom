@@ -54,7 +54,7 @@ ${cards.map(({ tokens: t, shots, res }) => `<section class="card"><h2>${esc(t.id
 <p class="tier">Tier ${t.atsTier}${t.twin ? ` · plain twin ${esc(t.twin)} for portals` : ''} · RTL variant · <a href="${REPO_URL}/blob/main/plugins/career-loom/skills/cv-design/systems/${esc(readdirSync(SYSTEMS_DIR).find((n) => n.startsWith(t.id.toLowerCase() + '-')))}/spec.md">spec and results</a></p>
 <div class="shots">${shots.map((s) => `<figure><a href="samples/${s.stem}.pdf"><img src="img/${s.stem}.png" alt="${esc(t.name)} ${esc(s.label)} sample CV, page 1" loading="lazy"></a><figcaption>${esc(s.label)} · <a href="samples/${s.stem}.pdf">PDF</a></figcaption></figure>`).join('')}</div>
 <ul class="badges">${checks.map((c) => `<li>${res.checks[c].pass ? '✓' : '✗'} ${names[c]}</li>`).join('')}</ul></section>`).join('\n')}
-<p class="note">Sorani (Central Kurdish) output needs native-speaker review. Word output is verified in LibreOffice only.</p>
+<p class="note">Sorani (Central Kurdish) output needs native-speaker review.</p>
 </main></body></html>`;
 writeFileSync(join(OUT, 'index.html'), html);
 console.log(`gallery: ${cards.length} designs -> ${OUT}`);

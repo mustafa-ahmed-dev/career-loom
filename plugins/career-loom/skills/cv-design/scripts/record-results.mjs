@@ -18,9 +18,8 @@ export function table(r) {
     ['4 PDF text extraction', mark(c.extraction.pass), `${ex.filter(([, e]) => e.ok).length}/${ex.length} sample PDFs (design and A twin) extract headings in reading order with email in the text.`],
     ['5 Page fit', mark(c.fit.pass), `Short profile: ${fit.short.pages} page, ${Math.round(fit.short.fill * 100)}% of the page height used (Arabic ${Math.round(fit.shortArabic.fill * 100)}%). Long profile: ${fit.long.pages} pages, bottom margin clear, last bullet present.`],
   ];
-  const docx = r.docx.status.startsWith('pass') ? `pass (${r.docx.tier === 'C' ? 'best effort, single column' : 'A/B'}; LibreOffice only, not verified in Word)` : r.docx.status;
   const twin = r.twin ? `A twin ${r.twin.design}: ${r.twin.produced ? 'produced for every sample' : '**NOT produced**'}.` : 'Tier A: no twin needed.';
-  return [START, '| Check | Result | Detail |', '|---|---|---|', ...rows.map((x) => `| ${x.join(' | ')} |`), '', `DOCX: ${docx}. ${twin}`, `Overall: ${r.pass ? 'all five checks pass' : '**not finished**'}.`, END].join('\n');
+  return [START, '| Check | Result | Detail |', '|---|---|---|', ...rows.map((x) => `| ${x.join(' | ')} |`), '', `${twin}`, `Overall: ${r.pass ? 'all five checks pass' : '**not finished**'}.`, END].join('\n');
 }
 for (const id of process.argv.slice(2)) {
   const dir = designDir(id), r = readJson(join(SKILL_DIR, 'tests', 'results', `${id.toLowerCase().split('-')[0]}.json`));
