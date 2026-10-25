@@ -18,6 +18,8 @@ npm install
 npx playwright install chromium
 ```
 
+PDF output needs a Chromium-based browser. The renderer looks, in this order, for: the browser at `CL_BROWSER_PATH` (set it to a `.exe` or binary you choose), Playwright's own Chromium (the `npx playwright install chromium` step), then Microsoft Edge, then Google Chrome. If the Playwright download is blocked on your network, you can skip it on Windows 10/11 because Edge is normally installed (this fallback has been tested only with a path given in `CL_BROWSER_PATH`, not with a real Edge or Chrome yet). `--format html` needs no browser at all; open the file and use the browser's Print to PDF if you want.
+
 Once, needs internet: `node fetch-fonts.mjs` downloads the Noto Sans SC (Chinese) and Noto Sans Devanagari fonts into `../fonts/cache/` (gitignored). It uses `npm pack` and `tar`, so both must be on your PATH.
 
 Optional for rendering: only needed for Chinese or Devanagari CVs. **Required before running the tests** (`npm test`, `check-design.mjs`): the render check covers the Chinese and Hindi samples, and on a checkout without these fonts it fails with missing glyphs and the p1 and c9 design tests fail (verified on a clean checkout: 2 of 41 tests fail). Without the fonts, a CV containing that script prints a "Fonts not available" warning and exits with code 3 (the files are still written, with fallback glyphs or gaps). English, Arabic and Cyrillic CVs never need them and exit 0.

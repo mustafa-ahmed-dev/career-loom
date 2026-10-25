@@ -77,3 +77,20 @@ test('Noto warnings appear only when the CV contains that script', () => {
   const hi = go('hi.json', 'nf-hi');
   assert.equal(hi.status, 3); assert.match(JSON.parse(hi.stdout).warnings.join(), /Devanagari/);
 });
+
+test('without any browser, HTML still works and PDF fails with a clear message that names CL_BROWSER_PATH', () => {
+  const env = { ...process.env, PLAYWRIGHT_BROWSERS_PATH: join(out, 'no-browsers') }; // an empty folder: Playwright finds no Chromium; Edge/Chrome are not installed on the test machine
+  const go = (fmt, name) => spawnSync('node', [CLI, join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', name, '--format', fmt], { encoding: 'utf8', env });
+  const html = go('html', 'nb-html');
+  assert.equal(html.status, 0, html.stderr); assert.ok(existsSync(join(out, 'nb-html.html')));
+  const pdf = go('pdf,html', 'nb-pdf');
+  if (/Executable doesn't exist|No browser found/.test(pdf.stderr)) {
+    assert.equal(pdf.status, 1); assert.match(pdf.stderr, /CL_BROWSER_PATH/); assert.ok(existsSync(join(out, 'nb-pdf.html')), 'the HTML is written before the PDF is attempted');
+  } else {
+    assert.equal(pdf.status, 0, 'a system Edge or Chrome was found and used: ' + pdf.stderr); // acceptable on a developer machine that has one
+  }
+});
+test('CL_BROWSER_PATH pointing nowhere fails with the browser path in the message', () => {
+  const r = spawnSync('node', [CLI, join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'bad-browser', '--format', 'pdf'], { encoding: 'utf8', env: { ...process.env, CL_BROWSER_PATH: join(out, 'no-such-browser') } });
+  assert.equal(r.status, 1); assert.match(r.stderr, /no-such-browser/);
+});
