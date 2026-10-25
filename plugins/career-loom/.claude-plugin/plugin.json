@@ -1,11 +1,18 @@
 {
   "name": "career-loom",
+  "displayName": "Career Loom",
   "version": "0.1.0",
   "description": "Career Loom is a career-coaching team in a plugin: truthful CV, résumé and cover-letter diagnosis, rewriting, design and localization, mock interviews, and relationship-based job search, in any language. Run the full engagement or call any single specialist.",
   "author": {
     "name": "Mustafa Ahmed"
   },
+  "homepage": "https://github.com/mustafa-ahmed-dev/career-loom",
+  "repository": "https://github.com/mustafa-ahmed-dev/career-loom",
   "license": "MIT",
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://github.com/mustafa-ahmed-dev/career-loom/blob/main/plugins/career-loom/README.md",
+  "supportUrl": "https://github.com/mustafa-ahmed-dev/career-loom/issues",
+  "privacyPolicyUrl": "https://github.com/mustafa-ahmed-dev/career-loom/blob/main/plugins/career-loom/PRIVACY.md",
   "keywords": [
     "career",
     "resume",
