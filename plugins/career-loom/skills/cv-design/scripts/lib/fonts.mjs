@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { FONTS_DIR, readJson } from './util.mjs';
+import { FONTS_DIR, FONT_CACHE_DIR, readJson } from './util.mjs';
 
 export function inRange(range, cps) {
   if (!range) return true;
@@ -18,7 +18,7 @@ const needed = (fam, cps) => !ON_DEMAND[fam] || cps.some((c) => ON_DEMAND[fam].s
 /** @font-face CSS embedding (base64) only the font files whose unicode range covers characters used in `text`. */
 export function fontFaceCss(families, text) {
   const cps = [...new Set([...text].map((c) => c.codePointAt(0)))];
-  const sources = [[FONTS_DIR, loadManifest(FONTS_DIR)], [join(FONTS_DIR, 'cache'), loadManifest(join(FONTS_DIR, 'cache'))]];
+  const sources = [[FONTS_DIR, loadManifest(FONTS_DIR)], [FONT_CACHE_DIR, loadManifest(FONT_CACHE_DIR)]];
   const missing = [];
   let css = '';
   for (const fam of families) {

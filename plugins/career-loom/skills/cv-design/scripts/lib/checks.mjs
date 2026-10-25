@@ -15,6 +15,9 @@ const toHex = (v) => '#' + v.map((n) => Math.round(Math.min(255, Math.max(0, n))
 export function pairs(c) {
   const p = [['text', 'bg', 4.5], ['muted', 'bg', 4.5], ['accent', 'bg', 4.5], ['rule', 'bg', 3]];
   if (c.bandBg) p.push(['bandText', 'bandBg', 4.5]);
+  if (c.ribbonBg) p.push(['ribbonText', 'ribbonBg', 4.5]);
+  if (c.cardBg) p.push(['text', 'cardBg', 4.5], ['muted', 'cardBg', 4.5], ['rule', 'cardBg', 3]);
+  if (c.chipBg) p.push(['text', 'chipBg', 4.5]);
   if (c.sidebarBg) p.push(['sidebarText', 'sidebarBg', 4.5], ['sidebarMuted', 'sidebarBg', 4.5], ['sidebarAccent', 'sidebarBg', 4.5]);
   return p.filter(([a, b]) => c[a] && c[b]);
 }
@@ -99,7 +102,7 @@ export async function greyscaleRenderCheck(pdf) {
       for (let y = Math.max(0, y0); y < Math.min(img.h, y1); y++) for (let x = Math.max(0, x0); x < Math.min(img.w, x1); x++) vals.push(img.px[y * img.w + x]);
       if (vals.length < 20) continue;
       vals.sort((a, b) => a - b);
-      const ink = vals[Math.floor(vals.length * 0.01)], paper = vals[Math.floor(vals.length * 0.6)];
+      const ink = vals[Math.floor(vals.length * 0.01)], paper = vals[Math.min(vals.length - 1, Math.floor(vals.length * 0.99))];
       const r = (lin(paper) * 0.2126 + lin(paper) * 0.7152 + lin(paper) * 0.0722 + 0.05) / (lin(ink) * 0.2126 + lin(ink) * 0.7152 + lin(ink) * 0.0722 + 0.05);
       items++; if (r < worst.ratio) { worst.ratio = r; worst.text = it.str; }
     }

@@ -26,10 +26,10 @@ No skill bars or percentages, no logos, no graphics, no photo, contact details i
 | Check | Result | Detail |
 |---|---|---|
 | 1 WCAG AA contrast and colour-blind | pass | Lowest text/non-text pair rule/bg 4.54:1 (needs 3); worst under protanopia rule/bg 4.54:1. Every pair is also checked under protanopia, deuteranopia and tritanopia. |
-| 2 Greyscale print | pass | Token pairs recomputed in greyscale and 62 rendered text runs measured on a greyscale raster; lowest 7.57:1 (needs 4.5). |
+| 2 Greyscale print | pass | Token pairs recomputed in greyscale and 71 rendered text runs measured on a greyscale raster; lowest 7.57:1 (needs 4.5). |
 | 3 Render tests | pass | Latin, Arabic (RTL), Sorani, Chinese, Devanagari, Cyrillic samples: no missing glyphs, no banned graphics. Sorani letters ڕ ڵ ۆ ێ ە present in IBM Plex Sans Arabic. |
 | 4 PDF text extraction | pass | 7/7 sample PDFs (design and A twin) extract headings in reading order with email in the text. |
-| 5 Page fit | pass | Short profile: 1 page, 57% of the page height used (Arabic 60%). Long profile: 2 pages, bottom margin clear, last bullet present. |
+| 5 Page fit | pass | Short profile: 1 page, 63% of the page height used (Arabic 66%). Long profile: 2 pages, bottom margin clear, last bullet present. |
 
 DOCX: pass (A/B; LibreOffice only, not verified in Word). Tier A: no twin needed.
 Overall: all five checks pass.

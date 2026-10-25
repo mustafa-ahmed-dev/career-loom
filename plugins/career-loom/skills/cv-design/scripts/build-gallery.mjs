@@ -48,7 +48,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:4px}a{color:var(--accent
 .note{font-size:14px;color:var(--muted);margin-top:24px}
 </style></head><body><main>
 <h1>Career Loom designs</h1>
-<p class="lead">${cards.length} of 20 designs are finished; the other ${20 - cards.length} are still specification stubs. All content is synthetic. Pages are shown on white paper.</p>
+<p class="lead">${cards.length === 20 ? 'All 20 designs are finished' : `${cards.length} of 20 designs are finished; the other ${20 - cards.length} are still specification stubs`}. Every design passes five checks (contrast and colour-blind, greyscale print, six-script render, text extraction, page fit). All content is synthetic. Pages are shown on white paper.</p>
 ${cards.map(({ tokens: t, shots, res }) => `<section class="card"><h2>${esc(t.id)} ${esc(t.name)}</h2>
 <p class="tier">Tier ${t.atsTier}${t.twin ? ` · plain twin ${esc(t.twin)} for portals` : ''} · RTL variant · <a href="https://github.com/mustafa-ahmed-dev/career-loom/blob/main/plugins/career-loom/skills/cv-design/systems/${esc(readdirSync(SYSTEMS_DIR).find((n) => n.startsWith(t.id.toLowerCase() + '-')))}/spec.md">spec and results</a></p>
 <div class="shots">${shots.map((s) => `<figure><a href="samples/${s.stem}.pdf"><img src="img/${s.stem}.png" alt="${esc(t.name)} ${esc(s.label)} sample CV, page 1" loading="lazy"></a><figcaption>${esc(s.label)} · <a href="samples/${s.stem}.pdf">PDF</a></figcaption></figure>`).join('')}</div>
