@@ -55,7 +55,7 @@ Record each answer with the date, sector, city and role (no names unless they ag
 ### Technical tests
 | Item | How |
 |---|---|
-| Sorani glyphs in each font | Render the letters ڕ ڵ ۆ ێ in Vazirmatn, Noto Sans Arabic, IBM Plex Sans Arabic and Cairo, in both PDF and Word; screenshot the results. Or check the font's character table (cmap) for U+0695, U+06B5, U+06C6, U+06CE with fontTools |
+| Sorani glyphs in each font | Render the letters ڕ ڵ ۆ ێ in Vazirmatn, Noto Sans Arabic, IBM Plex Sans Arabic and Cairo, in a PDF; screenshot the results. Or check the font's character table (cmap) for U+0695, U+06B5, U+06C6, U+06CE with fontTools |
 | IBM Plex Sorani bug (S143) | Read the latest comments on the GitHub issue; re-run the render test |
 | Indeed connector status (S098) | Check docs.indeed.com/mcp and connect it once in claude.ai; note whether it's still in beta |
 | Sorani Reality note | A native Sorani speaker writes it, rather than translating it. A second native speaker then checks it against the English |
