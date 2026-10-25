@@ -27,7 +27,7 @@ Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It i
 | `stub` | `id`, `name`, `atsTier`, `status`, `rtlVariant`. No layout, fonts, colours, sizes or spacing. Every current C/D stub also carries `twin`, but the schema does not require it at this status. |
 | `draft`, `finished` | the stub set plus `twin` (null allowed for A/B), `layout`, `fonts`, `colors`, `sizes`, `spacing`. |
 
-`cv-render.mjs` refuses `stub` and `draft` designs unless `--allow-draft` is passed (exit 4). Today only `draft` and `stub` designs exist; none is `finished`. Rendering a stub with `--allow-draft` crashes with `Cannot read properties of undefined (reading 'sectionOrder')` (exit 1), because it has no layout; the renderer has no friendlier message for this yet.
+`cv-render.mjs` refuses `stub` and `draft` designs unless `--allow-draft` is passed (exit 4). P1 and C9 are `finished`; the other 18 are `stub`. Rendering a stub with `--allow-draft` crashes with `Cannot read properties of undefined (reading 'sectionOrder')` (exit 1), because it has no layout; the renderer has no friendlier message for this yet.
 
 Conditional rules in the schema: a `sidebar` layout also requires `layout.sidebarWidth`, `layout.sidebarSections` and the four `colors.sidebar*` values. A `band` header also requires `colors.bandBg` and `colors.bandText`.
 
@@ -68,7 +68,7 @@ Four roles: `display` (name), `heading` (section and entry titles), `body`, `mon
 
 Optional `fonts.cjk` and `fonts.devanagari` are free strings. They default to Noto Sans SC and Noto Sans Devanagari, which are not bundled; `node scripts/fetch-fonts.mjs` downloads them into a gitignored cache. Only OFL fonts, and only fonts shipped in `../fonts/` (plus that cache), may be used. Fonts are embedded in the PDF as base64 subsets chosen by unicode range.
 
-**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly in HTML/PDF. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the substituted font. The DOCX writer does not apply this substitution (`docx.mjs` reads `fonts[role].arabic` directly), so a Cairo design would not be safe for Sorani DOCX. No current draft uses Cairo.
+**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly in HTML/PDF. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the substituted font. The DOCX writer does not apply this substitution (`docx.mjs` reads `fonts[role].arabic` directly), so a Cairo design would not be safe for Sorani DOCX. No current finished design uses Cairo.
 
 ## colors
 
@@ -96,7 +96,7 @@ Required: `bg`, `text`, `muted`, `accent`, `rule`. Optional: `bandBg`, `bandText
 
 ```json
 {
-  "id": "P1", "name": "Plain Master", "atsTier": "A", "status": "draft", "twin": null, "rtlVariant": true,
+  "id": "P1", "name": "Plain Master", "atsTier": "A", "status": "finished", "twin": null, "rtlVariant": true,
   "layout": { "kind": "single", "header": "plain", "headingCase": "upper", "headingStyle": "rule-below", "bulletStyle": "disc", "dateAlign": "end",
     "sectionOrder": ["summary", "work", "projects", "education", "volunteer", "publications", "skills", "certificates", "languages"] },
   "fonts": {
@@ -116,11 +116,11 @@ Required: `bg`, `text`, `muted`, `accent`, `rule`. Optional: `bandBg`, `bandText
 
 | Design | Tier | Status | Twin | Layout in tokens |
 |---|---|---|---|---|
-| P1 Plain Master | A | draft | none | single, plain header |
+| P1 Plain Master | A | finished | none | single, plain header |
 | P2 Modern Minimal, P3 Classic Serif, P4 Executive, P5 Academic Research, P6 Technical Compact, P7 Graduate Starter, P8 Public Service Field | A | stub | none | not yet defined |
 | C1 Accent Band, C3 Bold Type, C5 Ribbon Sections, C6 Metric Spotlight, C7 Brand Kit, C8 Warm Editorial | B | stub | none | not yet defined |
-| C9 Sidebar Light | C | draft | P1 | sidebar, 54mm, plain header |
+| C9 Sidebar Light | C | finished | P1 | sidebar, 54mm, plain header |
 | C10 Sidebar Dark, C11 Split Header, C12 Timeline, C15 Swiss Grid | C | stub | P1 | not yet defined |
 | C20 Portfolio Lite | D | stub | P1 | not yet defined |
 
-Only P1 and C9 can be rendered today. The other 18 are stubs: identity and tier only.
+Only P1 and C9 can be rendered today (both finished). The other 18 are stubs: identity and tier only.

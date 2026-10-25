@@ -37,14 +37,14 @@ node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format p
 | `--format` | `pdf,docx` | Comma list of `pdf`, `docx`, `html`. Other values are ignored without an error. |
 | `--rtl` | `auto` | `auto` follows the CV language/`meta.dir`; `on` or `off` forces it. Any other value behaves like `auto`. |
 | `--twin` | `on` | `off` skips the A-rated twin for tier C/D designs. Any value except `off` means on. |
-| `--allow-draft` | off | Render designs whose status is `draft` (or `stub`). |
+| `--allow-draft` | off | Render designs whose status is `draft` (or `stub`). Not needed for finished designs. |
 
-Today no design has status `finished`, so `--allow-draft` is needed for every run. Only `p1` (tier A) and `c9` (tier C) have layout data; rendering any of the 18 stubs crashes with a TypeError (exit 1).
+`p1` (tier A) and `c9` (tier C) are `finished`, so they render without `--allow-draft`. The other 18 designs are stubs with no layout data: `--allow-draft` does not help, and rendering one crashes with a TypeError (exit 1).
 
 Example:
 
 ```
-node cv-render.mjs ../test-data/short.json --design c9 --allow-draft --out ./out
+node cv-render.mjs ../test-data/short.json --design c9 --out ./out
 ```
 
 Prints a JSON summary (files, warnings, per-design tier, pages, RTL, DOCX status) to stdout; errors go to stderr.
@@ -57,7 +57,7 @@ Prints a JSON summary (files, warnings, per-design tier, pages, RTL, DOCX status
 | 1 | Missing CV path or `--design` (usage is printed), unknown design id, or any other unexpected error. |
 | 2 | CV JSON fails `../schema/cv.schema.json`, a design's `tokens.json` is invalid, or the language has no built-in labels and no `meta.labels`. |
 | 3 | Files were written, with warnings: more pages than the design's limit (2), content wider than the page, or missing CJK/Devanagari fonts. |
-| 4 | The design is `stub` or `draft` and `--allow-draft` was not passed. |
+| 4 | The design is `stub` or `draft` and `--allow-draft` was not passed (this includes every stub). |
 
 ## CV JSON
 
@@ -122,6 +122,11 @@ node check-design.mjs p1 c9   # the five checks for chosen designs, optional --o
 5. **fit** - the short sample is 1 page and its text fills at least 40% of the page height; the Arabic sample is 1 page, at least 30%; the long sample is exactly 2 pages, keeps the bottom margin, and its last bullet is present. "Fill" is measured from text extents, not pixels.
 
 DOCX (not one of the five): for tier A/B/C each of en/ar/long is written, converted to PDF by LibreOffice, and the XML is checked for text order, bidi flags (RTL) and at least 3 `Heading2` paragraphs. Informational for tier C; none for D.
+
+## Other scripts
+
+- `node record-results.mjs p1 [c9 ...]` writes the check results from `tests/results/<id>.json` into the RESULTS block of that design's `spec.md`. Run `npm test` first.
+- `node build-gallery.mjs` rebuilds `docs/gallery/` (static page, thumbnails, sample PDFs) for every finished design. Needs `pdftoppm` and a prior `npm test`. I did not run either script; this is from reading their header comments.
 
 ## Known limits
 
