@@ -1,0 +1,438 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "career-loom/tokens.schema.json",
+  "title": "Career Loom design tokens",
+  "description": "One tokens.json per design system. Documented in systems/TOKENS.md.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "atsTier",
+    "status",
+    "rtlVariant"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(P[1-8]|C(1|3|5|6|7|8|9|10|11|12|15|20))$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "atsTier": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "status": {
+      "enum": [
+        "stub",
+        "draft",
+        "finished"
+      ]
+    },
+    "twin": {
+      "description": "Design id of the A-rated plain twin. Required (non-null) for tiers C and D.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtlVariant": {
+      "const": true,
+      "description": "RTL is a flag of the design, never a separate design."
+    },
+    "layout": {
+      "type": "object",
+      "required": [
+        "kind",
+        "header"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "single",
+            "sidebar"
+          ]
+        },
+        "header": {
+          "enum": [
+            "plain",
+            "band",
+            "split"
+          ]
+        },
+        "sidebarWidth": {
+          "type": "string",
+          "pattern": "^[0-9.]+(mm|%)$"
+        },
+        "sidebarSections": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "contact",
+              "skills",
+              "languages",
+              "certificates",
+              "links"
+            ]
+          }
+        },
+        "headingCase": {
+          "enum": [
+            "none",
+            "upper"
+          ]
+        },
+        "headingStyle": {
+          "enum": [
+            "rule-below",
+            "rule-above",
+            "plain",
+            "bar-start",
+            "ribbon"
+          ]
+        },
+        "bulletStyle": {
+          "enum": [
+            "disc",
+            "dash",
+            "none"
+          ]
+        },
+        "dateAlign": {
+          "enum": [
+            "inline",
+            "end"
+          ]
+        },
+        "sectionOrder": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "fonts": {
+      "type": "object",
+      "required": [
+        "display",
+        "heading",
+        "body",
+        "mono"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "display": {
+          "$ref": "#/$defs/fontRole"
+        },
+        "heading": {
+          "$ref": "#/$defs/fontRole"
+        },
+        "body": {
+          "$ref": "#/$defs/fontRole"
+        },
+        "mono": {
+          "$ref": "#/$defs/fontRole"
+        },
+        "cjk": {
+          "type": "string"
+        },
+        "devanagari": {
+          "type": "string"
+        }
+      }
+    },
+    "colors": {
+      "type": "object",
+      "required": [
+        "bg",
+        "text",
+        "muted",
+        "accent",
+        "rule"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "bg": {
+          "$ref": "#/$defs/hex"
+        },
+        "text": {
+          "$ref": "#/$defs/hex"
+        },
+        "muted": {
+          "$ref": "#/$defs/hex"
+        },
+        "accent": {
+          "$ref": "#/$defs/hex"
+        },
+        "rule": {
+          "$ref": "#/$defs/hex"
+        },
+        "bandBg": {
+          "$ref": "#/$defs/hex"
+        },
+        "bandText": {
+          "$ref": "#/$defs/hex"
+        },
+        "sidebarBg": {
+          "$ref": "#/$defs/hex"
+        },
+        "sidebarText": {
+          "$ref": "#/$defs/hex"
+        },
+        "sidebarMuted": {
+          "$ref": "#/$defs/hex"
+        },
+        "sidebarAccent": {
+          "$ref": "#/$defs/hex"
+        }
+      }
+    },
+    "sizes": {
+      "type": "object",
+      "required": [
+        "page",
+        "base",
+        "name",
+        "headline",
+        "heading",
+        "small",
+        "lineHeight",
+        "marginTop",
+        "marginSide",
+        "marginBottom"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "enum": [
+            "A4",
+            "Letter"
+          ]
+        },
+        "base": {
+          "type": "number",
+          "minimum": 9,
+          "description": "pt; body text never below 9pt"
+        },
+        "name": {
+          "type": "number"
+        },
+        "headline": {
+          "type": "number"
+        },
+        "heading": {
+          "type": "number"
+        },
+        "small": {
+          "type": "number",
+          "minimum": 8
+        },
+        "lineHeight": {
+          "type": "number",
+          "minimum": 1.2,
+          "maximum": 1.7
+        },
+        "arabicLineHeight": {
+          "type": "number",
+          "minimum": 1.4,
+          "maximum": 1.9
+        },
+        "marginTop": {
+          "type": "number",
+          "description": "mm"
+        },
+        "marginSide": {
+          "type": "number",
+          "description": "mm"
+        },
+        "marginBottom": {
+          "type": "number",
+          "description": "mm"
+        }
+      }
+    },
+    "spacing": {
+      "type": "object",
+      "required": [
+        "section",
+        "item",
+        "bullet",
+        "gutter"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "section": {
+          "type": "number",
+          "description": "pt above a section"
+        },
+        "item": {
+          "type": "number",
+          "description": "pt between entries"
+        },
+        "bullet": {
+          "type": "number",
+          "description": "pt between bullets"
+        },
+        "gutter": {
+          "type": "number",
+          "description": "mm between columns"
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxPages": {
+          "const": 2
+        }
+      }
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "hex": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "fontRole": {
+      "type": "object",
+      "required": [
+        "latin",
+        "arabic",
+        "weight"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "latin": {
+          "enum": [
+            "Inter",
+            "IBM Plex Mono"
+          ],
+          "description": "Bundled OFL families only"
+        },
+        "arabic": {
+          "enum": [
+            "IBM Plex Sans Arabic",
+            "Cairo"
+          ]
+        },
+        "weight": {
+          "enum": [
+            400,
+            600,
+            700
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "draft",
+              "finished"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "twin",
+          "layout",
+          "fonts",
+          "colors",
+          "sizes",
+          "spacing"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "atsTier": {
+            "enum": [
+              "C",
+              "D"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "twin": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "kind": {
+                "const": "sidebar"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "colors": {
+            "required": [
+              "sidebarBg",
+              "sidebarText",
+              "sidebarMuted",
+              "sidebarAccent"
+            ]
+          },
+          "layout": {
+            "required": [
+              "sidebarWidth",
+              "sidebarSections"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "header": {
+                "const": "band"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "colors": {
+            "required": [
+              "bandBg",
+              "bandText"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

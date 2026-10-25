@@ -1,0 +1,67 @@
+{
+ "meta": {
+  "lang": "zh-Hans",
+  "labels": {
+   "summary": "个人简介",
+   "work": "工作经历",
+   "education": "教育背景",
+   "skills": "技能",
+   "languages": "语言",
+   "projects": "项目",
+   "certificates": "证书",
+   "volunteer": "志愿经历",
+   "publications": "发表",
+   "contact": "联系方式"
+  }
+ },
+ "basics": {
+  "name": "测试 小明",
+  "headline": "客户支持专员",
+  "email": "xiaoming.test@example.com",
+  "phone": "+86 138 0000 0000",
+  "location": "上海，中国"
+ },
+ "summary": "拥有三年经验的客户支持专员，负责处理在线电子产品商店的聊天和电话工单，擅长用简单的语言解释技术问题。",
+ "work": [
+  {
+   "title": "客户支持专员",
+   "org": "示例电子有限公司",
+   "location": "上海",
+   "start": "2022-03",
+   "end": "至今",
+   "bullets": [
+    "每天处理约 40 个关于保修和配送的咨询（自我估计）。",
+    "编写了 12 篇常见保修问题的帮助文章。"
+   ]
+  }
+ ],
+ "education": [
+  {
+   "title": "计算机科学学士",
+   "org": "示例大学",
+   "location": "上海",
+   "start": "2019",
+   "end": "2023"
+  }
+ ],
+ "skills": [
+  {
+   "name": "工具",
+   "items": [
+    "Zendesk",
+    "Excel",
+    "Google Workspace"
+   ]
+  }
+ ],
+ "languages": [
+  {
+   "name": "中文",
+   "level": "母语"
+  },
+  {
+   "name": "English",
+   "level": "B2"
+  }
+ ]
+}
