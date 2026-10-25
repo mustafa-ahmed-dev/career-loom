@@ -1,6 +1,7 @@
 // Fetches the OFL Noto fonts used only for CJK and Devanagari text into fonts/cache/ (gitignored).
 // Needs network once. Usage: node scripts/fetch-fonts.mjs
-import { execFileSync, execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
+import { npm } from './lib/npm.mjs';
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync, copyFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
@@ -13,13 +14,11 @@ const PACKS = [
 ];
 mkdirSync(ROOT, { recursive: true });
 const manifest = { families: {} };
-// On Windows npm is npm.cmd, which Node only starts through a shell; quote every argument for it.
-const npm = (args) => (process.platform === 'win32'
-  ? execSync(['npm', ...args].map((a) => `"${a}"`).join(' '), { encoding: 'utf8' })
-  : execFileSync('npm', args, { encoding: 'utf8' }));
 for (const p of PACKS) {
   const tmp = mkdtempSync(join(tmpdir(), 'cl-font-'));
-  const tgz = npm(['pack', p.pkg, '--silent', '--pack-destination', tmp]).trim().split('\n').pop();
+  let tgz;
+  try { tgz = npm(['pack', p.pkg, '--silent'], { cwd: tmp }).trim().split('\n').pop().trim(); } // cwd = tmp: the tarball lands there, and no path with spaces is passed to npm
+  catch (e) { console.error(`Could not download ${p.pkg} with npm: ${String(e.stderr || e.message).trim().split('\n')[0]}`); process.exit(1); }
   execFileSync('tar', ['xzf', tgz], { cwd: tmp }); // relative names only: GNU tar reads "C:\..." as a remote host
   manifest.families[p.family] = [];
   for (const w of p.weights) {
