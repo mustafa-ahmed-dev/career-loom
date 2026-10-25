@@ -25,7 +25,8 @@ Turns finished content into a document. Status: the renderer exists (`scripts/cv
 
 ## Rules
 - Contact details never live only in a header or footer. No skill percentage bars. Information is never only in a graphic: every visual has a text equivalent.
-- RTL is a variant flag, not a separate design: `--rtl auto` follows the CV language, `on` or `off` forces it. Fonts by role, open-licence (OFL) only. Sorani passes the glyph test (ڕ ڵ ۆ ێ ە) in IBM Plex Sans Arabic and Noto Naskh Arabic (not Cairo, which is swapped out), and is still labelled "needs native review".
+- RTL is a variant flag, not a separate design: `--rtl auto` follows the CV language, `on` or `off` forces it. Fonts by role, open-licence (OFL) only. Sorani uses IBM Plex Sans Arabic or Noto Naskh Arabic (never Cairo) and is labelled "needs native review".
+- Skills, titles and numbers keep the user's own words in every output, including the chat fallback: never rename, widen or add a qualifier ("reporting" stays "reporting", never "financial reporting"); unknowns stay `[add]`.
 - Check contrast, greyscale print and that text extracts from the PDF in reading order.
 
 ## Read when needed
