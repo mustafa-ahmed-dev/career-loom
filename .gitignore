@@ -3,3 +3,4 @@
 *.plugin
 .DS_Store
 Thumbs.db
+evals/out/
