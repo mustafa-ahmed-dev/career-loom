@@ -132,7 +132,7 @@ The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points 
 
 ## Known limits
 
-- Windows: tested by hand on one Windows machine (Git Bash, Node 24): the CLI starts, HTML is written, and a PDF is made through the Microsoft Edge fallback (Chromium 156.0.4314.42, reported by `pdfBrowser`). Not verified on Windows: `fetch-fonts.mjs` (the `npm.cmd` and `tar` handling), the Windows version, and Google Chrome as the fallback. `npm test` and `check-design.mjs` need poppler (`pdftotext`, `pdftoppm`), which is awkward to install on Windows; use WSL for the tests. Keep the repo in a folder path without spaces to be safe.
+- Windows: tested by hand on one Windows machine (Git Bash, Node 24): the CLI starts, HTML is written, a PDF is made through the Microsoft Edge fallback (Chromium 156.0.4314.42, reported by `pdfBrowser`), and `node fetch-fonts.mjs` downloads both Noto packs (after the fix in `lib/npm.mjs`, which starts `npm.cmd` with the command name unquoted). Not verified on Windows: rendering a Chinese or Hindi CV with those fonts, the Windows version, and Google Chrome as the fallback. `npm test` and `check-design.mjs` need poppler (`pdftotext`, `pdftoppm`), which is awkward to install on Windows; use WSL for the tests. Keep the repo in a folder path without spaces to be safe.
 
 - Not runnable inside claude.ai chat (see above).
 - Arabic-script text is rendered with ligatures disabled, so PDF text extraction keeps letter order. The letters look less joined than normal typesetting. This is deliberate.
