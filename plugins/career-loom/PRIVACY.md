@@ -15,6 +15,7 @@ Career Loom is a set of instructions and reference files that Claude follows. It
 
 - **Web search (optional).** If you turn web search on in Claude, search terms go to the search tool. Your CV is not sent. Live findings are shown separately and are never saved into the plugin's library.
 - **Cloud destinations (only on request).** Documents are written to Google Drive, Microsoft 365 or Notion only when you ask and have that connector enabled in Claude.
+- **CV renderer (Claude Code, Cowork or your own computer).** It runs locally and writes files on your machine. Your CV content is not uploaded. Setting it up downloads software from public hosts (npm packages, a Chromium browser, and for Chinese or Hindi CVs two open-licence fonts). Those downloads send no CV content.
 - **Nowhere else.** The plugin does not send your data to any other service.
 
 ## Not advice

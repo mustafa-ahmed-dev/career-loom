@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { SKILL_DIR, SYSTEMS_DIR, loadTokens, readJson, esc } from './lib/util.mjs';
 import { render } from './cv-render.mjs';
 
+const REPO_URL = readJson(join(SKILL_DIR, '..', '..', '.claude-plugin', 'plugin.json')).repository;
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..', '..', 'docs', 'gallery');
 rmSync(OUT, { recursive: true, force: true });
 for (const d of ['img', 'samples']) mkdirSync(join(OUT, d), { recursive: true });
@@ -50,7 +51,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:4px}a{color:var(--accent
 <h1>Career Loom designs</h1>
 <p class="lead">${cards.length} of 20 designs are finished; the other ${20 - cards.length} are still specification stubs. All content is synthetic. Pages are shown on white paper.</p>
 ${cards.map(({ tokens: t, shots, res }) => `<section class="card"><h2>${esc(t.id)} ${esc(t.name)}</h2>
-<p class="tier">Tier ${t.atsTier}${t.twin ? ` · plain twin ${esc(t.twin)} for portals` : ''} · RTL variant · <a href="https://github.com/mustafa-ahmed-dev/career-loom/blob/main/plugins/career-loom/skills/cv-design/systems/${esc(readdirSync(SYSTEMS_DIR).find((n) => n.startsWith(t.id.toLowerCase() + '-')))}/spec.md">spec and results</a></p>
+<p class="tier">Tier ${t.atsTier}${t.twin ? ` · plain twin ${esc(t.twin)} for portals` : ''} · RTL variant · <a href="${REPO_URL}/blob/main/plugins/career-loom/skills/cv-design/systems/${esc(readdirSync(SYSTEMS_DIR).find((n) => n.startsWith(t.id.toLowerCase() + '-')))}/spec.md">spec and results</a></p>
 <div class="shots">${shots.map((s) => `<figure><a href="samples/${s.stem}.pdf"><img src="img/${s.stem}.png" alt="${esc(t.name)} ${esc(s.label)} sample CV, page 1" loading="lazy"></a><figcaption>${esc(s.label)} · <a href="samples/${s.stem}.pdf">PDF</a></figcaption></figure>`).join('')}</div>
 <ul class="badges">${checks.map((c) => `<li>${res.checks[c].pass ? '✓' : '✗'} ${names[c]}</li>`).join('')}</ul></section>`).join('\n')}
 <p class="note">Sorani (Central Kurdish) output needs native-speaker review. Word output is verified in LibreOffice only.</p>
