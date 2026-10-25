@@ -20,7 +20,7 @@ npx playwright install chromium
 
 Optional, once, needs internet: `node fetch-fonts.mjs` downloads the Noto Sans SC (Chinese) and Noto Sans Devanagari fonts into `../fonts/cache/` (gitignored). It uses `npm pack` and `tar`, so both must be on your PATH.
 
-**Even if you only write English, run it.** Without these two fonts every run prints a "Fonts not available" warning and exits with code 3 (the files are still written). With them present the same run exits 0.
+Only needed for Chinese or Devanagari CVs. Without the fonts, a CV containing that script prints a "Fonts not available" warning and exits with code 3 (the files are still written, with fallback glyphs or gaps). English, Arabic and Cyrillic CVs never need them and exit 0.
 
 ## Usage
 
@@ -39,7 +39,7 @@ node cv-render.mjs <cv.json> --design <id> [--out dir] [--name base] [--format p
 | `--twin` | `on` | `off` skips the A-rated twin for tier C/D designs. Any value except `off` means on. |
 | `--allow-draft` | off | Render designs whose status is `draft` (or `stub`). Not needed for finished designs. |
 
-`p1` (tier A) and `c9` (tier C) are `finished`, so they render without `--allow-draft`. The other 18 designs are stubs with no layout data: `--allow-draft` does not help, and rendering one crashes with a TypeError (exit 1).
+`p1` (tier A) and `c9` (tier C) are `finished`, so they render without `--allow-draft`. The other 18 designs are stubs with no layout data: `--allow-draft` does not help: the renderer stops with "Design X is a stub" and lists the finished designs (exit 4).
 
 Example:
 
@@ -56,8 +56,8 @@ Prints a JSON summary (files, warnings, per-design tier, pages, RTL, DOCX status
 | 0 | Done, no warnings. |
 | 1 | Missing CV path or `--design` (usage is printed), unknown design id, or any other unexpected error. |
 | 2 | CV JSON fails `../schema/cv.schema.json`, a design's `tokens.json` is invalid, or the language has no built-in labels and no `meta.labels`. |
-| 3 | Files were written, with warnings: more pages than the design's limit (2), content wider than the page, or missing CJK/Devanagari fonts. |
-| 4 | The design is `stub` or `draft` and `--allow-draft` was not passed (this includes every stub). |
+| 3 | Files were written, with warnings: more pages than the design's limit (2), content wider than the page, or the CV contains Chinese or Devanagari text and `fetch-fonts.mjs` has not been run. |
+| 4 | The design is a stub (cannot be rendered at all), or is `draft` and `--allow-draft` was not passed. |
 
 ## CV JSON
 

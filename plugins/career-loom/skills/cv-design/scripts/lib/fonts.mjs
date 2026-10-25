@@ -11,6 +11,10 @@ export function loadManifest(dir) {
   const f = join(dir, 'fonts.json');
   return existsSync(f) ? readJson(f).families : {};
 }
+// Fonts that are fetched on demand are only reported missing when the text really contains their script.
+const ON_DEMAND = { 'Noto Sans SC': [[0x2e80, 0xa4cf], [0xac00, 0xd7af], [0xf900, 0xfaff], [0xff00, 0xffef]], 'Noto Sans Devanagari': [[0x0900, 0x097f], [0xa8e0, 0xa8ff]] };
+const needed = (fam, cps) => !ON_DEMAND[fam] || cps.some((c) => ON_DEMAND[fam].some(([a, b]) => c >= a && c <= b));
+
 /** @font-face CSS embedding (base64) only the font files whose unicode range covers characters used in `text`. */
 export function fontFaceCss(families, text) {
   const cps = [...new Set([...text].map((c) => c.codePointAt(0)))];
@@ -27,7 +31,7 @@ export function fontFaceCss(families, text) {
         css += `@font-face{font-family:"${fam}";font-weight:${f.weight};font-style:normal;src:url(data:font/woff2;base64,${b64}) format("woff2");${f.range ? `unicode-range:${f.range};` : ''}}\n`;
       }
     }
-    if (!found) missing.push(fam);
+    if (!found && needed(fam, cps)) missing.push(fam);
   }
   return { css, missing };
 }

@@ -1,7 +1,7 @@
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SKILL_DIR } from '../scripts/lib/util.mjs';
@@ -40,6 +40,8 @@ test('the twin is rendered in the same direction as the design', () => {
 });
 test('stubs and drafts are refused unless --allow-draft; unknown ids and bad JSON fail clearly', () => {
   assert.equal(run(join(DATA, 'short.json'), '--design', 'c3', '--out', out).status, 4);
+  const stub = run(join(DATA, 'short.json'), '--design', 'c3', '--out', out, '--allow-draft');
+  assert.equal(stub.status, 4, 'a stub cannot be forced with --allow-draft'); assert.match(stub.stderr, /is a stub.*(P1|C9)/);
   assert.equal(run(join(DATA, 'short.json'), '--design', 'zz', '--out', out).status, 1);
   const bad = join(out, 'bad.json'); writeFileSync(bad, JSON.stringify({ meta: { lang: 'en' }, basics: { name: 'X' }, skills: [{ name: 'a', items: ['b'], percent: 95 }] }));
   const r = run(bad, '--design', 'p1', '--out', out, '--allow-draft');
@@ -56,4 +58,17 @@ test('more than two pages is reported, not hidden', () => {
   const f = join(out, 'huge.json'); writeFileSync(f, JSON.stringify(cv));
   const r = run(f, '--design', 'p1', '--out', out, '--format', 'pdf', '--allow-draft');
   assert.equal(r.status, 3); assert.match(JSON.parse(r.stdout).warnings.join(), /pages/);
+});
+
+test('Noto warnings appear only when the CV contains that script', () => {
+  const hide = join(SKILL_DIR, 'fonts', 'cache'), moved = hide + '-hidden';
+  const had = existsSync(hide); if (had) renameSync(hide, moved);
+  try {
+    const en = run(join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'nf', '--format', 'pdf');
+    assert.equal(en.status, 0, 'English CV needs no fetched fonts: ' + en.stderr + en.stdout);
+    const zh = run(join(DATA, 'zh.json'), '--design', 'p1', '--out', out, '--name', 'nf-zh', '--format', 'pdf');
+    assert.equal(zh.status, 3); assert.match(JSON.parse(zh.stdout).warnings.join(), /Noto Sans SC/); assert.doesNotMatch(JSON.parse(zh.stdout).warnings.join(), /Devanagari/);
+    const hi = run(join(DATA, 'hi.json'), '--design', 'p1', '--out', out, '--name', 'nf-hi', '--format', 'pdf');
+    assert.equal(hi.status, 3); assert.match(JSON.parse(hi.stdout).warnings.join(), /Devanagari/);
+  } finally { if (had) renameSync(moved, hide); }
 });

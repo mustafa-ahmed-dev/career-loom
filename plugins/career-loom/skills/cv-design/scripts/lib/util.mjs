@@ -42,3 +42,5 @@ export function scriptOf(lang) {
   return 'latin';
 }
 export const hasRtlChars = (s) => /[֐-ࣿיִ-﷿ﹰ-﻿]/.test(s);
+
+export const finishedDesigns = () => readdirSync(SYSTEMS_DIR, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => readJson(join(SYSTEMS_DIR, d.name, 'tokens.json'))).filter((t) => t.status === 'finished').map((t) => t.id);
