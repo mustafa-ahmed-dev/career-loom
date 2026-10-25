@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Added the plugin icon: `logo.png` (set as `icon` in `plugin.json`) and the original `logo.jpg`, both in `plugins/career-loom/.claude-plugin/`.
 - Renamed the project from career-firm to **Career Loom** (plugin, marketplace, folder, front-door skill). Install commands now use `career-loom` and the repo `mustafa-ahmed-dev/career-loom`.
 - Sources migrated to `career-references/sources/sources.csv` (236 rows, IDs kept); maintainer tools in `tools/`.
 - Web search is optional and offered to the user; live findings stay separate from the library.
