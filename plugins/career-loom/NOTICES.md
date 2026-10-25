@@ -21,10 +21,8 @@ CV renderer, `skills/cv-design/fonts/`. All SIL Open Font License 1.1. Each bund
 
 These are listed in `skills/cv-design/scripts/package.json`; installed by the user with `npm install`, not shipped in the plugin. Licences read from each package's `package.json` at the installed version:
 - ajv 8.17.1, MIT.
-- docx 9.5.0, MIT.
 - playwright 1.63.0, Apache-2.0. It downloads Chromium separately (`npx playwright install chromium`); that download has its own licences, which have not been reviewed here.
 - fontkit 2.0.4, MIT (dev dependency, used by the tests).
-- jszip 3.10.2, "MIT OR GPL-3.0-or-later" (dev dependency, used by the tests).
 - pdfjs-dist 4.10.38, Apache-2.0 (dev dependency, used by the tests).
 Transitive dependencies were not audited.
 

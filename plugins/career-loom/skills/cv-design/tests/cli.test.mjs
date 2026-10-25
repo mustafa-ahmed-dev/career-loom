@@ -11,12 +11,18 @@ const run = (...args) => spawnSync('node', [CLI, ...args], { encoding: 'utf8' })
 let out;
 before(() => { out = mkdtempSync(join(tmpdir(), 'cl-cli-')); });
 
-test('tier C writes the design and an A-rated plain twin (PDF and DOCX)', () => {
+test('tier C writes the design and an A-rated plain twin (PDF and HTML)', () => {
   const r = run(join(DATA, 'short.json'), '--design', 'c9', '--out', out, '--name', 'c9', '--allow-draft');
   assert.equal(r.status, 0, r.stderr + r.stdout);
-  for (const f of ['c9.pdf', 'c9.docx', 'c9-ats.pdf', 'c9-ats.docx']) assert.ok(existsSync(join(out, f)), f);
+  for (const f of ['c9.pdf', 'c9.html', 'c9-ats.pdf', 'c9-ats.html']) assert.ok(existsSync(join(out, f)), f);
   const j = JSON.parse(r.stdout);
   assert.deepEqual(j.designs.map((d) => [d.design, d.tier, d.role]), [['C9', 'C', 'design'], ['P1', 'A', 'ats-twin']]);
+});
+test('--format docx is refused with a pointer to HTML; unknown formats are refused too', () => {
+  const d = run(join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--format', 'docx');
+  assert.equal(d.status, 1); assert.match(d.stderr, /DOCX is not produced.*HTML/);
+  const x = run(join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--format', 'txt');
+  assert.equal(x.status, 1); assert.match(x.stderr, /Unknown --format "txt"/);
 });
 test('tier A writes no twin; --twin off suppresses it', () => {
   const r = JSON.parse(run(join(DATA, 'short.json'), '--design', 'p1', '--out', out, '--name', 'p1', '--allow-draft', '--format', 'pdf').stdout);
