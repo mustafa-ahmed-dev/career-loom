@@ -20,7 +20,7 @@ npm install
 npx playwright install chromium
 ```
 
-PDF output needs a Chromium-based browser. The renderer looks, in this order, for: the browser at `CL_BROWSER_PATH` (set it to a `.exe` or binary you choose), Playwright's own Chromium (the `npx playwright install chromium` step), then Microsoft Edge, then Google Chrome. If the Playwright download is blocked on your network, you can skip it on Windows 10/11 because Edge is normally installed (on one Windows machine where the Playwright download was blocked, a PDF was made through this fallback; which browser it used was not recorded). `--format html` needs no browser at all; open the file and use the browser's Print to PDF if you want.
+PDF output needs a Chromium-based browser. The renderer looks, in this order, for: the browser at `CL_BROWSER_PATH` (set it to a `.exe` or binary you choose), Playwright's own Chromium (the `npx playwright install chromium` step), then Microsoft Edge, then Google Chrome. If the Playwright download is blocked on your network, you can skip it on Windows 10/11 because Edge is normally installed (on one Windows machine where the Playwright download was blocked, a PDF was made through this fallback with Microsoft Edge, Chromium 156.0.4314.42, as reported by the summary's `pdfBrowser` line). `--format html` needs no browser at all; open the file and use the browser's Print to PDF if you want.
 
 Once, needs internet: `node fetch-fonts.mjs` downloads the Noto Sans SC (Chinese) and Noto Sans Devanagari fonts into `../fonts/cache/` (gitignored). It uses `npm pack` and `tar`, so both must be on your PATH.
 
@@ -132,7 +132,7 @@ The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points 
 
 ## Known limits
 
-- Windows: tested by hand on one Windows machine (Git Bash, Node 24): the CLI starts, HTML is written, and a PDF is made through the Edge or Chrome fallback. Not verified on Windows: `fetch-fonts.mjs` (the `npm.cmd` and `tar` handling), the Windows version, and which browser was used. `npm test` and `check-design.mjs` need poppler (`pdftotext`, `pdftoppm`), which is awkward to install on Windows; use WSL for the tests. Keep the repo in a folder path without spaces to be safe.
+- Windows: tested by hand on one Windows machine (Git Bash, Node 24): the CLI starts, HTML is written, and a PDF is made through the Microsoft Edge fallback (Chromium 156.0.4314.42, reported by `pdfBrowser`). Not verified on Windows: `fetch-fonts.mjs` (the `npm.cmd` and `tar` handling), the Windows version, and Google Chrome as the fallback. `npm test` and `check-design.mjs` need poppler (`pdftotext`, `pdftoppm`), which is awkward to install on Windows; use WSL for the tests. Keep the repo in a folder path without spaces to be safe.
 
 - Not runnable inside claude.ai chat (see above).
 - Arabic-script text is rendered with ligatures disabled, so PDF text extraction keeps letter order. The letters look less joined than normal typesetting. This is deliberate.
