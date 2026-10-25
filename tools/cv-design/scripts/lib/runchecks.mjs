@@ -1,7 +1,7 @@
 // Runs the five design checks for one design and returns a structured result. Used by tests and check-design.mjs.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { SKILL_DIR, readJson, loadTokens, isRtl } from './util.mjs';
+import { TOOL_DIR, readJson, loadTokens, isRtl } from './util.mjs';
 import { buildHtml, anchors } from './html.mjs';
 import { renderPdf, closeBrowser } from './pdf.mjs';
 import { contrastCheck, colourBlindCheck, greyscaleTokenCheck, greyscaleRenderCheck, hasPoppler, pdfText, readingOrder, fitMetrics } from './checks.mjs';
@@ -10,7 +10,7 @@ import { missingGlyphs } from './glyphs.mjs';
 import { familiesUsed, arabicFont } from './css.mjs';
 import { render } from '../cv-render.mjs';
 
-const DATA = join(SKILL_DIR, 'test-data');
+const DATA = join(TOOL_DIR, 'test-data');
 const cvOf = (n) => readJson(join(DATA, n + '.json'));
 const SAMPLES = [['en', 'short'], ['ar', 'ar'], ['ckb', 'ckb'], ['zh', 'zh'], ['hi', 'hi'], ['ru', 'ru']];
 const SORANI = 'ڕڵۆێە';

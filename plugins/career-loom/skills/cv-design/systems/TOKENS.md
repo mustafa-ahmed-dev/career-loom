@@ -1,6 +1,6 @@
 # tokens.json reference
 
-Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It is validated against `../schema/tokens.schema.json` (JSON Schema 2020-12, `additionalProperties: false` everywhere, so unknown keys are rejected). The renderer in `../scripts/` reads it; see `../scripts/README.md`. `design.css`, `components.html` and the Tokens block in `spec.md` are generated from it by `../scripts/build-design-files.mjs`; edit `tokens.json`, then regenerate. This file documents the schema once. If the two disagree, the schema wins.
+Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It is validated against `tools/cv-design/schema/tokens.schema.json` (in the repository, not shipped with the plugin) (JSON Schema 2020-12, `additionalProperties: false` everywhere, so unknown keys are rejected). The maintainer renderer in `tools/cv-design/scripts/` reads it; see `tools/cv-design/scripts/README.md`. `design.css`, `components.html` and the Tokens block in `spec.md` are generated from it by `tools/cv-design/scripts/build-design-files.mjs`; edit `tokens.json`, then regenerate. This file documents the schema once. If the two disagree, the schema wins.
 
 ## Top-level fields
 
@@ -40,11 +40,11 @@ Conditional rules in the schema: tier A requires `kind: single`, `header: plain`
 | C | Two columns, sidebar or grid. Not for portals. | required, tier A |
 | D | Graphic design (bands, cards). Not for portals. | required, tier A |
 
-Every C and D design names an A-tier `twin` and the CLI writes it next to the design as `<name>-ats.*`. Applications through portals get the twin, not the design. That the twin is tier A is checked by `tests/tokens.test.mjs`, not by the schema. Currently every twin is P1.
+Every C and D design names an A-tier `twin` and the CLI writes it next to the design as `<name>-ats.*`. Applications through portals get the twin, not the design. That the twin is tier A is checked by `tools/cv-design/tests/tokens.test.mjs`, not by the schema. Currently every twin is P1.
 
 ## layout
 
-| Field | Values | Effect (checked in `scripts/lib/css.mjs` and `html.mjs`) |
+| Field | Values | Effect (checked in `tools/cv-design/scripts/lib/css.mjs` and `html.mjs`) |
 |---|---|---|
 | `kind` (required) | `single`, `sidebar`, `labelled` | `sidebar`: CSS grid with a side column and a main column; the page edge tint mirrors in RTL. `labelled`: every section is a two-column grid with the heading in a label column (`labelWidth`) and the content beside it. |
 | `header` (required) | `plain`, `band`, `split` | `band`: full-bleed coloured header (page margin 0, the layout padding repeats on every page). `split`: name and headline at the start, contact block at the end, rule below. |
@@ -73,9 +73,9 @@ Four roles: `display` (name), `heading` (section and entry titles), `body`, `mon
 | `arabic` | `IBM Plex Sans Arabic`, `Cairo`, `Noto Naskh Arabic` | Used for Arabic-script text. |
 | `weight` | `400`, `600`, `700` | Bundled files exist for these weights (IBM Plex Mono: 400 and 600 only, so `mono` should not use 700). |
 
-Optional `fonts.cjk` and `fonts.devanagari` are free strings. They default to Noto Sans SC and Noto Sans Devanagari, which are not bundled; `node scripts/fetch-fonts.mjs` downloads them into a gitignored cache. Only OFL fonts, and only fonts shipped in `../fonts/` (plus that cache), may be used. Fonts are embedded in the PDF as base64 subsets chosen by unicode range.
+Optional `fonts.cjk` and `fonts.devanagari` are free strings. They default to Noto Sans SC and Noto Sans Devanagari, which are not bundled; `node tools/cv-design/scripts/fetch-fonts.mjs` downloads them into a gitignored cache. Only OFL fonts, and only fonts shipped in `../fonts/` (plus that cache), may be used. Fonts are embedded in the PDF as base64 subsets chosen by unicode range.
 
-**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly. The unit test `tests/flags.test.mjs` covers the swap. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the font actually used; the P3 and P5 specs record that they are present in Noto Naskh Arabic, which is not substituted. No current finished design uses Cairo.
+**Cairo and Sorani.** Cairo has no glyphs for Central Kurdish (Sorani) letters (the code comment cites source S144). For documents whose language starts with `ckb` or `ku`, `arabicFont()` in `tools/cv-design/scripts/lib/css.mjs` substitutes IBM Plex Sans Arabic for every role, so a design may name Cairo and still render Sorani correctly. The unit test `tools/cv-design/tests/flags.test.mjs` covers the swap. The check `render` verifies the Sorani letters `ڕ ڵ ۆ ێ ە` against the font actually used; the P3 and P5 specs record that they are present in Noto Naskh Arabic, which is not substituted. No current finished design uses Cairo.
 
 ## colors
 

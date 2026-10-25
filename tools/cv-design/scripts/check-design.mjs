@@ -4,14 +4,14 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { runChecks } from './lib/runchecks.mjs';
-import { SKILL_DIR } from './lib/util.mjs';
+import { TOOL_DIR } from './lib/util.mjs';
 const args = process.argv.slice(2);
 const oi = args.indexOf('--out'); const out = oi >= 0 ? args.splice(oi, 2)[1] : join(tmpdir(), 'career-loom-checks');
 let bad = 0;
 for (const id of args) {
   const r = await runChecks(id, join(out, id));
-  mkdirSync(join(SKILL_DIR, 'tests', 'results'), { recursive: true });
-  writeFileSync(join(SKILL_DIR, 'tests', 'results', `${id.toLowerCase()}.json`), JSON.stringify(r, null, 1) + '\n');
+  mkdirSync(join(TOOL_DIR, 'tests', 'results'), { recursive: true });
+  writeFileSync(join(TOOL_DIR, 'tests', 'results', `${id.toLowerCase()}.json`), JSON.stringify(r, null, 1) + '\n');
   console.log(`${r.id} ${r.name}: ${r.pass ? 'ALL PASS' : 'FAIL'}`);
   for (const [k, v] of Object.entries(r.checks)) console.log(`  ${v.pass ? 'pass' : 'FAIL'}  ${k}`);
   if (!r.pass) { bad++; console.log(JSON.stringify(r.checks, (k, v) => (v === true ? undefined : v), 1).slice(0, 6000)); }

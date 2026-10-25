@@ -3,7 +3,9 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv/dist/2020.js';
 
-export const SKILL_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+export const TOOL_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..'); // tools/cv-design: scripts, tests, test data, schemas
+export const REPO_DIR = join(TOOL_DIR, '..', '..');
+export const SKILL_DIR = join(REPO_DIR, 'plugins', 'career-loom', 'skills', 'cv-design'); // the shipped design files: systems, fonts
 export const SYSTEMS_DIR = process.env.CL_SYSTEMS_DIR ?? join(SKILL_DIR, 'systems'); // override is for tests only
 export const FONTS_DIR = join(SKILL_DIR, 'fonts');
 export const FONT_CACHE_DIR = process.env.CL_FONT_CACHE ?? join(FONTS_DIR, 'cache'); // override is for tests only
@@ -13,7 +15,7 @@ export const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '
 const ajv = new Ajv({ allErrors: true, strict: false });
 const validators = {};
 function validator(name) {
-  return (validators[name] ??= ajv.compile(readJson(join(SKILL_DIR, 'schema', name))));
+  return (validators[name] ??= ajv.compile(readJson(join(TOOL_DIR, 'schema', name))));
 }
 export function validate(schemaFile, data) {
   const v = validator(schemaFile);

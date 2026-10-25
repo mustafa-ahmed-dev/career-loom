@@ -6,5 +6,5 @@ Thumbs.db
 evals/out/
 node_modules/
 plugins/career-loom/skills/cv-design/fonts/cache/
-plugins/career-loom/skills/cv-design/tests/results/out/
-plugins/career-loom/skills/cv-design/tests/results/
+tools/cv-design/tests/results/out/
+tools/cv-design/tests/results/

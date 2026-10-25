@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Career Loom is a plugin marketplace repo. `.claude-plugin/marketplace.json` lists one plugin, `plugins/career-loom` (`.claude-plugin/plugin.json`). The plugin is almost entirely Markdown: nine skills and two agents. The skills have no build step; the only code is the optional CV renderer and design checker in `skills/cv-design/scripts/` (Node, has tests). All 20 design systems are built and pass the five design checks. ESCO/O*NET data is not built; `evals/` is a small starter set.
+Career Loom is a plugin marketplace repo. `.claude-plugin/marketplace.json` lists one plugin, `plugins/career-loom` (`.claude-plugin/plugin.json`). The plugin is almost entirely Markdown: nine skills and two agents. The skills have no build step; the only code is the optional CV renderer and design checker in the top-level `tools/cv-design/` (Node, has tests); it is outside the plugin folder, so plugin users do not get it. All 20 design systems are built and pass the five design checks. ESCO/O*NET data is not built; `evals/` is a small starter set.
 
 Validate with `claude plugin validate plugins/career-loom` and `claude plugin validate .`. Do not add a top-level `bin/` folder inside the plugin. The two `.claude-plugin` folders are both correct: do not merge them. `CLAUDE.md` is not shipped to plugin users, so shipped guidance must live in skills.
 
@@ -26,10 +26,10 @@ Full text: `skills/career-references/rules/integrity.md` (canonical). Every user
 - Check any statistic against `banned-claims.md`.
 - Regional content lives in `regions/<region>/` (`pack.md`, `tips.md`; index in `regions/README.md`). Conventions carry a verified / secondary / unverified status. Nothing unverified is presented as fact. The founder observation S159 is excluded and used nowhere; Iraq/KRI CV conventions still need published sources.
 
-### Designs and the optional renderer (`skills/cv-design/`)
+### Designs (`skills/cv-design/`) and the optional renderer (`tools/cv-design/`)
 A design is plain files: `systems/<id>/spec.md`, `design.css` and `components.html`. Claude writes the HTML from them (this is the product, and it works in claude.ai chat); a PDF or Word file is an extra it makes only when it has a tool for it. The renderer below is optional: a laptop convenience and the maintainers' checking tool (it runs the five design checks).
 
-`cv-render.mjs` (Node 20+, Playwright) renders a JSON CV (`schema/cv.schema.json`) with a design's `tokens.json` to PDF and HTML. It does not write Word files: the design is HTML plus its rules, and a user who wants Word asks Claude to convert the HTML. It refuses stubs (exit 4) and drafts without `--allow-draft` and always writes the A-rated `-ats` twin for tier C/D. It cannot run in claude.ai chat. Do not edit it from skill work; change behaviour descriptions in `cv-design/SKILL.md`. Tests: `cd plugins/career-loom/skills/cv-design/scripts && npm install && npm test`.
+`cv-render.mjs` (Node 20+, Playwright) renders a JSON CV (`tools/cv-design/schema/cv.schema.json`) with a design's `tokens.json` to PDF and HTML. It does not write Word files: the design is HTML plus its rules, and a user who wants Word asks Claude to convert the HTML. It refuses stubs (exit 4) and drafts without `--allow-draft` and always writes the A-rated `-ats` twin for tier C/D. It cannot run in claude.ai chat. Do not edit it from skill work; change behaviour descriptions in `cv-design/SKILL.md`. Tests: `cd tools/cv-design/scripts && npm install && node fetch-fonts.mjs && npm test`.
 
 The three plain files (`spec.md` has a generated Tokens block) need no install. They are generated from `tokens.json` by `node build-design-files.mjs` (run it after editing tokens; `--check` fails if they are stale, and `npm test` runs that check). Never edit them by hand.
 
