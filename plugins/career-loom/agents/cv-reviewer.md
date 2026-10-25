@@ -1,6 +1,6 @@
 ---
 name: cv-reviewer
-description: "Independent second reviewer for a CV, résumé or cover letter. Use when the user or the career-firm skill asks for a separate, unbiased check in Cowork or Claude Code."
+description: "Independent second reviewer for a CV, résumé or cover letter. Use when the user or the career-loom skill asks for a separate, unbiased check in Cowork or Claude Code."
 skills:
   - cv-review
 model: inherit

@@ -5,7 +5,7 @@ description: "Plans a relationship-based job search: referral requests, introduc
 
 # Job Search
 
-Covers networking and outreach plus the weekly plan. The reality note in `career-firm` is the honest framing: silence is normal, referrals convert better, and success is measured in conversations per week, not applications sent.
+Covers networking and outreach plus the weekly plan. The reality note in `career-loom` is the honest framing: silence is normal, referrals convert better, and success is measured in conversations per week, not applications sent.
 
 ## Ask
 Who the user already knows (current and former colleagues, classmates, family contacts, community), target companies, how local employers usually hire in the target country, and hours available per week.

@@ -5,7 +5,7 @@ Run from the repo root. The CSV becomes the editable source of truth.
 """
 import csv, re, pathlib
 
-REF = pathlib.Path("plugins/career-firm/skills/career-references")
+REF = pathlib.Path("plugins/career-loom/skills/career-references")
 SRC = REF / "sources.md"
 OUT = REF / "sources" / "sources.csv"
 COLS = ["id", "region", "country", "topic", "claim_supported", "title", "publisher", "url",

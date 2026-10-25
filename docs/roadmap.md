@@ -4,7 +4,7 @@ Sixteen v0.1 roles were merged into nine skills. Roles are now sections inside a
 
 | Skill | Roles it holds |
 |---|---|
-| career-firm | Engagement Partner, Intake Lead, Reality-Check and Search Strategist (reality note) |
+| career-loom | Engagement Partner, Intake Lead, Reality-Check and Search Strategist (reality note) |
 | cv-review | Parse-Risk Diagnostician, independent integrity audit, hidden-text check |
 | cv-write | Resume Builder, Impact Rewriter, Skills Advisor, Market Recruiter |
 | cv-design | Resume Designer |

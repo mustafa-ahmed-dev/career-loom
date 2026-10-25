@@ -1,6 +1,6 @@
 # Design backlog
 
-Dropped from v1 (the 20 kept systems are in `plugins/career-firm/skills/cv-design/systems/`). Retired IDs C2, C17, C18 are never reused.
+Dropped from v1 (the 20 kept systems are in `plugins/career-loom/skills/cv-design/systems/`). Retired IDs C2, C17, C18 are never reused.
 
 | ID | Name | Why dropped |
 |---|---|---|

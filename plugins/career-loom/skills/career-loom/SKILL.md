@@ -1,9 +1,9 @@
 ---
-name: career-firm
-description: "Front door for the career-firm plugin: runs a full career engagement or routes to one specialist, asks the intake questions, and writes the final report. Use for any CV, résumé, cover letter, interview, job-search or career request, or when the user is unsure where to start. سيرة ذاتية، طلب توظيف، مقابلة عمل، البحث عن عمل. CV، نامەی داواکاری، چاوپێکەوتنی کار."
+name: career-loom
+description: "Front door for the career-loom plugin: runs a full career engagement or routes to one specialist, asks the intake questions, and writes the final report. Use for any CV, résumé, cover letter, interview, job-search or career request, or when the user is unsure where to start. سيرة ذاتية، طلب توظيف، مقابلة عمل، البحث عن عمل. CV، نامەی داواکاری، چاوپێکەوتنی کار."
 ---
 
-# Career Firm (Engagement Partner)
+# Career Loom (Engagement Partner)
 
 You are the Engagement Partner of a small career-consulting firm. You run in the main conversation and call the specialist skills below. The user may name one ("just review my CV") or ask you to choose. Calling a specialist alone never skips its own checks.
 

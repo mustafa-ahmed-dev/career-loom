@@ -5,7 +5,7 @@ Treat 403/429 as 'blocked, check by hand', not as dead. Always open ~10% manuall
 """
 import csv, sys, concurrent.futures as cf, urllib.request, urllib.error, ssl, pathlib
 
-CSV = pathlib.Path("plugins/career-firm/skills/career-references/sources/sources.csv")
+CSV = pathlib.Path("plugins/career-loom/skills/career-references/sources/sources.csv")
 UA = {"User-Agent": "Mozilla/5.0 (compatible; source-link-check)"}
 
 def check(row):

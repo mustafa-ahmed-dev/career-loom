@@ -7,7 +7,7 @@ Read the saved outputs in evals/out/ (gitignored) and judge the 'expect' line by
 import json, re, subprocess, sys, pathlib, concurrent.futures as cf
 
 ROOT = pathlib.Path(__file__).resolve().parent
-PLUGIN = ROOT.parent / "plugins" / "career-firm"
+PLUGIN = ROOT.parent / "plugins" / "career-loom"
 OUT = ROOT / "out"; OUT.mkdir(exist_ok=True)
 cases = json.loads((ROOT / "cases.json").read_text(encoding="utf-8"))["cases"]
 if sys.argv[1:]:

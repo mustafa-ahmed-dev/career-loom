@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A plugin marketplace repo. `.claude-plugin/marketplace.json` lists one plugin, `plugins/career-firm` (`.claude-plugin/plugin.json`). The plugin is almost entirely Markdown: nine skills and two agents. There is no build, lint or test command. The 20 design systems are spec stubs; the renderer, ESCO/O*NET data and `evals/` are not built.
+A plugin marketplace repo. `.claude-plugin/marketplace.json` lists one plugin, `plugins/career-loom` (`.claude-plugin/plugin.json`). The plugin is almost entirely Markdown: nine skills and two agents. There is no build, lint or test command. The 20 design systems are spec stubs; the renderer, ESCO/O*NET data and `evals/` are not built.
 
-Validate with `claude plugin validate plugins/career-firm` and `claude plugin validate .`. Do not add a top-level `bin/` folder inside the plugin. The two `.claude-plugin` folders are both correct: do not merge them. `CLAUDE.md` is not shipped to plugin users, so shipped guidance must live in skills.
+Validate with `claude plugin validate plugins/career-loom` and `claude plugin validate .`. Do not add a top-level `bin/` folder inside the plugin. The two `.claude-plugin` folders are both correct: do not merge them. `CLAUDE.md` is not shipped to plugin users, so shipped guidance must live in skills.
 
-## Architecture (`plugins/career-firm/`)
+## Architecture (`plugins/career-loom/`)
 
-- **`skills/`** holds all content, nine skills: `career-firm` (front door, runs on the main conversation, no agent wrapper because a subagent cannot start subagents), `cv-review`, `cv-write`, `cv-design`, `cover-letter`, `interview-coach`, `job-search`, `localization`, `career-references`. Roster mapping: `docs/roadmap.md`.
+- **`skills/`** holds all content, nine skills: `career-loom` (front door, runs on the main conversation, no agent wrapper because a subagent cannot start subagents), `cv-review`, `cv-write`, `cv-design`, `cover-letter`, `interview-coach`, `job-search`, `localization`, `career-references`. Roster mapping: `docs/roadmap.md`.
 - **`agents/`**: `cv-reviewer` (preloads `cv-review`) and `market-researcher`. Change behaviour in the skill, not the agent file.
 - No hooks and no commands: claude.ai chat loads only skills, so every must-keep rule is inside a skill.
 
