@@ -1,6 +1,6 @@
 // Design checks used by tests/ and scripts/check-design.mjs. Pure functions where possible.
 import { spawnSync } from 'node:child_process';
-import { readFileSync, mkdtempSync } from 'node:fs';
+import { readFileSync, mkdtempSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -79,8 +79,7 @@ export function raster(pdf, page, dpi = 150) {
   const dir = mkdtempSync(join(tmpdir(), 'cl-ras-'));
   const r = spawnSync('pdftoppm', ['-gray', '-r', String(dpi), '-f', String(page), '-l', String(page), pdf, join(dir, 'p')]);
   if (r.status !== 0) throw new Error('pdftoppm failed');
-  const f = spawnSync('sh', ['-c', `ls ${dir}/p*`], { encoding: 'utf8' }).stdout.trim();
-  const buf = readFileSync(f);
+  const buf = readFileSync(join(dir, readdirSync(dir).find((n) => n.startsWith('p'))));
   const m = /^P5\s+(\d+)\s+(\d+)\s+255\s/.exec(buf.subarray(0, 40).toString('latin1'));
   return { w: +m[1], h: +m[2], px: buf.subarray(m[0].length), dpi };
 }

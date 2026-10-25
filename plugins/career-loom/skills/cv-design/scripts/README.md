@@ -103,7 +103,7 @@ PDFs are tagged and use fonts embedded as subsets. The page limit is 2; going ov
 ## Tests
 
 ```
-npm test                      # node --test ../tests/*.test.mjs
+npm test                      # node run-tests.mjs: runs every ../tests/*.test.mjs (Node 20+)
 node check-design.mjs p1 c9   # the five checks for chosen designs, optional --out <dir>
 ```
 
@@ -127,6 +127,8 @@ The font-warning test in `cli.test.mjs` does not touch `fonts/cache`: it points 
 - `node build-gallery.mjs` rebuilds `docs/gallery/` (static page, thumbnails, sample PDFs) for every finished design. Needs `pdftoppm` and a prior `npm test`. I did not run either script; this is from reading their header comments.
 
 ## Known limits
+
+- Windows: the rendering commands and `fetch-fonts.mjs` were changed to work on Windows (start check uses `pathToFileURL`; `npm.cmd` is started through a shell; `tar` is run in the temp folder), but they have only been tested on Linux. A Windows run is still needed. `npm test` and `check-design.mjs` also need poppler (`pdftotext`, `pdftoppm`), which is awkward to install on Windows; use WSL for the tests. Keep the repo in a folder path without spaces to be safe.
 
 - Not runnable inside claude.ai chat (see above).
 - Arabic-script text is rendered with ligatures disabled, so PDF text extraction keeps letter order. The letters look less joined than normal typesetting. This is deliberate.
