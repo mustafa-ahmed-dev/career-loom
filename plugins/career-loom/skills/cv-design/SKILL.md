@@ -20,7 +20,7 @@ Turns finished content into a document. Status: the renderer exists (`scripts/cv
 ## Steps
 1. Ask the channel (portal, email to a person, print), region and seniority.
 2. Suggest three: **Safe pick** (tier A, best for the region), **Best fit** (region, industry, seniority), **Stretch** (the user's favourite, with a warning if it fails a check).
-3. Produce the document from the CV JSON (`schema/cv.schema.json`): `node scripts/cv-render.mjs cv.json --design <id> [--out dir] [--format pdf,docx,html] [--rtl auto|on|off]`. A tier C or D design always also writes the A-rated twin (`<name>-ats.*`); the portal gets the twin. Word: A/B yes, C best-effort single column, D none (PDF only). Without the renderer (claude.ai chat) fall back to Markdown or HTML. For Chinese or Hindi text, run `node scripts/fetch-fonts.mjs` once first, or the renderer exits 3 with a fonts warning.
+3. Produce the document from the CV JSON (`schema/cv.schema.json`): `node scripts/cv-render.mjs cv.json --design <id> [--out dir] [--format pdf,docx,html] [--rtl auto|on|off]`. A tier C or D design always also writes the A-rated twin (`<name>-ats.*`); the portal gets the twin. Word: A/B yes, C best-effort single column, D none (PDF only). Without the renderer (claude.ai chat) read the design's `systems/<id>/spec.md` (rules, colours, type), `design.css` and `components.html`, write HTML in that style using the same classes and variables, and say plainly that no PDF or Word file was made. For Chinese or Hindi text, run `node scripts/fetch-fonts.mjs` once first, or the renderer exits 3 with a fonts warning.
 4. Hand the result to `cv-review`.
 
 ## Rules

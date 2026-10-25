@@ -1,6 +1,6 @@
 # tokens.json reference
 
-Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It is validated against `../schema/tokens.schema.json` (JSON Schema 2020-12, `additionalProperties: false` everywhere, so unknown keys are rejected). The renderer in `../scripts/` reads it; see `../scripts/README.md`. This file documents the schema once. If the two disagree, the schema wins.
+Each design system folder (`systems/<id>-<name>/`) holds one `tokens.json`. It is validated against `../schema/tokens.schema.json` (JSON Schema 2020-12, `additionalProperties: false` everywhere, so unknown keys are rejected). The renderer in `../scripts/` reads it; see `../scripts/README.md`. `design.css`, `components.html` and the Tokens block in `spec.md` are generated from it by `../scripts/build-design-files.mjs`; edit `tokens.json`, then regenerate. This file documents the schema once. If the two disagree, the schema wins.
 
 ## Top-level fields
 
